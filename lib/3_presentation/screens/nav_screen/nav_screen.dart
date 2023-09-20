@@ -42,6 +42,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
       body: _tabScreens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
+        type: BottomNavigationBarType.fixed,
         onTap: _onTabSelected,
         selectedItemColor: AppColor.appBrandColor,
         unselectedItemColor: AppColor.secondaryColor,
