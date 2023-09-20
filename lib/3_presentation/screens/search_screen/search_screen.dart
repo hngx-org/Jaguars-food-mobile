@@ -105,7 +105,7 @@ class _MySearchWidgetState extends State<MySearchWidget> {
             });
           },
           decoration: InputDecoration(
-            hintText: 'Search...',
+            hintText: 'Search',
             suffixIcon: Icon(Icons.search),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.0),
