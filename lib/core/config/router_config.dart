@@ -1,21 +1,17 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-<<<<<<< HEAD
-import 'package:jaguar_foods_mobile/3_presentation/screens/auth/screens_barrel.dart';
-import 'package:jaguar_foods_mobile/3_presentation/screens/home/home_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/nav_screen/nav_screen.dart';
-=======
->>>>>>> origin/master
 import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/screens_barrel.dart';
 
+import '../../3_presentation/screens/home/home_screen.dart';
+
 
 final GoRouter routerConfig = GoRouter(
-<<<<<<< HEAD
+
   initialLocation: RoutesPath.navScreen,
-=======
-  initialLocation: RoutesPath.redeemScreen,
->>>>>>> origin/master
+
   errorBuilder: (context, state) => const Placeholder(),
   routes: [
     GoRoute(
@@ -31,7 +27,6 @@ final GoRouter routerConfig = GoRouter(
         path: RoutesPath.loginScreen,
         builder: (context, state) => const LoginScreen()),
     GoRoute(
-<<<<<<< HEAD
         path: RoutesPath.homeScreen,
         builder: (context, state) =>  HomeScreen(
         )),
@@ -39,9 +34,5 @@ final GoRouter routerConfig = GoRouter(
         path: RoutesPath.navScreen,
         builder: (context, state) => NavigationScreen(initialIndex: 0,
         )),
-=======
-        path: RoutesPath.redeemScreen,
-        builder: (context, state) => const RedeemScreen()),
->>>>>>> origin/master
   ],
 );
