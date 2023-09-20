@@ -8,7 +8,7 @@ class RedeemScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(26.0, 107.0, 26.0, 0),
+        padding: const EdgeInsets.fromLTRB(26.0, 50.0, 26.0, 0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,7 +53,7 @@ class RedeemScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 74.0,
+              height: 20.0,
             ),
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -84,6 +84,80 @@ class RedeemScreen extends StatelessWidget {
                   ),
                 ),
               ],
+            ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: 3,
+                itemBuilder: (context, index) {
+                  return const ListTile(
+                    leading: CircleAvatar(
+                      child: Icon(Icons.alarm),
+                    ),
+                    title: Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Free lunch',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontFamily: 'Lato',
+                              fontWeight: FontWeight.w700,
+                              height: 0.14,
+                              letterSpacing: -0.14,
+                            ),
+                          ),
+                          TextSpan(
+                            text: ' from ',
+                            style: TextStyle(
+                              color: Color(0xFF55506D),
+                              fontSize: 14,
+                              fontFamily: 'Lato',
+                              fontWeight: FontWeight.w600,
+                              height: 0.14,
+                              letterSpacing: -0.14,
+                            ),
+                          ),
+                          TextSpan(
+                            text: 'Shola Peters',
+                            style: TextStyle(
+                              color: Color(0xFF1B1A21),
+                              fontSize: 14,
+                              fontFamily: 'Lato',
+                              fontWeight: FontWeight.w600,
+                              height: 0.14,
+                              letterSpacing: -0.14,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    subtitle: Text(
+                      '15 Sep, 12:48',
+                      style: TextStyle(
+                        color: Color(0xFFABABAB),
+                        fontSize: 12,
+                        fontFamily: 'Lato',
+                        fontWeight: FontWeight.w600,
+                        height: 0.19,
+                        letterSpacing: -0.12,
+                      ),
+                    ),
+                    trailing: Text(
+                      'Redeem',
+                      textAlign: TextAlign.right,
+                      style: TextStyle(
+                        color: Color(0xFF2EAA60),
+                        fontSize: 12,
+                        fontFamily: 'Lato',
+                        fontWeight: FontWeight.w600,
+                        height: 0.19,
+                        letterSpacing: -0.12,
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
           ],
         ),
