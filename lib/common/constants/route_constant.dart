@@ -5,6 +5,7 @@ class RoutesPath {
   static const String loginScreen = '/login-screen';
   static const String withdrawDetailsScreen = '/withdraw_screen';
   static const String redeemScreen = '/redeem-screen';
+  static const String doubleLunchScreen = '/double_lunch';
 }
   
 
