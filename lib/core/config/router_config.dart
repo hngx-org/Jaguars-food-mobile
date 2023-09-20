@@ -4,7 +4,7 @@ import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/screens_barrel.dart';
 
 final GoRouter routerConfig = GoRouter(
-  initialLocation: RoutesPath.splashScreen,
+  initialLocation: RoutesPath.redeemScreen,
   errorBuilder: (context, state) => const Placeholder(),
   routes: [
     GoRoute(
@@ -19,5 +19,8 @@ final GoRouter routerConfig = GoRouter(
     GoRoute(
         path: RoutesPath.loginScreen,
         builder: (context, state) => const LoginScreen()),
+    GoRoute(
+        path: RoutesPath.redeemScreen,
+        builder: (context, state) => const RedeemScreen()),
   ],
 );
