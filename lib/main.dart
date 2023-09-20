@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jaguar_foods_mobile/common/constants/app_theme.dart';
 import 'package:jaguar_foods_mobile/core/config/router_config.dart';
 
 import 'common/constants/app_color.dart';
@@ -17,11 +18,7 @@ class MyApp extends StatelessWidget {
       routerConfig: routerConfig,
       title: 'Jaguar Foods Mobile',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          primaryColor: AppColor.appBrandColor,
-          scaffoldBackgroundColor: AppColor.white,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          appBarTheme: const AppBarTheme(elevation: 0)),
+      theme: theme
     );
   }
 }
