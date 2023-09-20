@@ -4,6 +4,8 @@ import 'package:jaguar_foods_mobile/3_presentation/withdraw_details/withdraw_det
 import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/screens_barrel.dart';
 
+import '../../common/constants/route_constant.dart';
+
 final GoRouter routerConfig = GoRouter(
   initialLocation: RoutesPath.redeemScreen,
   errorBuilder: (context, state) => const Placeholder(),
