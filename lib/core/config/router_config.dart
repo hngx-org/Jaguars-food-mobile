@@ -15,9 +15,10 @@ import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/screens_ba
 
 final GoRouter routerConfig = GoRouter(
 
-  initialLocation: RoutesPath.navScreen,
+  // initialLocation: RoutesPath.doubleLunchScreen,
+  // initialLocation: RoutesPath.navScreen,
   // initialLocation: RoutesPath.redeemScreen,
-//  initialLocation: RoutesPath.landingScreen,
+ initialLocation: RoutesPath.landingScreen,
 
   errorBuilder: (context, state) => const Placeholder(),
   routes: [
