@@ -6,4 +6,7 @@ class RoutesPath {
   static const String homeScreen = '/home';
   static const String navScreen = '/nav_screen';
   static const String redeemScreen = '/redeem-screen';
+  static const String landingScreen = '/landing-screen';
+  static const String doubleLunchScreen = '/double_lunch';
+
 }
