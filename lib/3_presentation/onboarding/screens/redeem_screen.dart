@@ -38,39 +38,17 @@ class RedeemScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(6),
                   ),
                 ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Search for reward, employee',
-                      style: TextStyle(
-                        color: Color(0xFFA4A4A4),
-                        fontSize: 18,
-                        fontFamily: 'Lato',
-                        fontWeight: FontWeight.w600,
-                        height: 0.09,
-                        letterSpacing: -0.18,
-                      ),
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                    hintText: 'Search for reward, employee',
+                    border: InputBorder.none,
+                    suffixIcon: IconButton(
+                      onPressed: null,
+                      icon: Icon(Icons.search),
                     ),
-                    const SizedBox(width: 45),
-                    Container(
-                      width: 32,
-                      height: 32,
-                      clipBehavior: Clip.antiAlias,
-                      decoration: const BoxDecoration(),
-                      child: const Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Icon(Icons.search,
-                              color: Color.fromARGB(255, 165, 165, 164)),
-                        ],
-                      ),
-                    )
-                  ],
+                  ),
                 ),
               ),
             ),
