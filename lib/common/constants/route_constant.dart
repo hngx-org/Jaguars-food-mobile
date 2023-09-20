@@ -4,4 +4,5 @@ class RoutesPath {
   static const String signUpScreen = '/signUp-screen';
   static const String loginScreen = '/login-screen';
   static const String redeemScreen = '/redeem-screen';
+  static const String searchScreen = '/search-screen';
 }
