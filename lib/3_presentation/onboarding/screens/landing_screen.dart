@@ -19,11 +19,10 @@ class _LandingScreenState extends State<LandingScreen> {
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           SizedBox(
-              height: 100,
-              width: 100,
-              child: SvgPicture.asset(
-                'assets/svg/mcdonald.svg',
-              )),
+            height: 100,
+            width: 100,
+            child: Image.asset('assets/png/mcdonald.png'),
+          ),
           FancyButton(
               text: 'Log In',
               isPressed: button1,
