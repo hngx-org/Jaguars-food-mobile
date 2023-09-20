@@ -52,6 +52,39 @@ class RedeemScreen extends StatelessWidget {
                 ),
               ),
             ),
+            const SizedBox(
+              height: 74.0,
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'All rewards',
+                  style: TextStyle(
+                    color: Color(0xFF55506D),
+                    fontSize: 18,
+                    fontFamily: 'Lato',
+                    fontWeight: FontWeight.w600,
+                    height: 0.09,
+                    letterSpacing: -0.18,
+                  ),
+                ),
+                TextButton(
+                  onPressed: null,
+                  child: Text(
+                    'See all',
+                    style: TextStyle(
+                      color: Color(0xFFABABAB),
+                      fontSize: 14,
+                      fontFamily: 'Lato',
+                      fontWeight: FontWeight.w600,
+                      height: 0.14,
+                      letterSpacing: -0.14,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
