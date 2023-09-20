@@ -4,4 +4,6 @@ class RoutesPath{
   static const String onBoardingScreen = '/onBoarding-screen';
   static const String signUpScreen = '/signUp-screen';
   static const String loginScreen = '/login-screen';
+  static const String homeScreen = '/home';
+  static const String navScreen = '/nav-screen';
 }

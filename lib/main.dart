@@ -21,6 +21,9 @@ class MyApp extends StatelessWidget {
           primaryColor: AppColor.appBrandColor,
           scaffoldBackgroundColor: AppColor.white,
           visualDensity: VisualDensity.adaptivePlatformDensity,
+          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            showUnselectedLabels: true,
+          ),
           appBarTheme: const AppBarTheme(elevation: 0)),
     );
   }
