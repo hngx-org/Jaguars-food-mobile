@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jaguar_foods_mobile/3_presentation/confirm_redeem_screen.dart';
+import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/double_lunch.dart';
 import 'package:jaguar_foods_mobile/3_presentation/success_screen.dart';
 import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/screens_barrel.dart';
@@ -27,5 +28,8 @@ final GoRouter routerConfig = GoRouter(
     GoRoute(
         path: RoutesPath.successScreen,
         builder: (context, state) => const SuccessScreen()),
+        GoRoute(
+        path: RoutesPath.doubleLunchScreen,
+        builder: (context, state) => const DoubleLunch()),
   ],
 );
