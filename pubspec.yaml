@@ -41,7 +41,6 @@ dependencies:
   google_fonts: ^6.0.0
   equatable: ^2.0.5
   dartz: ^0.10.1
-  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
