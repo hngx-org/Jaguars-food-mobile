@@ -35,11 +35,11 @@ final GoRouter routerConfig = GoRouter(
         builder: (context, state) => const LoginScreen()),
     GoRoute(
         path: RoutesPath.homeScreen,
-        builder: (context, state) =>  HomeScreen(
+        builder: (context, state) =>  const HomeScreen(
         )),
     GoRoute(
         path: RoutesPath.navScreen,
-        builder: (context, state) => NavigationScreen(initialIndex: 0,
+        builder: (context, state) => const NavigationScreen(initialIndex: 0,
         )),
     GoRoute(
         path: RoutesPath.redeemScreen,
