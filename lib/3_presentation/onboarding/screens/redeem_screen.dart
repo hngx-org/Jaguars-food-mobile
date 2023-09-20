@@ -13,6 +13,7 @@ class RedeemScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(),
             const Text(
               'Redeem your rewards',
               style: TextStyle(
