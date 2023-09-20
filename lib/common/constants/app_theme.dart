@@ -20,5 +20,8 @@ ThemeData theme = ThemeData(
     surfaceVariant: Color(0xffececec),
     onSurfaceVariant: Color(0xffa5a5a5),
     outline: Color(0xff84838b)
-    )
-);
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        showUnselectedLabels: true,
+    ),
+    appBarTheme: const AppBarTheme(elevation: 0));
