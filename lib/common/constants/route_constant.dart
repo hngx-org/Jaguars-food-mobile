@@ -7,4 +7,5 @@ class RoutesPath {
   static const String successScreen = '/success-screen';
   static const String doubleLunchScreen = '/double_lunch';
   static const String successfulLunchScreen = '/successful_lunch';
+  static const String redeemScreen = '/redeem_screen';
 }
