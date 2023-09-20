@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:jaguar_foods_mobile/core/config/router_config.dart';
-
 import 'common/constants/app_color.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override

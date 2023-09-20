@@ -6,6 +6,7 @@ import 'package:jaguar_foods_mobile/3_presentation/screens/nav_screen/nav_screen
 import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/onboarding/screens_barrel.dart';
 
+
 final GoRouter routerConfig = GoRouter(
   initialLocation: RoutesPath.navScreen,
   errorBuilder: (context, state) => const Placeholder(),
@@ -24,9 +25,11 @@ final GoRouter routerConfig = GoRouter(
         builder: (context, state) => const LoginScreen()),
     GoRoute(
         path: RoutesPath.homeScreen,
-        builder: (context, state) => const HomeScreen()),
+        builder: (context, state) =>  HomeScreen(
+        )),
     GoRoute(
         path: RoutesPath.navScreen,
-        builder: (context, state) => const NavigationScreen()),
+        builder: (context, state) => NavigationScreen(initialIndex: 0,
+        )),
   ],
 );

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/home/home_screen.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:jaguar_foods_mobile/common/constants/custom_nav_bar.dart';
 
 class NavigationScreen extends StatefulWidget {
-  const NavigationScreen({Key? key}) : super(key: key);
+  const NavigationScreen({Key? key, required this.initialIndex,}) : super(key: key);
+
+  final int initialIndex;
 
   @override
   State<NavigationScreen> createState() => _NavigationScreenState();
@@ -13,14 +14,20 @@ class NavigationScreen extends StatefulWidget {
 
 class _NavigationScreenState extends State<NavigationScreen> {
   int _selectedIndex = 0;
+  late List<Widget> _tabScreens;
 
-  // List of tab screens
-  final List<Widget> _tabScreens = [
-    HomeScreen(),
-    EmployeesScreen(),
-    RecordsScreen(),
-    SettingsScreen(),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.initialIndex;
+    _tabScreens = [
+      HomeScreen(),
+      EmployeesScreen(),
+      RewardsScreen(),
+      SettingsScreen(),
+    ];
+  }
+
 
   // Function to handle tab selection
   void _onTabSelected(int index) {
@@ -104,7 +111,7 @@ class EmployeesScreen extends StatelessWidget {
   }
 }
 
-class RecordsScreen extends StatelessWidget {
+class RewardsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
