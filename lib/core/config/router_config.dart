@@ -33,6 +33,7 @@ final GoRouter routerConfig = GoRouter(
         path: RoutesPath.homeScreen,
         builder: (context, state) =>  const HomeScreen(
         )),
+     GoRoute(
         path: RoutesPath.confirmRedeemScreen,
         builder: (context, state) => const ConfirmRedeemScreen()),
     GoRoute(
@@ -45,10 +46,7 @@ final GoRouter routerConfig = GoRouter(
     GoRoute(
         path: RoutesPath.landingScreen,
         builder: (context, state) => const LandingScreen()),
-GoRoute(
-        path: RoutesPath.doubleLunchScreen,
-        builder: (context, state) => const DoubleLunch()),
-
+    GoRoute(
         path: RoutesPath.successScreen,
         builder: (context, state) => const SuccessScreen()),
     GoRoute(
