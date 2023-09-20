@@ -21,7 +21,7 @@ final GoRouter routerConfig = GoRouter(
         path: RoutesPath.loginScreen,
         builder: (context, state) => const LoginScreen()),
     GoRoute(
-        path: RoutesPath.loginScreen,
+        path: RoutesPath.doubleLunchScreen,
         builder: (context, state) => const DoubleLunch()),
   ],
 );
