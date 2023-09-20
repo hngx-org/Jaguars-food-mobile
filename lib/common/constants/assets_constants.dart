@@ -7,6 +7,7 @@ class Assets {
   static String giftImagePath = '$pngPath/gift.png';
   static String lunchImagePath = '$pngPath/lunch.png';
   static String tagImagePath = '$pngPath/tag.png';
+  static String circleTickPath = '$pngPath/tick-circle.svg';
 
   static String employeesIconPath = '$svgPath/employees_icon.svg';
   static String giftIconPath = '$svgPath/gift_icon.svg';

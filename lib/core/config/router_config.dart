@@ -40,12 +40,6 @@ final GoRouter routerConfig = GoRouter(
         path: RoutesPath.confirmRedeemScreen,
         builder: (context, state) => const ConfirmRedeemScreen()),
     GoRoute(
-        path: RoutesPath.redeemScreen,
-        builder: (context, state) => const RedeemScreen()),
-    GoRoute(
-        path: RoutesPath.landingScreen,
-        builder: (context, state) => const LandingScreen()),
-    GoRoute(
         path: RoutesPath.successScreen,
         builder: (context, state) => const SuccessScreen()),
     GoRoute(
