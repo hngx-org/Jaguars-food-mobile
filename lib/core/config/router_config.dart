@@ -7,6 +7,7 @@ import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/screens_barrel.dart';
 
 
+
 final GoRouter routerConfig = GoRouter(
 
   initialLocation: RoutesPath.navScreen,
