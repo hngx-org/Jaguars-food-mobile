@@ -1,29 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
+
+import 'app_color.dart';
 
 class LoadingScreen extends StatelessWidget {
-  const LoadingScreen({super.key});
+  final String? message;
+
+  const LoadingScreen({super.key, this.message});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
+    return Container(
+      color: Colors.black.withOpacity(0.5),
+      child: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            CircularProgressIndicator(
+            const CircularProgressIndicator(
               color: AppColor.appBrandColor,
               strokeWidth: 4.0,
             ),
-            SizedBox(height: 20.0),
-            Text(
-              'Loading...',
-              style: TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
+            if (message != null)
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  message!,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16.0,
+                  ),
+                ),
               ),
-            ),
           ],
         ),
       ),
