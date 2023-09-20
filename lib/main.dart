@@ -17,14 +17,7 @@ class MyApp extends StatelessWidget {
       routerConfig: routerConfig,
       title: 'Jaguar Foods Mobile',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          primaryColor: AppColor.appBrandColor,
-          scaffoldBackgroundColor: AppColor.white,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          bottomNavigationBarTheme: BottomNavigationBarThemeData(
-            showUnselectedLabels: true,
-          ),
-          appBarTheme: const AppBarTheme(elevation: 0)),
+      theme: theme,
     );
   }
 }
