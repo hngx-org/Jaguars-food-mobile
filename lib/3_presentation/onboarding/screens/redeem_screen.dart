@@ -99,7 +99,7 @@ class RedeemScreen extends StatelessWidget {
                           TextSpan(
                             text: 'Free lunch',
                             style: TextStyle(
-                              color: Colors.black,
+                              color: Color.fromARGB(255, 21, 21, 21),
                               fontSize: 14,
                               fontFamily: 'Lato',
                               fontWeight: FontWeight.w700,
