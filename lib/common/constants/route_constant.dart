@@ -12,4 +12,6 @@ class RoutesPath {
   static const String searchScreen = '/search-screen';
   static const String confirmRedeemScreen = '/confirmRedeem-screen';
   static const String successScreen = '/success-screen';
+  static const String doubleLunchScreen = '/double_lunch';
+  static const String successfulLunchScreen = '/successful_lunch';
 }
