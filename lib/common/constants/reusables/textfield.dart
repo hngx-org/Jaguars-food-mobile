@@ -38,13 +38,116 @@ class CustomTextField extends StatelessWidget {
           obscureText: obscureText,
           decoration: InputDecoration(
             labelText: labelText,
-            hintStyle: TextStyle(color: AppColor.hinttextfieldColor),
+            hintStyle: const TextStyle(color: AppColor.hinttextfieldColor),
             hintText: hintText,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
             ),
           ),
         ),
+      ],
+    );
+  }
+}
+
+class CustomTextFieldWithDropdown extends StatefulWidget {
+  final String headerText;
+  final String hintText;
+  final List<String> dropdownItems;
+  final ValueChanged<String> onChanged;
+
+  CustomTextFieldWithDropdown({
+    required this.headerText,
+    required this.hintText,
+    required this.dropdownItems,
+    required this.onChanged,
+  });
+
+  @override
+  _CustomTextFieldWithDropdownState createState() =>
+      _CustomTextFieldWithDropdownState();
+}
+
+class _CustomTextFieldWithDropdownState
+    extends State<CustomTextFieldWithDropdown> {
+  String selectedDropdownValue = "";
+  bool isDropdownOpen = false;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedDropdownValue = widget.dropdownItems.first;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widget.headerText,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+        SizedBox(height: 8),
+        TextFormField(
+          readOnly: true, // Prevent manual editing
+          controller: TextEditingController(
+            text: selectedDropdownValue,
+          ),
+          onTap: () {
+            setState(() {
+              isDropdownOpen = !isDropdownOpen;
+            });
+          },
+          decoration: InputDecoration(
+            hintText: widget.hintText,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            suffixIcon: GestureDetector(
+              onTap: () {
+                setState(() {
+                  isDropdownOpen = !isDropdownOpen;
+                });
+              },
+              child: Icon(
+                isDropdownOpen
+                    ? Icons.keyboard_arrow_up_outlined
+                    : Icons.keyboard_arrow_down_outlined,
+              ),
+            ),
+          ),
+        ),
+        if (isDropdownOpen)
+          Container(
+            width: double.infinity,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.circular(4.0),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: widget.dropdownItems
+                  .map(
+                    (item) => InkWell(
+                      onTap: () {
+                        setState(() {
+                          selectedDropdownValue = item;
+                          isDropdownOpen = false;
+                        });
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(item),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
       ],
     );
   }

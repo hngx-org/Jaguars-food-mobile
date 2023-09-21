@@ -11,6 +11,7 @@ import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/screens_barrel.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/successful_lunch.dart';
 
+import '../../3_presentation/onboarding/screens/copy_share_link.dart';
 import '../../3_presentation/onboarding/screens/create_organization.dart';
 
 final GoRouter routerConfig = GoRouter(
@@ -57,5 +58,8 @@ final GoRouter routerConfig = GoRouter(
     GoRoute(
         path: RoutesPath.createOrganizationScreen,
         builder: (context, state) => const CreateOrganizationScreen()),
+    GoRoute(
+        path: RoutesPath.copyShareLink,
+        builder: (context, state) => const CopyShareLink()),
   ],
 );
