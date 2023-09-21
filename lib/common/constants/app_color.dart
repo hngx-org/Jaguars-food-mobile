@@ -9,4 +9,5 @@ class AppColor {
   static const Color imageBackground = Color(0xFFEFFFF5);
   static const Color subText = Color(0xFFA4A4A4);
   static const Color border = Color(0xFFEBEBEB);
+  static const Color secondaryColor = Color(0xFFABABAB);
 }
