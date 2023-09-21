@@ -8,7 +8,7 @@ class RedeemScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(26.0, 50.0, 26.0, 0),
+        padding: const EdgeInsets.fromLTRB(26.0, 80.0, 26.0, 0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,7 +91,10 @@ class RedeemScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return const ListTile(
                     leading: CircleAvatar(
-                      child: Icon(Icons.alarm),
+                      radius: 14,
+                      backgroundImage: AssetImage(
+                        'assets/png/lunch.png',
+                      ),
                     ),
                     title: Text.rich(
                       TextSpan(

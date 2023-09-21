@@ -9,7 +9,7 @@ import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/screens_ba
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/successful_lunch.dart';
 
 final GoRouter routerConfig = GoRouter(
-  initialLocation: RoutesPath.splashScreen,
+  initialLocation: RoutesPath.redeemScreen,
   errorBuilder: (context, state) => const Placeholder(),
   routes: [
     GoRoute(
