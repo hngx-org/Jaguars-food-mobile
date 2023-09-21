@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
                 primaryColor: AppColor.appBrandColor,
                 scaffoldBackgroundColor: AppColor.white,
                 visualDensity: VisualDensity.adaptivePlatformDensity,
-                appBarTheme: const AppBarTheme(elevation: 0)),
+            ),
           );
         });
   }
