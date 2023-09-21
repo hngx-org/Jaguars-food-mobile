@@ -5,12 +5,6 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [],
-      )),
-    );
+    return const Placeholder();
   }
 }
