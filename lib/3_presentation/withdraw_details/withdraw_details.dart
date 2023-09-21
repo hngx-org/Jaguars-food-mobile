@@ -46,143 +46,147 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 27),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // text
-            Padding(
-              padding: const EdgeInsets.only(top: 100, bottom: 40),
-              child: Text(
-                'Redeem your free lunch!',
-                style:
-                    GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 24),
-              ),
-            ),
-
-            // container with png
-            Container(
-              height: 204,
-              width: 375,
-              decoration: BoxDecoration(
-                  color: theme.colorScheme.secondaryContainer,
-                  borderRadius: BorderRadius.circular(8)),
-              child: Center(child: Image.asset(Assets.lunchImagePath)),
-            ),
-            // text
-            Padding(
-              padding: const EdgeInsets.only(top: 33, bottom: 24),
-              child: Text(
-                'Withdraw Details',
-                style: GoogleFonts.lato(
-                    fontSize: 24,
-                    color: theme.colorScheme.primary,
-                    fontWeight: FontWeight.bold),
-              ),
-            ),
-
-            //three textfields
-
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                border: Border.all(color: Colors.grey),
-              ),
-              child: TextField(
-                decoration: InputDecoration(
-                  suffixIcon: IconButton(
-                    icon: Icon(Icons.keyboard_arrow_down_rounded),
-                    onPressed: _showBankDropdown,
+        child: SingleChildScrollView(
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height * 1.5,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // text
+                Padding(
+                  padding: const EdgeInsets.only(top: 100, bottom: 40),
+                  child: Text(
+                    'Redeem your free lunch!',
+                    style:
+                        GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 24),
                   ),
-                  contentPadding:
-                      EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
-                  border: InputBorder.none,
                 ),
-                controller: TextEditingController(text: selectedBank),
-                readOnly: true,
-              ),
-            ),
 
-            SizedBox(height: 20.0),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                border: Border.all(color: Colors.grey),
-              ),
-              child: Column(
-                children: [
-                  TextField(
+                // container with png
+                Container(
+                  height: 204,
+                  width: 375,
+                  decoration: BoxDecoration(
+                      color: theme.colorScheme.secondaryContainer,
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Center(child: Image.asset(Assets.lunchImagePath)),
+                ),
+                // text
+                Padding(
+                  padding: const EdgeInsets.only(top: 33, bottom: 24),
+                  child: Text(
+                    'Withdraw Details',
+                    style: GoogleFonts.lato(
+                        fontSize: 24,
+                        color: theme.colorScheme.primary,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+
+                //three textfields
+
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    border: Border.all(color: Colors.grey),
+                  ),
+                  child: TextField(
                     decoration: InputDecoration(
-                      hintText: "Account number will be displayed here",
+                      suffixIcon: IconButton(
+                        icon: Icon(Icons.keyboard_arrow_down_rounded),
+                        onPressed: _showBankDropdown,
+                      ),
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+                      border: InputBorder.none,
                     ),
-                    controller: TextEditingController(text: accountNumber),
+                    controller: TextEditingController(text: selectedBank),
                     readOnly: true,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          '$accountName',
-                          style: GoogleFonts.lato(fontSize: 14),
-                        ),
-                        Container(
-                          
-                          width: 24.0,
-                          height: 24.0,
-                          margin: EdgeInsets.only(right: 8.0),
-                          child: SvgPicture.asset(Assets.circleTickPath)
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            SizedBox(
-              height: 20,
-            ),
-
-            // 3rd textfield
-            Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  border: Border.all(color: Colors.grey),
                 ),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: "How much do you want to redeem?",
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+
+                SizedBox(height: 20.0),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.0),
+                    border: Border.all(color: Colors.grey),
                   ),
-                )),
+                  child: Column(
+                    children: [
+                      TextField(
+                        decoration: InputDecoration(
+                          hintText: "Account number will be displayed here",
+                          contentPadding:
+                              EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+                        ),
+                        controller: TextEditingController(text: accountNumber),
+                        readOnly: true,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              '$accountName',
+                              style: GoogleFonts.lato(fontSize: 14),
+                            ),
+                            Container(
 
-            SizedBox(
-              height: 4,
+                              width: 24.0,
+                              height: 24.0,
+                              margin: EdgeInsets.only(right: 8.0),
+                              child: SvgPicture.asset(Assets.circleTickPath)
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
+                SizedBox(
+                  height: 20,
+                ),
+
+                // 3rd textfield
+                Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      border: Border.all(color: Colors.grey),
+                    ),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: "How much do you want to redeem?",
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+                      ),
+                    )),
+
+                SizedBox(
+                  height: 4,
+                ),
+
+                //  texts
+                Text('Triple Lunch = N 500', style:
+                        GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 14),),
+                SizedBox(height: 30,),
+                // withdraw button
+                SizedBox(
+                  height: 52,
+                  width: MediaQuery.of(context).size.width,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text('Withdraw', style:
+                        GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 18),),
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                )
+              ],
             ),
-
-            //  texts
-            Text('Triple Lunch = N 500', style:
-                    GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 14),),
-
-            Spacer(),
-            // withdraw button
-            SizedBox(
-              height: 52,
-              width: MediaQuery.of(context).size.width,
-              child: ElevatedButton(
-                onPressed: () {},
-                child: Text('Withdraw', style:
-                    GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 18),),
-              ),
-            ),
-            SizedBox(
-              height: 5,
-            )
-          ],
+          ),
         ),
       ),
     );
