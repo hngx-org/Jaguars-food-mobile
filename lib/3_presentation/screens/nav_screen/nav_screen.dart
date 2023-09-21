@@ -26,10 +26,10 @@ class _NavigationScreenState extends State<NavigationScreen> {
     super.initState();
     _selectedIndex = widget.initialIndex;
     _tabScreens = [
-      HomeScreen(),
-      EmployeeScreen(),
-      RewardsScreen(),
-      SettingsScreen(),
+      const HomeScreen(),
+      const EmployeeScreen(),
+      const RewardsScreen(),
+      const SettingsScreen(),
     ];
   }
 
@@ -107,18 +107,22 @@ class _NavigationScreenState extends State<NavigationScreen> {
 }
 
 class RewardsScreen extends StatelessWidget {
+  const RewardsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('Records Screen'),
     );
   }
 }
 
 class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('Settings Screen'),
     );
   }

@@ -12,7 +12,8 @@ import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/screens_ba
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/successful_lunch.dart';
 
 final GoRouter routerConfig = GoRouter(
-  initialLocation: RoutesPath.redeemScreen,
+  //TODO: return the initial screen back to redeemScreen
+  initialLocation: RoutesPath.loginScreen,
   errorBuilder: (context, state) => const Placeholder(),
   routes: [
     GoRoute(
@@ -28,10 +29,11 @@ final GoRouter routerConfig = GoRouter(
         path: RoutesPath.loginScreen,
         builder: (context, state) => const LoginScreen()),
     GoRoute(
-        path: RoutesPath.homeScreen, builder: (context, state) => HomeScreen()),
+        path: RoutesPath.homeScreen,
+        builder: (context, state) => const HomeScreen()),
     GoRoute(
         path: RoutesPath.navScreen,
-        builder: (context, state) => NavigationScreen(
+        builder: (context, state) => const NavigationScreen(
               initialIndex: 0,
             )),
     GoRoute(
