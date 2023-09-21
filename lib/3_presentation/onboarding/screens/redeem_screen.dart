@@ -90,10 +90,14 @@ class RedeemScreen extends StatelessWidget {
                 itemCount: 3,
                 itemBuilder: (context, index) {
                   return const ListTile(
-                    leading: CircleAvatar(
-                      radius: 14,
-                      backgroundImage: AssetImage(
-                        'assets/png/lunch.png',
+                    leading: SizedBox(
+                      height: 36,
+                      width: 36,
+                      child: CircleAvatar(
+                        radius: 14,
+                        backgroundImage: AssetImage(
+                          'assets/png/lunch.png',
+                        ),
                       ),
                     ),
                     title: Text.rich(
