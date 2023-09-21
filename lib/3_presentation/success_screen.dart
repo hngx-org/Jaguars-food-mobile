@@ -117,7 +117,7 @@ class SuccessScreen extends StatelessWidget {
               Positioned(
                 left: 7.w,
                 top: 250.h,
-                child: Image.asset(Assets.checkImagePath),
+                child: Image.asset(Assets.circleTickImagePath),
               ),
             ],
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/redeem_screen.dart';
+import 'package:jaguar_foods_mobile/3_presentation/screens/employee_screen/employee_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/home/home_screen.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:jaguar_foods_mobile/common/constants/custom_nav_bar.dart';
@@ -26,7 +27,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
     _selectedIndex = widget.initialIndex;
     _tabScreens = [
       const HomeScreen(),
-      const EmployeesScreen(),
+      const EmployeeScreen(),
       const RedeemScreen(),
       const SettingsScreen(),
     ];
@@ -101,28 +102,6 @@ class _NavigationScreenState extends State<NavigationScreen> {
           // Add more items as needed
         ],
       ),
-    );
-  }
-}
-
-class EmployeesScreen extends StatelessWidget {
-  const EmployeesScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Employees Screen'),
-    );
-  }
-}
-
-class RewardsScreen extends StatelessWidget {
-  const RewardsScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Records Screen'),
     );
   }
 }
