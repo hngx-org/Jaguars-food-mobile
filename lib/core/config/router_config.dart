@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jaguar_foods_mobile/3_presentation/auth_complete_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/double_lunch/double_lunch.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/successful_lunch.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/employee_screen/employee_screen.dart';
@@ -97,7 +98,6 @@ final GoRouter routerConfig = GoRouter(
       ),
     ),
     GoRoute(
-
       path: RoutesPath.employeeScreen,
       pageBuilder: (context, state) => CupertinoPage<void>(
         child: const EmployeeScreen(),
@@ -112,6 +112,13 @@ final GoRouter routerConfig = GoRouter(
         key: state.pageKey,
       ),
          ),
+      
+    GoRoute(
+      path: RoutesPath.authCompleteScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const AuthCompleteScreen(),
+        key: state.pageKey,
+      ), ),
 
   ],
 );
