@@ -61,7 +61,7 @@ class DoubleLunch extends StatelessWidget {
                 ),
               ),
 
-              Padding(
+              const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 1, vertical: 1),
                 child: TextField(
                   minLines: 5,
@@ -71,7 +71,11 @@ class DoubleLunch extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 40),
+
+              const SizedBox(
+                height: 40,
+              ),
+
               // send button
               SizedBox(
                 height: 52,
@@ -85,7 +89,7 @@ class DoubleLunch extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               )
             ],

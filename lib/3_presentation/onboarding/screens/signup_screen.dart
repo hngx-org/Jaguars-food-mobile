@@ -15,6 +15,7 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     TextEditingController _orgController = TextEditingController();
     return SafeArea(
       child: Scaffold(
