@@ -103,7 +103,7 @@ class SuccessScreen extends StatelessWidget {
                           while (routerConfig.canPop() == true) {
                             routerConfig.pop();
                           }
-                          routerConfig.pushReplacement(RoutesPath.splashScreen);
+                          routerConfig.pushReplacement(RoutesPath.navScreen);
                         },
                         buttonText: 'Back to home',
                         fontSize: 14,
@@ -117,7 +117,7 @@ class SuccessScreen extends StatelessWidget {
               Positioned(
                 left: 7.w,
                 top: 250.h,
-                child: Image.asset(Assets.checkImagePath),
+                child: Image.asset(Assets.circleTickImagePath),
               ),
             ],
           ),
