@@ -11,6 +11,8 @@ import '../../3_presentation/confirm_redeem_screen.dart';
 import '../../3_presentation/onboarding/screens/redeem_screen.dart';
 import '../../3_presentation/success_screen.dart';
 
+import '../../3_presentation/onboarding/screens/create_organization.dart';
+
 final GoRouter routerConfig = GoRouter(
   initialLocation: RoutesPath.splashScreen,
   errorBuilder: (context, state) => const Placeholder(),
@@ -95,11 +97,21 @@ final GoRouter routerConfig = GoRouter(
       ),
     ),
     GoRoute(
+
       path: RoutesPath.employeeScreen,
       pageBuilder: (context, state) => CupertinoPage<void>(
         child: const EmployeeScreen(),
         key: state.pageKey,
       ),
     ),
+
+    GoRoute(
+        path: RoutesPath.createOrganizationScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const CreateOrganizationScreen(),
+        key: state.pageKey,
+      ),
+         ),
+
   ],
 );
