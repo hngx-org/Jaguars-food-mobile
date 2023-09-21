@@ -3,8 +3,13 @@ import 'package:jaguar_foods_mobile/3_presentation/screens/home/home_screen.dart
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:jaguar_foods_mobile/common/constants/custom_nav_bar.dart';
 
+import '../employee_screen/employee_screen.dart';
+
 class NavigationScreen extends StatefulWidget {
-  const NavigationScreen({Key? key, required this.initialIndex,}) : super(key: key);
+  const NavigationScreen({
+    Key? key,
+    required this.initialIndex,
+  }) : super(key: key);
 
   final int initialIndex;
 
@@ -21,13 +26,12 @@ class _NavigationScreenState extends State<NavigationScreen> {
     super.initState();
     _selectedIndex = widget.initialIndex;
     _tabScreens = [
-      HomeScreen(),
-      EmployeesScreen(),
-      RewardsScreen(),
-      SettingsScreen(),
+      const HomeScreen(),
+      const EmployeeScreen(),
+      const RewardsScreen(),
+      const SettingsScreen(),
     ];
   }
-
 
   // Function to handle tab selection
   void _onTabSelected(int index) {
@@ -98,33 +102,27 @@ class _NavigationScreenState extends State<NavigationScreen> {
           // Add more items as needed
         ],
       ),
-
-    );
-  }
-}
-
-class EmployeesScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Employees Screen'),
     );
   }
 }
 
 class RewardsScreen extends StatelessWidget {
+  const RewardsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('Records Screen'),
     );
   }
 }
 
 class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('Settings Screen'),
     );
   }

@@ -11,7 +11,7 @@ class CustomBottomNavigationBarItem extends StatelessWidget {
   final double? space;
   final double? size;
 
-  const CustomBottomNavigationBarItem({
+  const CustomBottomNavigationBarItem({super.key, 
     required this.svgAsset,
     required this.label,
     required this.isSelected,
