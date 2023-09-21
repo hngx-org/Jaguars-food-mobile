@@ -80,6 +80,7 @@ class MySearchWidget extends StatefulWidget {
   const MySearchWidget({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _MySearchWidgetState createState() => _MySearchWidgetState();
 }
 
@@ -159,51 +160,52 @@ class SearchBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Row(
-            children: [
-              CircleAvatar(
-                  backgroundColor: AppColor.brand,
-                  radius: 18,
-                  child: SvgPicture.asset(
-                    Assets.giftIconPath,
-                    color: AppColor.appBrandColor,
-                  )),
-              const SizedBox(width: 13),
-              Expanded(
+    return Column(
+      children: [
+        Row(
+          children: [
+            CircleAvatar(
+                backgroundColor: AppColor.brand,
+                radius: 18,
+                child: SvgPicture.asset(
+                  Assets.giftIconPath,
+                  colorFilter: const ColorFilter.mode(
+                    AppColor.appBrandColor,
+                    BlendMode.clear,
+                  ),
+                )),
+            const SizedBox(width: 13),
+            Expanded(
+              child: Text(
+                text1,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontFamily: 'Lato',
+                  color: AppColor.black,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {},
+              child: const Expanded(
                 child: Text(
-                  text1,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    fontFamily: 'Lato',
-                    color: AppColor.black,
-                    fontWeight: FontWeight.w700,
-                  ),
+                  "Send gift",
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontFamily: 'Lato',
+                      color: AppColor.lightgreen),
                 ),
               ),
-              InkWell(
-                onTap: () {},
-                child: const Expanded(
-                  child: Text(
-                    "Send gift",
-                    style: TextStyle(
-                        fontSize: 12,
-                        fontFamily: 'Lato',
-                        color: AppColor.lightgreen),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 14),
-          const Divider(
-            height: 1,
-          ),
-          const SizedBox(height: 14),
-        ],
-      ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 14),
+        const Divider(
+          height: 1,
+        ),
+        const SizedBox(height: 14),
+      ],
     );
   }
 }
