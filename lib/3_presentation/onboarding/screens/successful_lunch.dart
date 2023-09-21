@@ -7,11 +7,11 @@ import 'package:jaguar_foods_mobile/common/constants/reusables/button.dart';
 import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 import 'package:jaguar_foods_mobile/core/config/router_config.dart';
 
-class SuccessScreen extends StatelessWidget {
+class SuccessfulLunchScreen extends StatelessWidget {
   final String? giftee;
   final String? lunchType;
 
-  const SuccessScreen({
+  const SuccessfulLunchScreen({
     super.key,
     this.giftee,
     this.lunchType,
@@ -27,7 +27,7 @@ class SuccessScreen extends StatelessWidget {
           child: Stack(
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                padding: EdgeInsets.symmetric(horizontal: 30.w),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,7 +51,7 @@ class SuccessScreen extends StatelessWidget {
                       )),
                       Flexible(
                         child: Text(
-                          'You have succesfully\nwithdrawn your Reward!',
+                          'You successfully gifted Adekunle Emmanuel free Double lunch!',
                           textAlign: TextAlign.center,
                           maxLines: 2,
                           overflow: TextOverflow.clip,
@@ -103,7 +103,7 @@ class SuccessScreen extends StatelessWidget {
                           while (routerConfig.canPop() == true) {
                             routerConfig.pop();
                           }
-                          routerConfig.pushReplacement(RoutesPath.navScreen);
+                          routerConfig.pushReplacement(RoutesPath.splashScreen);
                         },
                         buttonText: 'Back to home',
                         fontSize: 14,
