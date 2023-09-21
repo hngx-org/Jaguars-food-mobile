@@ -18,43 +18,91 @@ final GoRouter routerConfig = GoRouter(
   errorBuilder: (context, state) => const Placeholder(),
   routes: [
     GoRoute(
-        path: RoutesPath.splashScreen,
-        builder: (context, state) => const SplashScreen()),
+      path: RoutesPath.splashScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const SplashScreen(),
+        key: state.pageKey,
+      ),
+    ),
     GoRoute(
-        path: RoutesPath.onBoardingScreen,
-        builder: (context, state) => const OnBoardingScreen()),
+      path: RoutesPath.onBoardingScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const OnBoardingScreen(),
+        key: state.pageKey,
+      ),
+    ),
     GoRoute(
-        path: RoutesPath.signUpScreen,
-        builder: (context, state) => const SignUpScreen()),
+      path: RoutesPath.signUpScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const SignUpScreen(),
+        key: state.pageKey,
+      ),
+    ),
     GoRoute(
-        path: RoutesPath.loginScreen,
-        builder: (context, state) => const LoginScreen()),
+      path: RoutesPath.loginScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const LoginScreen(),
+        key: state.pageKey,
+      ),
+    ),
     GoRoute(
-        path: RoutesPath.homeScreen,
-        builder: (context, state) => const HomeScreen()),
+      path: RoutesPath.homeScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const HomeScreen(),
+        key: state.pageKey,
+      ),
+    ),
     GoRoute(
-        path: RoutesPath.navScreen,
-        builder: (context, state) => const NavigationScreen(
-              initialIndex: 0,
-            )),
+      path: RoutesPath.navScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const NavigationScreen(
+          initialIndex: 0,
+        ),
+        key: state.pageKey,
+      ),
+    ),
     GoRoute(
-        path: RoutesPath.confirmRedeemScreen,
-        builder: (context, state) => const ConfirmRedeemScreen()),
+      path: RoutesPath.confirmRedeemScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const ConfirmRedeemScreen(),
+        key: state.pageKey,
+      ),
+    ),
     GoRoute(
-        path: RoutesPath.successScreen,
-        builder: (context, state) => const SuccessScreen()),
+      path: RoutesPath.successScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const SuccessScreen(),
+        key: state.pageKey,
+      ),
+    ),
     GoRoute(
-        path: RoutesPath.employeeScreen,
-        builder: (context, state) => const EmployeeScreen()),
+      path: RoutesPath.doubleLunchScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const DoubleLunch(),
+        key: state.pageKey,
+      ),
+    ),
     GoRoute(
-        path: RoutesPath.doubleLunchScreen,
-        builder: (context, state) => const DoubleLunch()),
+      path: RoutesPath.successfulLunchScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const SuccessfulLunchScreen(),
+        key: state.pageKey,
+      ),
+    ),
     GoRoute(
-        path: RoutesPath.successfulLunchScreen,
-        builder: (context, state) => const SuccessfulLunchScreen()),
+      path: RoutesPath.redeemScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const RedeemScreen(),
+        key: state.pageKey,
+      ),
+    ),
     GoRoute(
-        path: RoutesPath.redeemScreen,
-        builder: (context, state) => const RedeemScreen()),
+      path: RoutesPath.employeeScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const EmployeeScreen(),
+        key: state.pageKey,
+      ),
+    ),
     GoRoute(
         path: RoutesPath.landingScreen,
         builder: (context, state) => const LandingScreen()),

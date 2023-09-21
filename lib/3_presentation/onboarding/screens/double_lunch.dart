@@ -71,7 +71,11 @@ class DoubleLunch extends StatelessWidget {
                   ),
                 ),
               ),
-              const SizedBox(height: 40),
+
+              const SizedBox(
+                height: 40,
+              ),
+
               // send button
               SizedBox(
                 height: 52,

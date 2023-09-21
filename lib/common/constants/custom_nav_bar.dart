@@ -11,13 +11,16 @@ class CustomBottomNavigationBarItem extends StatelessWidget {
   final double? space;
   final double? size;
 
-  const CustomBottomNavigationBarItem({super.key, 
+  const CustomBottomNavigationBarItem({
+    super.key,
     required this.svgAsset,
     required this.label,
     required this.isSelected,
     required this.selectedColor,
     required this.unselectedColor,
-    required this.onTap, this.space, this.size,
+    required this.onTap,
+    this.space,
+    this.size,
   });
 
   @override
@@ -39,7 +42,9 @@ class CustomBottomNavigationBarItem extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: space,),
+          SizedBox(
+            height: space,
+          ),
           Text(
             label,
             style: TextStyle(
