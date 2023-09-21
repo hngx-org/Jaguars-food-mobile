@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jaguar_foods_mobile/1_data/models/transactions.dart';
-import 'package:jaguar_foods_mobile/3_presentation/screens/nav_screen/nav_screen.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:intl/intl.dart';
 import 'package:jaguar_foods_mobile/common/constants/assets_constants.dart';
@@ -309,7 +307,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Material(
                           child: InkWell(
                             onTap: () =>
-                                routerConfig.push(RoutesPath.searchScreen),
+                                routerConfig.push(RoutesPath.employeeScreen),
                             child: Container(
                               width: double.infinity,
                               height: double.infinity,

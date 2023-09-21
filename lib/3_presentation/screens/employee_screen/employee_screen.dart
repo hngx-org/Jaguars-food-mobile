@@ -1,62 +1,70 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
+import 'package:jaguar_foods_mobile/common/constants/assets_constants.dart';
 
-class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
+class EmployeeScreen extends StatefulWidget {
+  const EmployeeScreen({super.key});
 
   @override
-  State<SearchScreen> createState() => _SearchScreenState();
+  State<EmployeeScreen> createState() => _EmployeeScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
+class _EmployeeScreenState extends State<EmployeeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: const BackButton(),
-      ),
-      body: const SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24),
-          child: SingleChildScrollView(
+    return const Scaffold(
+      backgroundColor: AppColor.white,
+      // appBar: AppBar(
+      //   backgroundColor: AppColor.white,
+      // ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                BackButton(),
                 SizedBox(height: 28),
                 Text(
                   "Search for an employee",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontFamily: 'Lato',
+                      color: AppColor.black,
+                      fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 28),
+                SizedBox(height: 20),
                 MySearchWidget(),
-                SizedBox(height: 54),
+                SizedBox(height: 36),
                 Text(
                   "All Employees",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: 'Lato',
+                      fontWeight: FontWeight.w600),
                 ),
-                SizedBox(height: 54),
+                SizedBox(height: 18),
                 SearchBox(
-                  icon: Icons.access_alarm,
+                  text1: "Adekunle Emmanuel",
+                ),
+                SearchBox(
                   text1: "Kehinde Ojapa",
                 ),
                 SearchBox(
-                  icon: Icons.access_alarm,
                   text1: "Bolaji Nifemi",
                 ),
                 SearchBox(
-                  icon: Icons.access_alarm,
                   text1: "Oluwanifemi Balogunimil",
                 ),
                 SearchBox(
-                  icon: Icons.access_alarm,
                   text1: "Sandra Imolel",
                 ),
                 SearchBox(
-                  icon: Icons.access_alarm,
                   text1: "Jude bellingham",
                 ),
                 SearchBox(
-                  icon: Icons.access_alarm,
                   text1: "Busayo Davis",
                 ),
               ],
@@ -78,15 +86,7 @@ class MySearchWidget extends StatefulWidget {
 
 class _MySearchWidgetState extends State<MySearchWidget> {
   String _searchText = '';
-  final List<String> _items = [
-    'Adekunle Emmanuel',
-    'Kehinde Ojapa',
-    'Bolaji Nifemi',
-    'Oluwanifemi Balogunimi',
-    'Sandra Imole',
-    'Jude bellingham',
-    'Busayo Davis',
-  ];
+  final List<String> _items = [];
   List<String> _filteredItems = [];
 
   @override
@@ -99,17 +99,36 @@ class _MySearchWidgetState extends State<MySearchWidget> {
 
     return Column(
       children: [
-        TextField(
-          onChanged: (value) {
-            setState(() {
-              _searchText = value;
-            });
-          },
-          decoration: InputDecoration(
-            hintText: 'Search',
-            suffixIcon: const Icon(Icons.search),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.0),
+        Container(
+          decoration: BoxDecoration(
+            color: AppColor.textfieldColor1,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: TextField(
+              onChanged: (value) {
+                setState(() {
+                  _searchText = value;
+                });
+              },
+              decoration: InputDecoration(
+                focusedBorder: InputBorder.none,
+
+                fillColor: AppColor.textfieldColor1,
+                hintText: 'Search for an employee',
+                suffixIcon: const Icon(
+                  Icons.search,
+                  size: 35,
+                  color: AppColor.brand1,
+                ),
+                // SvgPicture.asset(
+                //   Assets.searchPath,
+                // ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
             ),
           ),
         ),
@@ -131,14 +150,12 @@ class _MySearchWidgetState extends State<MySearchWidget> {
 class SearchBox extends StatelessWidget {
   const SearchBox({
     super.key,
-    required this.icon,
     required this.text1,
     this.onTap,
   });
 
   final String text1;
 
-  final IconData icon;
   final void Function()? onTap;
 
   @override
@@ -148,18 +165,24 @@ class SearchBox extends StatelessWidget {
         Row(
           children: [
             CircleAvatar(
-              backgroundColor: AppColor.appBrandColor,
-              radius: 18,
-              child: Icon(icon),
-            ),
+                backgroundColor: AppColor.brand,
+                radius: 18,
+                child: SvgPicture.asset(
+                  Assets.giftIconPath,
+                  colorFilter: const ColorFilter.mode(
+                    AppColor.appBrandColor,
+                    BlendMode.clear,
+                  ),
+                )),
             const SizedBox(width: 13),
             Expanded(
               child: Text(
                 text1,
                 style: const TextStyle(
                   fontSize: 14,
+                  fontFamily: 'Lato',
                   color: AppColor.black,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.w700,
                 ),
               ),
             ),
@@ -168,7 +191,10 @@ class SearchBox extends StatelessWidget {
               child: const Expanded(
                 child: Text(
                   "Send gift",
-                  style: TextStyle(fontSize: 12, color: AppColor.black),
+                  style: TextStyle(
+                      fontSize: 12,
+                      fontFamily: 'Lato',
+                      color: AppColor.lightgreen),
                 ),
               ),
             ),
@@ -178,6 +204,7 @@ class SearchBox extends StatelessWidget {
         const Divider(
           height: 1,
         ),
+        const SizedBox(height: 14),
       ],
     );
   }

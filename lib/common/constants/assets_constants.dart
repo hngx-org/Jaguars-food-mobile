@@ -17,4 +17,5 @@ class Assets {
   static String settingsIconPath = '$svgPath/settings_icon.svg';
   static String giftBagPath = '$svgPath/gift-bag.svg';
   static String redeemNewPath = '$svgPath/redeem-new.svg';
+  static String searchPath = '$svgPath/search.svg';
 }

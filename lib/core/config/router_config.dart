@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:jaguar_foods_mobile/3_presentation/screens/employee_screen/employee_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/home/home_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/nav_screen/nav_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/confirm_redeem_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/double_lunch.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/redeem_screen.dart';
-import 'package:jaguar_foods_mobile/3_presentation/screens/search_screen/search.dart';
 import 'package:jaguar_foods_mobile/3_presentation/success_screen.dart';
 import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/screens_barrel.dart';
@@ -83,7 +83,9 @@ final GoRouter routerConfig = GoRouter(
     GoRoute(
       path: RoutesPath.successfulLunchScreen,
       pageBuilder: (context, state) => CupertinoPage<void>(
-          child: const SuccessfulLunchScreen(), key: state.pageKey),
+        child: const SuccessfulLunchScreen(),
+        key: state.pageKey,
+      ),
     ),
     GoRoute(
       path: RoutesPath.redeemScreen,
@@ -93,9 +95,9 @@ final GoRouter routerConfig = GoRouter(
       ),
     ),
     GoRoute(
-      path: RoutesPath.searchScreen,
+      path: RoutesPath.employeeScreen,
       pageBuilder: (context, state) => CupertinoPage<void>(
-        child: const SearchScreen(),
+        child: const EmployeeScreen(),
         key: state.pageKey,
       ),
     ),
