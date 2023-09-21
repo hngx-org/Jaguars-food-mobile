@@ -13,6 +13,7 @@ import '../../3_presentation/confirm_redeem_screen.dart';
 import '../../3_presentation/redeem_screen.dart';
 import '../../3_presentation/success_screen.dart';
 
+import '../../3_presentation/onboarding/screens/copy_share_link.dart';
 import '../../3_presentation/onboarding/screens/create_organization.dart';
 
 final GoRouter routerConfig = GoRouter(
@@ -111,21 +112,26 @@ final GoRouter routerConfig = GoRouter(
         key: state.pageKey,
       ),
     ),
-
+    
     GoRoute(
-        path: RoutesPath.createOrganizationScreen,
+        path: RoutesPath.copyShareLink,
+        pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const CopyShareLink(),
+        key: state.pageKey,
+      ),
+   
+ GoRoute(
       pageBuilder: (context, state) => CupertinoPage<void>(
         child: const CreateOrganizationScreen(),
         key: state.pageKey,
       ),
          ),
-      
+ 
     GoRoute(
       path: RoutesPath.authCompleteScreen,
       pageBuilder: (context, state) => CupertinoPage<void>(
         child: const AuthCompleteScreen(),
         key: state.pageKey,
       ), ),
-
   ],
 );

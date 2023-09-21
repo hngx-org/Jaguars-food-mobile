@@ -16,5 +16,6 @@ class RoutesPath {
   static const String doubleLunchScreen = '/double_lunch';
   static const String successfulLunchScreen = '/successful_lunch';
   static const String createOrganizationScreen = '/create_organization';
+  static const String copyShareLink = '/copy_share_link';
   static const String authCompleteScreen = '/auth_complete_screen';
 }
