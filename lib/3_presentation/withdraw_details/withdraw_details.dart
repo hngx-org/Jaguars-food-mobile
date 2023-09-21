@@ -57,8 +57,8 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
                   padding: const EdgeInsets.only(top: 100, bottom: 40),
                   child: Text(
                     'Redeem your free lunch!',
-                    style:
-                        GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 24),
+                    style: GoogleFonts.lato(
+                        fontWeight: FontWeight.bold, fontSize: 24),
                   ),
                 ),
 
@@ -96,8 +96,8 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
                         icon: const Icon(Icons.keyboard_arrow_down_rounded),
                         onPressed: _showBankDropdown,
                       ),
-                      contentPadding:
-                          const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+                      contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 16),
                       border: InputBorder.none,
                     ),
                     controller: TextEditingController(text: selectedBank),
@@ -116,8 +116,8 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
                       TextField(
                         decoration: const InputDecoration(
                           hintText: "Account number will be displayed here",
-                          contentPadding:
-                              EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+                          contentPadding: EdgeInsets.symmetric(
+                              horizontal: 16.0, vertical: 16),
                         ),
                         controller: TextEditingController(text: accountNumber),
                         readOnly: true,
@@ -132,13 +132,11 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
                               style: GoogleFonts.lato(fontSize: 14),
                             ),
                             Container(
-
-                              width: 24.0,
-                              height: 24.0,
-                              margin: const EdgeInsets.only(right: 8.0),
-                              child: SvgPicture.asset(Assets.circleTickImagePath)
-
-                            ),
+                                width: 24.0,
+                                height: 24.0,
+                                margin: const EdgeInsets.only(right: 8.0),
+                                child: SvgPicture.asset(
+                                    Assets.circleTickImagePath)),
                           ],
                         ),
                       ),
@@ -159,8 +157,8 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
                     child: const TextField(
                       decoration: InputDecoration(
                         hintText: "How much do you want to redeem?",
-                        contentPadding:
-                            EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+                        contentPadding: EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 16),
                       ),
                     )),
 
@@ -169,17 +167,25 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
                 ),
 
                 //  texts
-                Text('Triple Lunch = N 500', style:
-                        GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 14),),
-                const SizedBox(height: 30,),
+                Text(
+                  'Triple Lunch = N 500',
+                  style: GoogleFonts.lato(
+                      fontWeight: FontWeight.bold, fontSize: 14),
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
                 // withdraw button
                 SizedBox(
                   height: 52,
                   width: MediaQuery.of(context).size.width,
                   child: ElevatedButton(
                     onPressed: () {},
-                    child: Text('Withdraw', style:
-                        GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 18),),
+                    child: Text(
+                      'Withdraw',
+                      style: GoogleFonts.lato(
+                          fontWeight: FontWeight.bold, fontSize: 18),
+                    ),
                   ),
                 ),
                 const SizedBox(
