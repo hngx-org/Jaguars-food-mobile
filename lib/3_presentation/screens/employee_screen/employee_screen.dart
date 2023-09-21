@@ -13,7 +13,7 @@ class EmployeeScreen extends StatefulWidget {
 class _EmployeeScreenState extends State<EmployeeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: AppColor.white,
       // appBar: AppBar(
       //   backgroundColor: AppColor.white,
@@ -27,7 +27,7 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
               children: [
                 BackButton(),
                 SizedBox(height: 28),
-                const Text(
+                Text(
                   "Search for an employee",
                   style: TextStyle(
                       fontSize: 24,
@@ -35,36 +35,36 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                       color: AppColor.black,
                       fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 20),
+                SizedBox(height: 20),
                 MySearchWidget(),
-                const SizedBox(height: 36),
-                const Text(
+                SizedBox(height: 36),
+                Text(
                   "All Employees",
                   style: TextStyle(
                       fontSize: 18,
                       fontFamily: 'Lato',
                       fontWeight: FontWeight.w600),
                 ),
-                const SizedBox(height: 18),
-                const SearchBox(
+                SizedBox(height: 18),
+                SearchBox(
                   text1: "Adekunle Emmanuel",
                 ),
-                const SearchBox(
+                SearchBox(
                   text1: "Kehinde Ojapa",
                 ),
-                const SearchBox(
+                SearchBox(
                   text1: "Bolaji Nifemi",
                 ),
-                const SearchBox(
+                SearchBox(
                   text1: "Oluwanifemi Balogunimil",
                 ),
-                const SearchBox(
+                SearchBox(
                   text1: "Sandra Imolel",
                 ),
-                const SearchBox(
+                SearchBox(
                   text1: "Jude bellingham",
                 ),
-                const SearchBox(
+                SearchBox(
                   text1: "Busayo Davis",
                 ),
               ],
@@ -77,13 +77,15 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
 }
 
 class MySearchWidget extends StatefulWidget {
+  const MySearchWidget({super.key});
+
   @override
   _MySearchWidgetState createState() => _MySearchWidgetState();
 }
 
 class _MySearchWidgetState extends State<MySearchWidget> {
   String _searchText = '';
-  List<String> _items = [];
+  final List<String> _items = [];
   List<String> _filteredItems = [];
 
   @override
@@ -114,7 +116,7 @@ class _MySearchWidgetState extends State<MySearchWidget> {
 
                 fillColor: AppColor.textfieldColor1,
                 hintText: 'Search for an employee',
-                suffixIcon: Icon(
+                suffixIcon: const Icon(
                   Icons.search,
                   size: 35,
                   color: AppColor.brand1,

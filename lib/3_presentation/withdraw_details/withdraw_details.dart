@@ -93,11 +93,11 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
                   child: TextField(
                     decoration: InputDecoration(
                       suffixIcon: IconButton(
-                        icon: Icon(Icons.keyboard_arrow_down_rounded),
+                        icon: const Icon(Icons.keyboard_arrow_down_rounded),
                         onPressed: _showBankDropdown,
                       ),
                       contentPadding:
-                          EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
+                          const EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
                       border: InputBorder.none,
                     ),
                     controller: TextEditingController(text: selectedBank),
@@ -105,7 +105,7 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
                   ),
                 ),
 
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10.0),
@@ -114,7 +114,7 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
                   child: Column(
                     children: [
                       TextField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: "Account number will be displayed here",
                           contentPadding:
                               EdgeInsets.symmetric(horizontal: 16.0, vertical: 16),
@@ -135,7 +135,7 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
 
                               width: 24.0,
                               height: 24.0,
-                              margin: EdgeInsets.only(right: 8.0),
+                              margin: const EdgeInsets.only(right: 8.0),
                               child: SvgPicture.asset(Assets.circleTickImagePath)
                             ),
                           ],
@@ -145,7 +145,7 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
                   ),
                 ),
 
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
 
@@ -155,7 +155,7 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
                       borderRadius: BorderRadius.circular(10.0),
                       border: Border.all(color: Colors.grey),
                     ),
-                    child: TextField(
+                    child: const TextField(
                       decoration: InputDecoration(
                         hintText: "How much do you want to redeem?",
                         contentPadding:
@@ -163,14 +163,14 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
                       ),
                     )),
 
-                SizedBox(
+                const SizedBox(
                   height: 4,
                 ),
 
                 //  texts
                 Text('Triple Lunch = N 500', style:
                         GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 14),),
-                SizedBox(height: 30,),
+                const SizedBox(height: 30,),
                 // withdraw button
                 SizedBox(
                   height: 52,
@@ -181,7 +181,7 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
                         GoogleFonts.lato(fontWeight: FontWeight.bold, fontSize: 18),),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 5,
                 )
               ],
@@ -197,7 +197,7 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Select a Bank"),
+          title: const Text("Select a Bank"),
           content: DropdownButton(
               value: selectedBank,
               items: banks.map((bank) {
