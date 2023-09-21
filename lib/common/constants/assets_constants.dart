@@ -1,4 +1,5 @@
 class Assets {
+class Assets {
   static const pngPath = "assets/png";
   static const svgPath = "assets/svg";
 
@@ -15,3 +16,4 @@ class Assets {
   static String settingsIconPath = '$svgPath/settings_icon.svg';
   static String backArrowIconPath = '$svgPath/arrow_back.svg';
 }
+

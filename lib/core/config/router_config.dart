@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
@@ -19,6 +18,7 @@ final GoRouter routerConfig = GoRouter(
   // initialLocation: RoutesPath.redeemScreen,
 //  initialLocation: RoutesPath.landingScreen,
 
+  initialLocation: RoutesPath.splashScreen,
   errorBuilder: (context, state) => const Placeholder(),
   routes: [
     GoRoute(
@@ -35,11 +35,13 @@ final GoRouter routerConfig = GoRouter(
         builder: (context, state) => const LoginScreen()),
     GoRoute(
         path: RoutesPath.homeScreen,
-        builder: (context, state) =>  HomeScreen(
+        builder: (context, state) =>  const HomeScreen(
         )),
+        path: RoutesPath.confirmRedeemScreen,
+        builder: (context, state) => const ConfirmRedeemScreen()),
     GoRoute(
         path: RoutesPath.navScreen,
-        builder: (context, state) => NavigationScreen(initialIndex: 0,
+        builder: (context, state) => const NavigationScreen(initialIndex: 0,
         )),
     GoRoute(
         path: RoutesPath.redeemScreen,
@@ -51,5 +53,13 @@ GoRoute(
         path: RoutesPath.doubleLunchScreen,
         builder: (context, state) => const DoubleLunch()),
 
+        path: RoutesPath.successScreen,
+        builder: (context, state) => const SuccessScreen()),
+    GoRoute(
+        path: RoutesPath.doubleLunchScreen,
+        builder: (context, state) => const DoubleLunch()),
+    GoRoute(
+        path: RoutesPath.successfulLunchScreen,
+        builder: (context, state) => const SuccessfulLunchScreen()),
   ],
 );
