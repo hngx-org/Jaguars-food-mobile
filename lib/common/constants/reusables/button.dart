@@ -5,14 +5,21 @@ import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 
 class ButtonWidget extends StatefulWidget {
   final void Function() onPressed;
-  final String buttonText;
+  final String? buttonText;
   final double fontSize;
-  const ButtonWidget({
-    super.key,
-    required this.onPressed,
-    required this.buttonText,
-    required this.fontSize,
-  });
+  final Widget? child;
+  final Color? buttonColor;
+  final Color? borderSideColor;
+  final Color? textColor;
+  const ButtonWidget(
+      {super.key,
+      required this.onPressed,
+      this.buttonText,
+      required this.fontSize,
+      this.child,
+      this.borderSideColor,
+      this.buttonColor,
+      this.textColor});
 
   @override
   State<ButtonWidget> createState() => _ButtonWidgetState();
@@ -25,12 +32,12 @@ class _ButtonWidgetState extends State<ButtonWidget> {
       padding: EdgeInsets.symmetric(vertical: 10.h),
       child: SizedBox(
         width: double.infinity,
-        height: 50.h,
+        height: 65.h,
         child: ElevatedButton(
           onPressed: widget.onPressed,
           style: ButtonStyle(
             backgroundColor: MaterialStateColor.resolveWith(
-              (states) => AppColor.appBrandColor,
+              (states) => widget.buttonColor ?? AppColor.appBrandColor,
             ),
             textStyle: MaterialStateTextStyle.resolveWith(
               (states) => GoogleFonts.lato(
@@ -38,8 +45,22 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                 fontWeight: FontWeight.w600,
               ),
             ),
+            shape: MaterialStateProperty.resolveWith<OutlinedBorder>(
+              (states) => RoundedRectangleBorder(
+                side: BorderSide(
+                  color: widget.borderSideColor ?? Colors.transparent,
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(8.r),
+              ),
+            ),
+            elevation: MaterialStateProperty.all(0),
           ),
-          child: Text(widget.buttonText),
+          child: widget.child ??
+              Text(
+                widget.buttonText ?? '',
+                style: TextStyle(color: widget.textColor),
+              ),
         ),
       ),
     );

@@ -23,4 +23,8 @@ class Assets {
   static String backArrowIconPath = '$svgPath/arrow_back.svg';
   static String searchIconPath = '$svgPath/search_icon.svg';
   static String buildingIconPath = '$svgPath/building_icon.svg';
+  static String smallHomeIconPath = '$svgPath/home.svg';
+  static String arrowDownIcon = '$svgPath/arrow-down.svg';
+  static String copyIcon = '$svgPath/copy_icon.svg';
+  static String emailIcon = '$svgPath/email_icon.svg';
 }

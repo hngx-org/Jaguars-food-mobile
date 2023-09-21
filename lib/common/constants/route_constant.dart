@@ -10,8 +10,12 @@ class RoutesPath {
   static const String navScreen = '/nav_screen';
   static const String redeemScreen = '/redeem-screen';
   static const String employeeScreen = '/employee-screen';
+  static const String sendLunchDealScreen = '/send_lunch_deal';
   static const String confirmRedeemScreen = '/confirmRedeem-screen';
   static const String successScreen = '/success-screen';
   static const String doubleLunchScreen = '/double_lunch';
   static const String successfulLunchScreen = '/successful_lunch';
+  static const String createOrganizationScreen = '/create_organization';
+  static const String copyShareLink = '/copy_share_link';
+  static const String authCompleteScreen = '/auth_complete_screen';
 }
