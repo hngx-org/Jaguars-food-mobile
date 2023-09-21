@@ -13,5 +13,4 @@ class RoutesPath {
   static const String navScreen = '/nav_screen';
   static const String landingScreen = '/landing-screen';
   static const String successfulLunchScreen = '/successful_lunch';
-  static const String redeemScreen = '/redeem_screen';
 }

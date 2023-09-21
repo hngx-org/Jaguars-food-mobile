@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 
@@ -14,10 +13,9 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(),
+        leading: const BackButton(),
       ),
-      backgroundColor: AppColor.white,
-      body: SafeArea(
+      body: const SafeArea(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 24),
           child: SingleChildScrollView(
@@ -71,13 +69,16 @@ class _SearchScreenState extends State<SearchScreen> {
 }
 
 class MySearchWidget extends StatefulWidget {
+  const MySearchWidget({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _MySearchWidgetState createState() => _MySearchWidgetState();
 }
 
 class _MySearchWidgetState extends State<MySearchWidget> {
   String _searchText = '';
-  List<String> _items = [
+  final List<String> _items = [
     'Adekunle Emmanuel',
     'Kehinde Ojapa',
     'Bolaji Nifemi',
@@ -106,13 +107,13 @@ class _MySearchWidgetState extends State<MySearchWidget> {
           },
           decoration: InputDecoration(
             hintText: 'Search',
-            suffixIcon: Icon(Icons.search),
+            suffixIcon: const Icon(Icons.search),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.0),
             ),
           ),
         ),
-        SizedBox(height: 16.0),
+        const SizedBox(height: 16.0),
         ListView.builder(
           shrinkWrap: true,
           itemCount: _filteredItems.length,
@@ -142,44 +143,42 @@ class SearchBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Row(
-            children: [
-              CircleAvatar(
-                backgroundColor: AppColor.appBrandColor,
-                radius: 18,
-                child: Icon(icon),
+    return Column(
+      children: [
+        Row(
+          children: [
+            CircleAvatar(
+              backgroundColor: AppColor.appBrandColor,
+              radius: 18,
+              child: Icon(icon),
+            ),
+            const SizedBox(width: 13),
+            Expanded(
+              child: Text(
+                text1,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: AppColor.black,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              SizedBox(width: 13),
-              Expanded(
+            ),
+            InkWell(
+              onTap: () {},
+              child: const Expanded(
                 child: Text(
-                  text1,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: AppColor.black,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  "Send gift",
+                  style: TextStyle(fontSize: 12, color: AppColor.black),
                 ),
               ),
-              InkWell(
-                onTap: () {},
-                child: Expanded(
-                  child: Text(
-                    "Send gift",
-                    style: TextStyle(fontSize: 12, color: AppColor.black),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 14),
-          Divider(
-            height: 1,
-          ),
-        ],
-      ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 14),
+        const Divider(
+          height: 1,
+        ),
+      ],
     );
   }
 }
