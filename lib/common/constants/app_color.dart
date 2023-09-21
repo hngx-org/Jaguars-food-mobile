@@ -13,4 +13,5 @@ class AppColor {
   static const Color secondaryColor = Color(0xFFABABAB);
   static const Color textfieldColor1 = Color(0xFFF4F4F4);
   static const Color brand = Color(0xFFE8DDFF);
+  static const Color brand1 = Color(0xFF969696);
 }

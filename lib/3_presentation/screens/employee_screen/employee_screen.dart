@@ -96,25 +96,36 @@ class _MySearchWidgetState extends State<MySearchWidget> {
 
     return Column(
       children: [
-        TextField(
-          onChanged: (value) {
-            setState(() {
-              _searchText = value;
-            });
-          },
-          decoration: InputDecoration(
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                color: AppColor.white,
-                width: 2.0, // Set the desired border color here
+        Container(
+          decoration: BoxDecoration(
+            color: AppColor.textfieldColor1,
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: TextField(
+              onChanged: (value) {
+                setState(() {
+                  _searchText = value;
+                });
+              },
+              decoration: InputDecoration(
+                focusedBorder: InputBorder.none,
+
+                fillColor: AppColor.textfieldColor1,
+                hintText: 'Search for an employee',
+                suffixIcon: Icon(
+                  Icons.search,
+                  size: 35,
+                  color: AppColor.brand1,
+                ),
+                // SvgPicture.asset(
+                //   Assets.searchPath,
+                // ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
-            ),
-            filled: true,
-            fillColor: AppColor.textfieldColor1,
-            hintText: 'Search for an employee',
-            suffixIcon: SvgPicture.asset(Assets.searchPath),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(60),
             ),
           ),
         ),
