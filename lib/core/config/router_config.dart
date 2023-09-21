@@ -18,8 +18,6 @@ import '../../3_presentation/success_screen.dart';
 final GoRouter routerConfig = GoRouter(
   initialLocation: RoutesPath.splashScreen,
 
-  // initialLocation: RoutesPath.redeemScreen,
-//  initialLocation: RoutesPath.landingScreen,
 
   errorBuilder: (context, state) => const Placeholder(),
   routes: [
@@ -37,11 +35,11 @@ final GoRouter routerConfig = GoRouter(
         builder: (context, state) => const LoginScreen()),
     GoRoute(
         path: RoutesPath.homeScreen,
-        builder: (context, state) =>  HomeScreen(
+        builder: (context, state) =>  const HomeScreen(
         )),
     GoRoute(
         path: RoutesPath.navScreen,
-        builder: (context, state) => NavigationScreen(initialIndex: 0,
+        builder: (context, state) => const NavigationScreen(initialIndex: 0,
         )),
      GoRoute(
         path: RoutesPath.confirmRedeemScreen,
@@ -49,12 +47,12 @@ final GoRouter routerConfig = GoRouter(
     GoRoute(
         path: RoutesPath.successScreen,
         builder: (context, state) => const SuccessScreen()),
-    // GoRoute(
-    //     path: RoutesPath.doubleLunchScreen,
-    //     builder: (context, state) => const DoubleLunch()),
-    // GoRoute(
-    //     path: RoutesPath.successfulLunchScreen,
-    //     builder: (context, state) => const SuccessfulLunchScreen()),
+    GoRoute(
+        path: RoutesPath.doubleLunchScreen,
+        builder: (context, state) => const DoubleLunch()),
+    GoRoute(
+        path: RoutesPath.successfulLunchScreen,
+        builder: (context, state) => const SuccessfulLunchScreen()),
     GoRoute(
         path: RoutesPath.redeemScreen,
         builder: (context, state) => const RedeemScreen()),
