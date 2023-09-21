@@ -77,20 +77,20 @@ class _HomeScreenState extends State<HomeScreen> {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-          child: Container(
+          child: SizedBox(
             width: mediaQuery.width,
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   //welcome title and profile image
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
+                      SizedBox(
                         width: mediaQuery.width * 0.6,
                         height: 100,
                         child: Column(
@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Welcome ${firstName}! 👋',
+                              'Welcome $firstName! 👋',
                               style: TextStyle(
                                 color: AppColor.black,
                                 fontSize: mediaQuery.width * 0.065,
@@ -111,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             Text(
                               formattedDate,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Color(0xFFABABAB),
                                 fontSize: 14,
                                 fontFamily: 'Lato',
@@ -126,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       Container(
                         width: 49,
                         height: 49,
-                        decoration: ShapeDecoration(
+                        decoration: const ShapeDecoration(
                           shape: OvalBorder(),
                         ),
                         child: Image.asset('assets/png/sample_profile.png'),
@@ -142,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       clipBehavior: Clip.antiAlias,
                       decoration: ShapeDecoration(
                         shape: RoundedRectangleBorder(
-                          side: BorderSide(width: 1, color: Color(0xFFEBEBEB)),
+                          side: const BorderSide(width: 1, color: Color(0xFFEBEBEB)),
                           borderRadius: BorderRadius.circular(6),
                         ),
                       ),
@@ -154,13 +154,13 @@ class _HomeScreenState extends State<HomeScreen> {
                               onTap: () {
                                 Navigator.of(context).push(
                                   MaterialPageRoute(
-                                    builder: (context) => NavigationScreen(
+                                    builder: (context) => const NavigationScreen(
                                       initialIndex: 1,
                                     ),
                                   ),
                                 );
                               },
-                              child: CustomImageText(
+                              child: const CustomImageText(
                             image: 'assets/png/tag.png',
                             text: 'Redeem',
                           )),
@@ -169,13 +169,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             onTap: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => NavigationScreen(
+                                  builder: (context) => const NavigationScreen(
                                     initialIndex: 2
                                   ),
                                 ),
                               );
                             },
-                            child: CustomImageText(
+                            child: const CustomImageText(
                               image: 'assets/png/gift.png',
                               text: 'Gift',
                             ),
@@ -185,8 +185,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   //received rewards
-                  SizedBox(height: 40,),
-                  Row(
+                  const SizedBox(height: 40,),
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
@@ -209,14 +209,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       )
                     ],
                   ),
-                  SizedBox(height: 15,),
+                  const SizedBox(height: 15,),
                   //item
                   Material(
                     elevation: 7,
                     child: ListView.builder(
                       shrinkWrap: true,
-                      padding: EdgeInsets.symmetric(horizontal: 12),
-                      physics: NeverScrollableScrollPhysics(),
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: transactions.length,
                       itemBuilder: (context, index) {
                         final transaction = transactions[index];
@@ -226,9 +226,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(height: 20,),
+                            const SizedBox(height: 20,),
                             Container(
-                              margin: EdgeInsets.only(bottom: 20),
+                              margin: const EdgeInsets.only(bottom: 20),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
@@ -236,17 +236,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Material(
                                     elevation: 4,
                                     color: Colors.transparent,
-                                    shape: OvalBorder(),
+                                    shape: const OvalBorder(),
                                     child: Container(
                                       width: 36,
                                       height: 36,
-                                      padding: EdgeInsets.all(10),
-                                      decoration: ShapeDecoration(
+                                      padding: const EdgeInsets.all(10),
+                                      decoration: const ShapeDecoration(
                                         color: Color(0xFFE8DDFF),
                                         shape: OvalBorder(),
                                       ),
                                       child: ColorFiltered(
-                                        colorFilter: ColorFilter.mode(
+                                        colorFilter: const ColorFilter.mode(
                                           AppColor.appBrandColor,
                                           BlendMode.srcIn,
                                         ),
@@ -256,7 +256,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox( width: 15,),
+                                  const SizedBox( width: 15,),
                                   Expanded(
                                     child: Column(
                                       mainAxisAlignment: MainAxisAlignment.start,
@@ -267,7 +267,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             children: [
                                               TextSpan(
                                                 text: transaction.receiverId,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   color: Color(0xFF1A1920),
                                                   fontSize: 14,
                                                   fontFamily: 'Lato',
@@ -276,7 +276,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ),
                                               TextSpan(
                                                 text: ' just gifted you ${transaction.amount.toInt()} Plts',
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                   color: Color(0xFF55506D),
                                                   fontSize: 14,
                                                   fontFamily: 'Lato',
@@ -289,10 +289,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                           maxLines: 3,
                                         ),
                                         // Date
-                                        SizedBox(height: 8),
+                                        const SizedBox(height: 8),
                                         Text(
                                           formattedTransactionDate,
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                             color: Color(0xFFABABAB),
                                             fontSize: 12,
                                             fontFamily: 'Lato',
@@ -302,14 +302,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ],
                                     ),
                                   ),
-                                  SizedBox( width: 20,),
+                                  const SizedBox( width: 20,),
                                   // text
                                   Material(
                                     elevation: 8,
                                     color: Colors.transparent,
                                     child: Container(
                                       alignment: Alignment.centerLeft,
-                                      child: Text(
+                                      child: const Text(
                                         'View',
                                         style: TextStyle(
                                           color: Color(0xFF2EAA60),
@@ -358,12 +358,12 @@ class CustomImageText extends StatelessWidget {
       children: [
         Material(
           elevation: 4,
-          shape: OvalBorder(),
+          shape: const OvalBorder(),
           child: Container(
             width: 81,
             height: 81,
             alignment: Alignment.center,
-            decoration: ShapeDecoration(
+            decoration: const ShapeDecoration(
               color: Color(0xFFE8DDFF),
               shape: OvalBorder(),
             ),
@@ -380,7 +380,7 @@ class CustomImageText extends StatelessWidget {
           color: Colors.transparent,
           child: Text(
             text,
-            style: TextStyle(
+            style: const TextStyle(
               color: Color(0xFF33313E),
               fontSize: 14,
               fontFamily: 'Lato',
