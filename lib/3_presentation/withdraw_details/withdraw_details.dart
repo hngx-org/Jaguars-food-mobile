@@ -136,7 +136,7 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
                               width: 24.0,
                               height: 24.0,
                               margin: EdgeInsets.only(right: 8.0),
-                              child: SvgPicture.asset(Assets.circleTickPath)
+                              child: SvgPicture.asset(Assets.circleTickImagePath)
                             ),
                           ],
                         ),
