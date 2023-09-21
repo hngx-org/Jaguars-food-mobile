@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/redeem_screen.dart';
+import 'package:jaguar_foods_mobile/3_presentation/screens/employee_screen/employee_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/home/home_screen.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:jaguar_foods_mobile/common/constants/custom_nav_bar.dart';
 
 class NavigationScreen extends StatefulWidget {
-  const NavigationScreen({Key? key, required this.initialIndex,}) : super(key: key);
+  const NavigationScreen({
+    Key? key,
+    required this.initialIndex,
+  }) : super(key: key);
 
   final int initialIndex;
 
@@ -21,16 +26,15 @@ class _NavigationScreenState extends State<NavigationScreen> {
     super.initState();
     _selectedIndex = widget.initialIndex;
     _tabScreens = [
-      HomeScreen(),
-      EmployeesScreen(),
-      RewardsScreen(),
-      SettingsScreen(),
+      const HomeScreen(),
+      const EmployeeScreen(),
+      const RedeemScreen(),
+      const SettingsScreen(),
     ];
   }
 
-
   // Function to handle tab selection
-  void _onTabSelected(int index) {
+  void onTabSelected(int index) {
     setState(() {
       _selectedIndex = index;
     });
@@ -43,7 +47,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         type: BottomNavigationBarType.fixed,
-        onTap: _onTabSelected,
+        onTap: onTabSelected,
         selectedItemColor: AppColor.appBrandColor,
         unselectedItemColor: AppColor.secondaryColor,
         items: [
@@ -54,7 +58,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
               isSelected: _selectedIndex == 0,
               selectedColor: AppColor.appBrandColor,
               unselectedColor: AppColor.secondaryColor,
-              onTap: () => _onTabSelected(0),
+              onTap: () => onTabSelected(0),
             ),
             label: '',
           ),
@@ -65,7 +69,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
               isSelected: _selectedIndex == 1,
               selectedColor: AppColor.appBrandColor,
               unselectedColor: AppColor.secondaryColor,
-              onTap: () => _onTabSelected(1),
+              onTap: () => onTabSelected(1),
             ),
             label: '',
           ),
@@ -78,7 +82,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
               isSelected: _selectedIndex == 2,
               selectedColor: AppColor.appBrandColor,
               unselectedColor: AppColor.secondaryColor,
-              onTap: () => _onTabSelected(2),
+              onTap: () => onTabSelected(2),
             ),
             label: '',
           ),
@@ -91,40 +95,23 @@ class _NavigationScreenState extends State<NavigationScreen> {
               isSelected: _selectedIndex == 3,
               selectedColor: AppColor.appBrandColor,
               unselectedColor: AppColor.secondaryColor,
-              onTap: () => _onTabSelected(3),
+              onTap: () => onTabSelected(3),
             ),
             label: '',
           ),
           // Add more items as needed
         ],
       ),
-
-    );
-  }
-}
-
-class EmployeesScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Employees Screen'),
-    );
-  }
-}
-
-class RewardsScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Records Screen'),
     );
   }
 }
 
 class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('Settings Screen'),
     );
   }

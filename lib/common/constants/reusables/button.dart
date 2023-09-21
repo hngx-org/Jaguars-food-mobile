@@ -25,7 +25,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
       padding: EdgeInsets.symmetric(vertical: 10.h),
       child: SizedBox(
         width: double.infinity,
-        height: 50.h,
+        height: 65.h,
         child: ElevatedButton(
           onPressed: widget.onPressed,
           style: ButtonStyle(
@@ -36,6 +36,15 @@ class _ButtonWidgetState extends State<ButtonWidget> {
               (states) => GoogleFonts.lato(
                 fontSize: widget.fontSize,
                 fontWeight: FontWeight.w600,
+              ),
+            ),
+            shape: MaterialStateProperty.resolveWith<OutlinedBorder>(
+              (states) => RoundedRectangleBorder(
+                side: BorderSide(
+                  color: Colors.transparent,
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(8.r),
               ),
             ),
           ),

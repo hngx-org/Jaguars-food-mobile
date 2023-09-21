@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jaguar_foods_mobile/common/constants/assets_constants.dart';
 
@@ -62,7 +61,7 @@ class DoubleLunch extends StatelessWidget {
                 ),
               ),
 
-              Padding(
+              const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 1, vertical: 1),
                 child: TextField(
                   minLines: 5,
@@ -72,7 +71,11 @@ class DoubleLunch extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 40),
+
+              const SizedBox(
+                height: 40,
+              ),
+
               // send button
               SizedBox(
                 height: 52,
@@ -86,7 +89,7 @@ class DoubleLunch extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               )
             ],
