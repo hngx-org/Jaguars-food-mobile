@@ -40,7 +40,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
             ),
             shape: MaterialStateProperty.resolveWith<OutlinedBorder>(
               (states) => RoundedRectangleBorder(
-                side: BorderSide(
+                side: const BorderSide(
                   color: Colors.transparent,
                   width: 1,
                 ),

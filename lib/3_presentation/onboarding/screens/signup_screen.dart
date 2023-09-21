@@ -15,8 +15,7 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    TextEditingController _orgController = TextEditingController();
+    TextEditingController orgController = TextEditingController();
     return SafeArea(
       child: Scaffold(
           body: Container(
@@ -33,7 +32,7 @@ class SignUpScreen extends StatelessWidget {
             60.verticalSpace,
             CustomTextField(
               headerText: "Enter your Organization name",
-              controller: _orgController,
+              controller: orgController,
               hintText: 'e.g PricewaterhouseCoopers Ltd.',
             ),
             20.verticalSpace,
@@ -53,16 +52,16 @@ class SignUpScreen extends StatelessWidget {
                 buttonText: "Next",
                 fontSize: 18.sp),
             20.verticalSpace,
-            Divider(),
+            const Divider(),
             20.verticalSpace,
-            Text('Want to join an existing organization?'),
+            const Text('Want to join an existing organization?'),
             20.verticalSpace,
             GestureDetector(
               child: Row(
                 children: [
                   SvgPicture.asset(Assets.smallHomeIconPath),
                   10.horizontalSpace,
-                  Text("Join with company invite code"),
+                  const Text("Join with company invite code"),
                 ],
               ),
             )
