@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jaguar_foods_mobile/3_presentation/double_lunch/double_lunch.dart';
+import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/send_lunch_deal.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/successful_lunch.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/employee_screen/employee_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/home/home_screen.dart';
@@ -12,9 +13,12 @@ import '../../3_presentation/onboarding/screens/redeem_screen.dart';
 import '../../3_presentation/success_screen.dart';
 
 final GoRouter routerConfig = GoRouter(
-  initialLocation: RoutesPath.splashScreen,
+  initialLocation: RoutesPath.sendLunchDealScreen,
   errorBuilder: (context, state) => const Placeholder(),
   routes: [
+    GoRoute(
+        path: RoutesPath.sendLunchDealScreen,
+        builder: (context, state) => const SendLunchDealScreen()),
     GoRoute(
         path: RoutesPath.splashScreen,
         builder: (context, state) => const SplashScreen()),
