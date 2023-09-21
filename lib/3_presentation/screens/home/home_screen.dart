@@ -134,51 +134,54 @@ class _HomeScreenState extends State<HomeScreen> {
                     ],
                   ),
                   //redeem , gift
-                  Container(
-                    width: mediaQuery.width,
-                    height: mediaQuery.height * 0.23,
-                    clipBehavior: Clip.antiAlias,
-                    decoration: ShapeDecoration(
-                      shape: RoundedRectangleBorder(
-                        side: BorderSide(width: 1, color: Color(0xFFEBEBEB)),
-                        borderRadius: BorderRadius.circular(6),
+                  Material(
+                    elevation: 3,
+                    child: Container(
+                      width: mediaQuery.width,
+                      height: mediaQuery.height * 0.23,
+                      clipBehavior: Clip.antiAlias,
+                      decoration: ShapeDecoration(
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(width: 1, color: Color(0xFFEBEBEB)),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
                       ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        //redeem
-                        GestureDetector(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          //redeem
+                          GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => NavigationScreen(
+                                      initialIndex: 1,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: CustomImageText(
+                            image: 'assets/png/tag.png',
+                            text: 'Redeem',
+                          )),
+                          //gift
+                          GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) => NavigationScreen(
-                                    initialIndex: 1,
+                                    initialIndex: 2
                                   ),
                                 ),
                               );
                             },
                             child: CustomImageText(
-                          image: 'assets/png/tag.png',
-                          text: 'Redeem',
-                        )),
-                        //gift
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => NavigationScreen(
-                                  initialIndex: 2
-                                ),
-                              ),
-                            );
-                          },
-                          child: CustomImageText(
-                            image: 'assets/png/gift.png',
-                            text: 'Gift',
+                              image: 'assets/png/gift.png',
+                              text: 'Gift',
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   //received rewards
@@ -206,106 +209,127 @@ class _HomeScreenState extends State<HomeScreen> {
                       )
                     ],
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(height: 15,),
                   //item
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: transactions.length,
-                    itemBuilder: (context, index) {
-                      final transaction = transactions[index];
-                      final formattedTransactionDate =
-                      DateFormat('d MMM, HH:mm').format(transaction.createdAt);
+                  Material(
+                    elevation: 7,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      padding: EdgeInsets.symmetric(horizontal: 12),
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: transactions.length,
+                      itemBuilder: (context, index) {
+                        final transaction = transactions[index];
+                        final formattedTransactionDate =
+                        DateFormat('d MMM, HH:mm').format(transaction.createdAt);
 
-                      return Container(
-                        margin: EdgeInsets.only(bottom: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            SizedBox(height: 20,),
                             Container(
-                              width: 36,
-                              height: 36,
-                              padding: EdgeInsets.all(10),
-                              decoration: ShapeDecoration(
-                                color: Color(0xFFE8DDFF),
-                                shape: OvalBorder(),
-                              ),
-                              child: ColorFiltered(
-                                colorFilter: ColorFilter.mode(
-                                  AppColor.appBrandColor,
-                                  BlendMode.srcIn,
-                                ),
-                                child: SvgPicture.asset(
-                                  'assets/svg/gift_icon.svg',
-                                ),
-                              ),
-                            ),
-                            SizedBox( width: 20,),
-                            Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              margin: EdgeInsets.only(bottom: 20),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text.rich(
-                                    TextSpan(
-                                      children: [
-                                        TextSpan(
-                                          text: transaction.receiverId,
-                                          style: TextStyle(
-                                            color: Color(0xFF1A1920),
-                                            fontSize: 14,
-                                            fontFamily: 'Lato',
-                                            fontWeight: FontWeight.w700,
-                                          ),
+                                  //gift icon
+                                  Material(
+                                    elevation: 4,
+                                    color: Colors.transparent,
+                                    shape: OvalBorder(),
+                                    child: Container(
+                                      width: 36,
+                                      height: 36,
+                                      padding: EdgeInsets.all(10),
+                                      decoration: ShapeDecoration(
+                                        color: Color(0xFFE8DDFF),
+                                        shape: OvalBorder(),
+                                      ),
+                                      child: ColorFiltered(
+                                        colorFilter: ColorFilter.mode(
+                                          AppColor.appBrandColor,
+                                          BlendMode.srcIn,
                                         ),
-                                        TextSpan(
-                                          text: ' just gifted you ${transaction.amount.toInt()} Plts',
+                                        child: SvgPicture.asset(
+                                          'assets/svg/gift_icon.svg',
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox( width: 15,),
+                                  Expanded(
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text.rich(
+                                          TextSpan(
+                                            children: [
+                                              TextSpan(
+                                                text: transaction.receiverId,
+                                                style: TextStyle(
+                                                  color: Color(0xFF1A1920),
+                                                  fontSize: 14,
+                                                  fontFamily: 'Lato',
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                text: ' just gifted you ${transaction.amount.toInt()} Plts',
+                                                style: TextStyle(
+                                                  color: Color(0xFF55506D),
+                                                  fontSize: 14,
+                                                  fontFamily: 'Lato',
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          overflow: TextOverflow.ellipsis,
+                                          maxLines: 3,
+                                        ),
+                                        // Date
+                                        SizedBox(height: 8),
+                                        Text(
+                                          formattedTransactionDate,
                                           style: TextStyle(
-                                            color: Color(0xFF55506D),
-                                            fontSize: 14,
+                                            color: Color(0xFFABABAB),
+                                            fontSize: 12,
                                             fontFamily: 'Lato',
                                             fontWeight: FontWeight.w600,
                                           ),
-                                        ),
+                                        )
                                       ],
                                     ),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 3,
                                   ),
-                                  // Date
-                                  SizedBox(height: 8),
-                                  Text(
-                                    formattedTransactionDate,
-                                    style: TextStyle(
-                                      color: Color(0xFFABABAB),
-                                      fontSize: 12,
-                                      fontFamily: 'Lato',
-                                      fontWeight: FontWeight.w600,
+                                  SizedBox( width: 20,),
+                                  // text
+                                  Material(
+                                    elevation: 8,
+                                    color: Colors.transparent,
+                                    child: Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        'View',
+                                        style: TextStyle(
+                                          color: Color(0xFF2EAA60),
+                                          fontSize: 12,
+                                          fontFamily: 'Lato',
+                                          fontWeight: FontWeight.w600,
+                                          height: 0.19,
+                                          letterSpacing: -0.12,
+                                        ),
+                                      ),
                                     ),
                                   )
                                 ],
                               ),
                             ),
-                            SizedBox( width: 20,),
-                            // text
-                            Container(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                'View',
-                                style: TextStyle(
-                                  color: Color(0xFF2EAA60),
-                                  fontSize: 12,
-                                  fontFamily: 'Lato',
-                                  fontWeight: FontWeight.w600,
-                                  height: 0.19,
-                                  letterSpacing: -0.12,
-                                ),
-                              ),
-                            )
+                            Divider(color: AppColor.secondaryColor.withOpacity(0.7), ),
                           ],
-                        ),
-                      );
-                    },
+                        );
+                      },
+                    ),
                   )
                 ],
               ),
@@ -332,27 +356,36 @@ class CustomImageText extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        Container(
-          width: 81,
-          height: 81,
-          alignment: Alignment.center,
-          decoration: ShapeDecoration(
-            color: Color(0xFFE8DDFF),
-            shape: OvalBorder(),
-          ),
-          child: Image.asset(
-            image,
-            width: 101,
-            height: 55.50,
+        Material(
+          elevation: 4,
+          shape: OvalBorder(),
+          child: Container(
+            width: 81,
+            height: 81,
+            alignment: Alignment.center,
+            decoration: ShapeDecoration(
+              color: Color(0xFFE8DDFF),
+              shape: OvalBorder(),
+            ),
+            child: Image.asset(
+              image,
+              width: 101,
+              height: 55.50,
+            ),
           ),
         ),
-        Text(
-          text,
-          style: TextStyle(
-            color: Color(0xFF33313E),
-            fontSize: 14,
-            fontFamily: 'Lato',
-            fontWeight: FontWeight.w500,
+        Material(
+          elevation: 6,
+          shadowColor: Colors.black.withOpacity(0.4),
+          color: Colors.transparent,
+          child: Text(
+            text,
+            style: TextStyle(
+              color: Color(0xFF33313E),
+              fontSize: 14,
+              fontFamily: 'Lato',
+              fontWeight: FontWeight.w500,
+            ),
           ),
         )
       ],

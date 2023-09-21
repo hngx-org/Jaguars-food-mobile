@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/nav_screen/nav_screen.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
-import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
-import 'package:jaguar_foods_mobile/core/config/router_config.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -36,10 +33,10 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Center(
         child: Text(
-          'SplashScreen',
+          'Jaguar Lunch',
           style: GoogleFonts.lato(
               fontWeight: FontWeight.bold,
-              fontSize: 20.0,
+              fontSize: 30.0,
               color: AppColor.appBrandColor),
         ),
       ),
