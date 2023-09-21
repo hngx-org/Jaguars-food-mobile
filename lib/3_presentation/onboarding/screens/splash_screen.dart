@@ -4,18 +4,38 @@ import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 import 'package:jaguar_foods_mobile/core/config/router_config.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _navigateToMainScreen();
+  }
+
+  Future<void> _navigateToMainScreen() async {
+    await Future.delayed(const Duration(seconds: 3), () {
+      while (routerConfig.canPop() == true) {
+        routerConfig.pop();
+      }
+      routerConfig.pushReplacement(RoutesPath.navScreen);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Text(
-          'SplashScreen',
+          'Jaguar Lunch',
           style: GoogleFonts.lato(
               fontWeight: FontWeight.bold,
-              fontSize: 20.0,
+              fontSize: 30.0,
               color: AppColor.appBrandColor),
         ),
       ),

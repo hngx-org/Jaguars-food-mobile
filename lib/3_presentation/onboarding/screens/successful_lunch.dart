@@ -27,7 +27,7 @@ class SuccessfulLunchScreen extends StatelessWidget {
           child: Stack(
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                padding: EdgeInsets.symmetric(horizontal: 30.w),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -117,7 +117,7 @@ class SuccessfulLunchScreen extends StatelessWidget {
               Positioned(
                 left: 7.w,
                 top: 250.h,
-                child: Image.asset(Assets.checkImagePath),
+                child: Image.asset(Assets.circleTickImagePath),
               ),
             ],
           ),
