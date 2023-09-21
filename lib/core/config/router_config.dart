@@ -13,7 +13,7 @@ import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/successful
 
 final GoRouter routerConfig = GoRouter(
   //TODO: return the initial screen back to redeemScreen
-  initialLocation: RoutesPath.loginScreen,
+  initialLocation: RoutesPath.redeemScreen,
   errorBuilder: (context, state) => const Placeholder(),
   routes: [
     GoRoute(

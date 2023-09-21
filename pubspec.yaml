@@ -43,6 +43,7 @@ dependencies:
   dartz: ^0.10.1
   flutter_screenutil: ^5.8.4
   intl: ^0.18.1
+  email_validator: ^2.1.17
 
 dev_dependencies:
   flutter_test:
