@@ -8,15 +8,15 @@ import '../../../common/constants/reusables/back_icon.dart';
 import '../../../common/constants/reusables/textfield.dart';
 import '../../../common/constants/route_constant.dart';
 
-class JoinOrganizationScreen extends StatefulWidget {
-  const JoinOrganizationScreen({super.key, required this.orgName});
+class StaffLoginScreen extends StatefulWidget {
+  const StaffLoginScreen({super.key, required this.orgName});
   final String orgName;
 
   @override
-  State<JoinOrganizationScreen> createState() => _JoinOrganizationScreenState();
+  State<StaffLoginScreen> createState() => _StaffLoginScreenState();
 }
 
-class _JoinOrganizationScreenState extends State<JoinOrganizationScreen> {
+class _StaffLoginScreenState extends State<StaffLoginScreen> {
   bool _isObscured = true;
   bool _isObscured2 = true;
   @override
