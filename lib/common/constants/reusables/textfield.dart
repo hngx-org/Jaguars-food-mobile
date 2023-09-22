@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -8,7 +10,10 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType keyboardType;
   final bool obscureText;
-  final BorderSide? borderSide;
+  final Widget? prefix;
+  final String? Function(String?)? validator;
+  final void Function(String)? onChanged;
+  final Widget? suffixIcon;
 
   const CustomTextField({
     super.key,
@@ -17,7 +22,11 @@ class CustomTextField extends StatelessWidget {
     this.hintText,
     this.controller,
     this.keyboardType = TextInputType.text,
-    this.obscureText = false, this.borderSide,
+    this.obscureText = false,
+    this.validator,
+    this.onChanged,
+    this.suffixIcon,
+    this.prefix,
   });
 
   @override
@@ -27,29 +36,41 @@ class CustomTextField extends StatelessWidget {
       children: <Widget>[
         Text(
           headerText,
-          style: const TextStyle(
-            fontWeight: FontWeight.w700,
-            fontSize: 14,
-          ),
+          style: GoogleFonts.lato(
+              fontWeight: FontWeight.w700,
+              fontSize: 14,
+              color: const Color(0xFF475466)),
         ),
-        const SizedBox(height: 8),
-        TextField(
+        SizedBox(height: 5.h),
+        TextFormField(
+          validator: validator,
+          onChanged: onChanged,
           controller: controller,
           keyboardType: keyboardType,
           obscureText: obscureText,
+          cursorColor: AppColor.appBrandColor,
           decoration: InputDecoration(
-            labelText: labelText,
-            hintStyle: const TextStyle(color: AppColor.hinttextfieldColor),
-            hintText: hintText,
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
-              borderSide: borderSide ?? BorderSide(color: Colors.transparent),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(13.0),
-              borderSide: borderSide ?? BorderSide(color: Colors.transparent),
-            ),
-          ),
+              prefixIcon: prefix,
+              suffixIcon: suffixIcon,
+              labelText: labelText,
+              labelStyle: GoogleFonts.lato(
+                color: const Color(0xFF475466),
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+              ),
+              hintStyle: const TextStyle(color: AppColor.hinttextfieldColor),
+              hintText: hintText,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: const BorderSide(color: AppColor.appBrandColor),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: const BorderSide(color: Colors.red),
+              )),
         ),
       ],
     );
@@ -62,7 +83,8 @@ class CustomTextFieldWithDropdown extends StatefulWidget {
   final List<String> dropdownItems;
   final ValueChanged<String> onChanged;
 
-  CustomTextFieldWithDropdown({
+  const CustomTextFieldWithDropdown({
+    super.key,
     required this.headerText,
     required this.hintText,
     required this.dropdownItems,
@@ -70,6 +92,7 @@ class CustomTextFieldWithDropdown extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _CustomTextFieldWithDropdownState createState() =>
       _CustomTextFieldWithDropdownState();
 }
@@ -92,12 +115,13 @@ class _CustomTextFieldWithDropdownState
       children: [
         Text(
           widget.headerText,
-          style: const TextStyle(
-            fontSize: 16,
+          style: GoogleFonts.lato(
             fontWeight: FontWeight.w700,
+            fontSize: 14,
+            color: const Color(0xFF475466),
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         TextFormField(
           readOnly: true, // Prevent manual editing
           controller: TextEditingController(
@@ -110,16 +134,22 @@ class _CustomTextFieldWithDropdownState
           },
           decoration: InputDecoration(
             hintText: widget.hintText,
-            hintStyle: TextStyle(color: Colors.grey),
+            labelStyle: GoogleFonts.lato(
+              color: const Color(0xFF475466),
+              fontSize: 14,
+              fontWeight: FontWeight.w700,
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            hintStyle: const TextStyle(color: Colors.grey),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
-              borderSide: BorderSide(color: AppColor.appBrandColor)
-            ),
+                borderRadius: BorderRadius.circular(8.0),
+                borderSide: const BorderSide(color: AppColor.appBrandColor)),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
-              borderSide: BorderSide(color: AppColor.appBrandColor)
-            ),
-            suffixIcon: GestureDetector(
+                borderRadius: BorderRadius.circular(8.0),
+                borderSide: const BorderSide(color: AppColor.appBrandColor)),
+            suffixIcon: InkWell(
               onTap: () {
                 setState(() {
                   isDropdownOpen = !isDropdownOpen;
@@ -134,12 +164,19 @@ class _CustomTextFieldWithDropdownState
           ),
         ),
         if (isDropdownOpen)
-          Container(
+          AnimatedContainer(
+            margin: EdgeInsets.symmetric(
+              vertical: 5.h,
+            ),
             width: double.infinity,
             decoration: BoxDecoration(
               border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(4.0),
+              borderRadius: BorderRadius.circular(8.0),
             ),
+            duration: const Duration(
+              milliseconds: 1000,
+            ),
+            curve: Curves.easeInOut,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: widget.dropdownItems
@@ -152,8 +189,19 @@ class _CustomTextFieldWithDropdownState
                         });
                       },
                       child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(item),
+                        padding: EdgeInsets.only(
+                          top: 5.h,
+                          bottom: 10.0.h,
+                          left: 10.w,
+                          right: 10.w,
+                        ),
+                        child: Text(
+                          item,
+                          style: GoogleFonts.lato(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 14,
+                              color: const Color(0xFF475466)),
+                        ),
                       ),
                     ),
                   )

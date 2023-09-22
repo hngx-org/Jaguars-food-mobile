@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/create_organization.dart';
-import 'package:jaguar_foods_mobile/3_presentation/screens/nav_screen/nav_screen.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/button.dart';
 
@@ -10,7 +10,6 @@ import '../../../common/constants/reusables/back_icon.dart';
 
 class RegisterOrgNameScreen extends StatefulWidget {
   const RegisterOrgNameScreen({super.key});
-
 
   @override
   State<RegisterOrgNameScreen> createState() => _RegisterOrgNameScreenState();
@@ -72,20 +71,18 @@ class _RegisterOrgNameScreenState extends State<RegisterOrgNameScreen> {
                 40.verticalSpace,
                 Text(
                   'Create an Organization',
-                  style: TextStyle(
-                    color: Color(0xFF571FCD),
+                  style: GoogleFonts.lato(
+                    color: const Color(0xFF571FCD),
                     fontSize: 24,
-                    fontFamily: 'Lato',
                     fontWeight: FontWeight.w700,
                   ),
                 ),
                 40.verticalSpace,
                 Text(
                   'Enter your Organization name',
-                  style: TextStyle(
-                    color: Color(0xFF475466),
+                  style: GoogleFonts.lato(
+                    color: const Color(0xFF475466),
                     fontSize: 14,
-                    fontFamily: 'Lato',
                     fontWeight: FontWeight.w700,
                     height: 0.10,
                   ),
@@ -93,11 +90,13 @@ class _RegisterOrgNameScreenState extends State<RegisterOrgNameScreen> {
                 20.verticalSpace,
                 TextField(
                   controller: orgNameController,
-                  style: TextStyle(color: AppColor.appBrandColor),
+                  style: GoogleFonts.lato(
+                    color: AppColor.appBrandColor,
+                  ),
                   decoration: InputDecoration(
                     label: SizedBox(
                       width: mediaQuery.width * 0.8,
-                      child: Text(
+                      child: const Text(
                         'e.g PricewaterhouseCoopers Ltd.',
                         style: TextStyle(
                           color: Color(0xFF98A1B2),
@@ -110,23 +109,23 @@ class _RegisterOrgNameScreenState extends State<RegisterOrgNameScreen> {
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
-                      borderSide:
-                      BorderSide(width: 2, color: AppColor.appBrandColor),
+                      borderSide: const BorderSide(
+                          width: 2, color: AppColor.appBrandColor),
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(8),
-                      borderSide:
-                      BorderSide(width: 2, color: AppColor.appBrandColor),
+                      borderSide: const BorderSide(
+                          width: 2, color: AppColor.appBrandColor),
                     ),
                   ),
                 ),
                 20.verticalSpace,
                 Text(
                   errorText,
-                  style: TextStyle(color: Colors.red),
+                  style: const TextStyle(color: Colors.red),
                 ),
                 40.verticalSpace,
-                Text(
+                const Text(
                   'This is the name that would appear to your employees',
                   style: TextStyle(
                     color: Color(0xFF5C636F),
