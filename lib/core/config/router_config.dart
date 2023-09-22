@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jaguar_foods_mobile/3_presentation/double_lunch/double_lunch.dart';
+import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/InviteEmployeesScreen.dart';
+import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/landing_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/successful_lunch.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/employee_screen/employee_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/home/home_screen.dart';
@@ -69,6 +71,13 @@ final GoRouter routerConfig = GoRouter(
       ),
     ),
     GoRoute(
+      path: RoutesPath.landingScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const LandingScreen(),
+        key: state.pageKey,
+      ),
+    ),
+    GoRoute(
       path: RoutesPath.successScreen,
       pageBuilder: (context, state) => CupertinoPage<void>(
         child: const SuccessScreen(),
@@ -108,7 +117,15 @@ final GoRouter routerConfig = GoRouter(
     GoRoute(
         path: RoutesPath.createOrganizationScreen,
       pageBuilder: (context, state) => CupertinoPage<void>(
-        child: const CreateOrganizationScreen(),
+        child: CreateOrganizationScreen(),
+        key: state.pageKey,
+      ),
+         ),
+    GoRoute(
+        path: RoutesPath.inviteEmployeesScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: InviteEmployeesScreen(orgName: '',
+        ),
         key: state.pageKey,
       ),
          ),

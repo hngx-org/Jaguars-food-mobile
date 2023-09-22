@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
       while (routerConfig.canPop() == true) {
         routerConfig.pop();
       }
-      routerConfig.pushReplacement(RoutesPath.createOrganizationScreen);
+      routerConfig.pushReplacement(RoutesPath.landingScreen);
     });
   }
 

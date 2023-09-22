@@ -1,5 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/create_organization.dart';
+import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
+import 'package:jaguar_foods_mobile/common/constants/assets_constants.dart';
+import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 
 class LandingScreen extends StatefulWidget {
   const LandingScreen({super.key});
@@ -9,62 +15,73 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreenState extends State<LandingScreen> {
-  bool button1 = true;
   bool button2 = false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          body: Column(
+          body: SingleChildScrollView(
+            child: Container(
+              height: MediaQuery.of(context).size.height,
+              child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          SizedBox(
-              height: 100,
-              width: 100,
-              child: SvgPicture.asset(
-                'assets/svg/mcdonald.svg',
-              )),
-          FancyButton(
-              text: 'Log In',
-              isPressed: button1,
-              onTapped: () {
-                if (button1 == false) {
-                  setState(() {
-                    button1 = true;
-                    button2 = false;
-                  });
-                }
-              }),
-          FancyButton(
-            text: 'Register',
-            isPressed: button2,
-            onTapped: () {
-              if (button2 == false) {
-                setState(() {
-                  button2 = true;
-                  button1 = false;
-                });
-              }
-            },
-          ),
-          const SizedBox(
-            height: 35,
-          ),
+              SizedBox(
+                  height: 100,
+                  width: 100,
+                  child: Image.asset(Assets.splashImagePath)),
+              FancyButton(
+                  text: 'Create your Organization',
+                  onTapped: () {
+                    Navigator.of(context).push(
+                      CupertinoPageRoute<void>(
+                        builder: (BuildContext context) {
+                          return CreateOrganizationScreen();
+                        },
+                      ),
+                    );
+
+                  }, isCreate: true,),
+              FancyButton(
+                text: 'Join an existing Organization',
+                isCreate: false,
+                onTapped: () {
+
+                },
+              ),
+              const SizedBox(
+                height: 35,
+              ),
+              Container(
+                child: Text(
+                  'Sign into your organization',
+                  style: TextStyle(
+                    color: Color(0xFF571FCD),
+                    fontSize: 16,
+                    fontFamily: 'Lato',
+                    fontWeight: FontWeight.w600,
+                    height: 0.11,
+                    letterSpacing: -0.16,
+                  ),
+                ),
+              ),
+          SizedBox(height: 30,)
         ],
-      )),
+      ),
+            ),
+          )),
     );
   }
 }
 
 class FancyButton extends StatelessWidget {
   final String text;
-  final bool isPressed;
+  final bool isCreate;
   final VoidCallback onTapped;
   const FancyButton(
       {super.key,
       required this.text,
-      required this.isPressed,
-      required this.onTapped});
+      required this.onTapped, required this.isCreate});
 
   @override
   Widget build(BuildContext context) {
@@ -75,14 +92,14 @@ class FancyButton extends StatelessWidget {
         child: Container(
           height: 45,
           decoration: BoxDecoration(
-            color: isPressed ? Colors.blue : Colors.grey.shade300,
+            color: isCreate ? AppColor.appBrandColor : Colors.grey.shade300,
             borderRadius: BorderRadius.circular(10),
             //border: BoxShadow()
           ),
           child: Center(
             child: Text(
               text,
-              style: TextStyle(color: isPressed ? Colors.white : Colors.blue),
+              style: TextStyle(color: isCreate ? Colors.white : AppColor.appBrandColor),
             ),
           ),
         ),

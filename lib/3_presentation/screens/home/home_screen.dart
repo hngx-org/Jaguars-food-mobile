@@ -540,6 +540,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 color: AppColor.secondaryColor
                                     .withOpacity(0.7),
                               ),
+                              10.verticalSpace
                             ],
                           );
                         },

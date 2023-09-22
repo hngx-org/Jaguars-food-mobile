@@ -7,11 +7,17 @@ class ButtonWidget extends StatefulWidget {
   final void Function() onPressed;
   final String buttonText;
   final double fontSize;
+  final bool? iconAllowed;
+  final Icon? icon;
+  final Color? textColor;
+  final Color? borderColor;
+  final Color? bgColor;
+
   const ButtonWidget({
     super.key,
     required this.onPressed,
     required this.buttonText,
-    required this.fontSize,
+    required this.fontSize, this.icon , this.iconAllowed = false, this.textColor, this.borderColor, this.bgColor,
   });
 
   @override
@@ -30,7 +36,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
           onPressed: widget.onPressed,
           style: ButtonStyle(
             backgroundColor: MaterialStateColor.resolveWith(
-              (states) => AppColor.appBrandColor,
+              (states) => widget.bgColor ?? AppColor.appBrandColor,
             ),
             textStyle: MaterialStateTextStyle.resolveWith(
               (states) => GoogleFonts.lato(
@@ -41,14 +47,21 @@ class _ButtonWidgetState extends State<ButtonWidget> {
             shape: MaterialStateProperty.resolveWith<OutlinedBorder>(
               (states) => RoundedRectangleBorder(
                 side: BorderSide(
-                  color: Colors.transparent,
+                  color: widget.borderColor ?? Colors.transparent,
                   width: 1,
                 ),
                 borderRadius: BorderRadius.circular(8.r),
               ),
             ),
           ),
-          child: Text(widget.buttonText),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              widget.iconAllowed == false ? const SizedBox.shrink() : widget.icon ?? const SizedBox.shrink() ,
+              10.horizontalSpace,
+              Text(widget.buttonText, style: TextStyle(color: widget.textColor ?? Colors.white),),
+            ],
+          ),
         ),
       ),
     );
