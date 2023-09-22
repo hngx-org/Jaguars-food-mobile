@@ -7,6 +7,7 @@ import 'package:jaguar_foods_mobile/common/constants/reusables/button.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/textfield.dart';
 
 import '../../../common/constants/assets_constants.dart';
+import '../../../common/constants/reusables/back_icon.dart';
 import '../../../common/constants/route_constant.dart';
 import '../../../core/config/router_config.dart';
 
@@ -37,11 +38,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
         resizeToAvoidBottomInset: false,
         body: SafeArea(
             child: Container(
-          margin: EdgeInsets.only(top: 50.h),
+          margin: EdgeInsets.only(top: 10.h),
           padding: EdgeInsets.symmetric(horizontal: 20.h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const BackIconWidget(),
+              40.verticalSpace,
               Text('Create an Organization',
                   style: GoogleFonts.lato(
                       fontWeight: FontWeight.w700,

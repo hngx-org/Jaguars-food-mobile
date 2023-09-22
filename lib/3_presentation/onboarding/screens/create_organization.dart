@@ -22,13 +22,13 @@ class _CreateOrganizationScreenState extends State<CreateOrganizationScreen> {
   bool _isObscured2 = true;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 20.h),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start, 
               children: [
                 const BackIconWidget(),
                 5.verticalSpace,
