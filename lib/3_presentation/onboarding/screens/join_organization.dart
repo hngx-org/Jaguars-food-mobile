@@ -11,14 +11,14 @@ import '../../../common/constants/assets_constants.dart';
 import '../../../common/constants/route_constant.dart';
 import '../../../core/config/router_config.dart';
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class JoinOrganizationScreen extends StatefulWidget {
+  const JoinOrganizationScreen({super.key});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<JoinOrganizationScreen> createState() => _JoinOrganizationScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _JoinOrganizationScreenState extends State<JoinOrganizationScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController orgController = TextEditingController();
 
@@ -43,7 +43,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const BackIconWidget(),
-              Text('Create an Organization',
+              Text('Join an Organization',
                   style: GoogleFonts.lato(
                       fontWeight: FontWeight.w700,
                       fontSize: 24.sp,
@@ -62,33 +62,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   onChanged: (value) {
                     _formKey.currentState!.validate();
                   },
-                  headerText: "Enter your Organization name",
+                  headerText: "Input your invite code",
                   controller: orgController,
-                  hintText: 'e.g PricewaterhouseCoopers Ltd.',
                   keyboardType: TextInputType.text,
                 ),
               ),
-              20.verticalSpace,
-              Text(
-                'This is the name that would appear to your employees',
-                style: GoogleFonts.lato(
-                    color: AppColor.subText,
-                    fontSize: 13.sp,
-                    fontWeight: FontWeight.w400),
-              ),
               30.verticalSpace,
               ButtonWidget(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    routerConfig
-                        .push(RoutesPath.createOrganizationScreen, extra: {
-                      'companyName': orgController.text,
-                    });
-                  }
-                },
-                buttonText: "Next",
-                fontSize: 18.sp,
-              ),
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      routerConfig
+                          .push(RoutesPath.createOrganizationScreen, extra: {
+                        'companyName': orgController.text,
+                      });
+                    }
+                  },
+                  buttonText: "Verify",
+                  fontSize: 18.sp),
               20.verticalSpace,
               const Divider(),
               20.verticalSpace,

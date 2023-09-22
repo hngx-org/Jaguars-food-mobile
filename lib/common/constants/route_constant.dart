@@ -21,4 +21,5 @@ class RoutesPath {
   static const String authCompleteScreen = '/auth_complete_screen';
   static const String verificationScreen = '/verification_screen';
   static const String setLunchPriceScreen = '/set_lunch_price_screen';
+  static const String joinOrganizationScreen = '/join_organization_screen';
 }

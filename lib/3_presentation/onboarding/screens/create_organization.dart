@@ -18,6 +18,13 @@ class CreateOrganizationScreen extends StatefulWidget {
 }
 
 class _CreateOrganizationScreenState extends State<CreateOrganizationScreen> {
+  final GlobalKey<FormState> _formKey = GlobalKey();
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _firstName = TextEditingController();
+  final TextEditingController _lastName = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+  final TextEditingController _confirmPassword = TextEditingController();
+  final TextEditingController _phone = TextEditingController();
   bool _isObscured = true;
   bool _isObscured2 = true;
   @override
@@ -46,50 +53,133 @@ class _CreateOrganizationScreenState extends State<CreateOrganizationScreen> {
                   style: GoogleFonts.lato(color: AppColor.subText),
                 ),
                 20.verticalSpace,
-                const CustomTextField(headerText: 'Enter your Email address'),
-                10.verticalSpace,
-                const CustomTextField(headerText: 'First name'),
-                10.verticalSpace,
-                const CustomTextField(headerText: 'Last name'),
-                10.verticalSpace,
-                CustomTextField(
-                  headerText: 'Password',
-                  obscureText: _isObscured,
-                  suffixIcon: InkWell(
-                    onTap: () {
-                      setState(() {
-                        _isObscured = !_isObscured;
-                      });
-                    },
-                    child: _isObscured
-                        ? const Icon(
-                            Icons.visibility_off_outlined,
-                          )
-                        : const Icon(Icons.visibility_outlined),
-                  ),
-                ),
-                10.verticalSpace,
-                CustomTextField(
-                  headerText: 'Confirm password',
-                  obscureText: _isObscured2,
-                  suffixIcon: InkWell(
-                    onTap: () {
-                      setState(() {
-                        _isObscured2 = !_isObscured2;
-                      });
-                    },
-                    child: _isObscured2
-                        ? const Icon(
-                            Icons.visibility_off_outlined,
-                          )
-                        : const Icon(Icons.visibility_outlined),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      CustomTextField(
+                        keyboardType: TextInputType.emailAddress,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Required field';
+                          } else {
+                            return null;
+                          }
+                        },
+                        headerText: 'Enter your Email address',
+                        controller: _email,
+                      ),
+                      10.verticalSpace,
+                      CustomTextField(
+                        keyboardType: TextInputType.name,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Required field';
+                          } else {
+                            return null;
+                          }
+                        },
+                        headerText: 'First name',
+                        controller: _firstName,
+                      ),
+                      10.verticalSpace,
+                      CustomTextField(
+                        keyboardType: TextInputType.name,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Required field';
+                          } else {
+                            return null;
+                          }
+                        },
+                        headerText: 'Last name',
+                        controller: _lastName,
+                      ),
+                      10.verticalSpace,
+                      CustomTextField(
+                        keyboardType: TextInputType.phone,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Required field';
+                          } else {
+                            return null;
+                          }
+                        },
+                        hintText: '+234903672753',
+                        headerText: 'Phone number',
+                        controller: _phone,
+                      ),
+                      10.verticalSpace,
+                      CustomTextField(
+                        keyboardType: TextInputType.visiblePassword,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Required field';
+                          } else {
+                            return null;
+                          }
+                        },
+                        controller: _password,
+                        headerText: 'Password',
+                        obscureText: _isObscured,
+                        suffixIcon: InkWell(
+                          onTap: () {
+                            setState(() {
+                              _isObscured = !_isObscured;
+                            });
+                          },
+                          child: _isObscured
+                              ? const Icon(
+                                  Icons.visibility_off_outlined,
+                                )
+                              : const Icon(Icons.visibility_outlined),
+                        ),
+                      ),
+                      10.verticalSpace,
+                      CustomTextField(
+                        keyboardType: TextInputType.visiblePassword,
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Required field';
+                          } else if (_password.text.trim() !=
+                              _confirmPassword.text.trim()) {
+                            return 'Password not match';
+                          } else {
+                            return null;
+                          }
+                        },
+                        controller: _confirmPassword,
+                        headerText: 'Confirm password',
+                        obscureText: _isObscured2,
+                        suffixIcon: InkWell(
+                          onTap: () {
+                            setState(() {
+                              _isObscured2 = !_isObscured2;
+                            });
+                          },
+                          child: _isObscured2
+                              ? const Icon(
+                                  Icons.visibility_off_outlined,
+                                )
+                              : const Icon(Icons.visibility_outlined),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 30.verticalSpace,
                 ButtonWidget(
                   onPressed: () {
-                    context.push(RoutesPath.verificationScreen,
-                        extra: {'companyName': widget.orgName});
+                    if (_formKey.currentState!.validate()) {
+                      context.push(RoutesPath.setLunchPriceScreen, extra: {
+                        'companyName': widget.orgName,
+                        "email": _email.text.trim(),
+                        "password": _password.text,
+                        "first_name": _firstName.text.trim(),
+                        "last_name": _lastName.text.trim(),
+                        "phone_number": _phone.text.trim(),
+                      });
+                    }
                   },
                   buttonText: 'Next',
                   fontSize: 16.sp,

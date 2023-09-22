@@ -58,7 +58,11 @@ class CustomTextField extends StatelessWidget {
                 fontSize: 14,
                 fontWeight: FontWeight.w700,
               ),
-              hintStyle: const TextStyle(color: AppColor.hinttextfieldColor),
+              // isDense: true,
+              hintStyle: GoogleFonts.lato(
+                fontSize: 16.sp,
+                color: AppColor.hinttextfieldColor,
+              ),
               hintText: hintText,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.0),
@@ -122,43 +126,46 @@ class _CustomTextFieldWithDropdownState
           ),
         ),
         const SizedBox(height: 8),
-        TextFormField(
-          readOnly: true, // Prevent manual editing
-          controller: TextEditingController(
-            text: selectedDropdownValue,
-          ),
-          onTap: () {
-            setState(() {
-              isDropdownOpen = !isDropdownOpen;
-            });
-          },
-          decoration: InputDecoration(
-            hintText: widget.hintText,
-            labelStyle: GoogleFonts.lato(
-              color: const Color(0xFF475466),
-              fontSize: 14,
-              fontWeight: FontWeight.w700,
+        SizedBox(
+          child: TextFormField(
+            readOnly: true, // Prevent manual editing
+            controller: TextEditingController(
+              text: selectedDropdownValue,
             ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-            hintStyle: const TextStyle(color: Colors.grey),
-            enabledBorder: OutlineInputBorder(
+            onTap: () {
+              setState(() {
+                isDropdownOpen = !isDropdownOpen;
+              });
+            },
+            decoration: InputDecoration(
+              hintText: widget.hintText,
+              labelStyle: GoogleFonts.lato(
+                color: const Color(0xFF475466),
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+              ),
+              border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.0),
-                borderSide: const BorderSide(color: AppColor.appBrandColor)),
-            focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8.0),
-                borderSide: const BorderSide(color: AppColor.appBrandColor)),
-            suffixIcon: InkWell(
-              onTap: () {
-                setState(() {
-                  isDropdownOpen = !isDropdownOpen;
-                });
-              },
-              child: Icon(
-                isDropdownOpen
-                    ? Icons.keyboard_arrow_up_outlined
-                    : Icons.keyboard_arrow_down_outlined,
+              ),
+              contentPadding: EdgeInsets.symmetric(vertical: 10.h),
+              hintStyle: const TextStyle(color: Colors.grey),
+              enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: const BorderSide(color: AppColor.appBrandColor)),
+              focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: const BorderSide(color: AppColor.appBrandColor)),
+              suffixIcon: InkWell(
+                onTap: () {
+                  setState(() {
+                    isDropdownOpen = !isDropdownOpen;
+                  });
+                },
+                child: Icon(
+                  isDropdownOpen
+                      ? Icons.keyboard_arrow_up_outlined
+                      : Icons.keyboard_arrow_down_outlined,
+                ),
               ),
             ),
           ),

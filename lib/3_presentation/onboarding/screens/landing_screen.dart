@@ -48,8 +48,8 @@ class _LandingScreenState extends State<LandingScreen> {
             height: height * 0.075,
           ),
           SizedBox(
-            height: 200,
-            width: 200,
+            height: 200.w,
+            width: 200.h,
             child: Image.asset(Assets.peopleImagePath),
           ),
           SizedBox(
@@ -64,8 +64,8 @@ class _LandingScreenState extends State<LandingScreen> {
             height: 10.h,
           ),
           ButtonWidget(
-            onPressed: () => context.push(RoutesPath.signUpScreen),
-            fontSize: 16,
+            onPressed: () => context.push(RoutesPath.joinOrganizationScreen),
+            fontSize: 16.sp,
             buttonText: 'Join an existing organization',
             buttonColor: Colors.transparent,
             borderSideColor: AppColor.borderColor,
@@ -73,12 +73,17 @@ class _LandingScreenState extends State<LandingScreen> {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(
-              'Sign into your organization',
-              style: GoogleFonts.lato(
-                color: AppColor.appBrandColor,
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
+            child: InkWell(
+              onTap: () {
+                context.push(RoutesPath.loginScreen);
+              },
+              child: Text(
+                'Sign into your organization',
+                style: GoogleFonts.lato(
+                  color: AppColor.appBrandColor,
+                  fontSize: 16.sp,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
           ),

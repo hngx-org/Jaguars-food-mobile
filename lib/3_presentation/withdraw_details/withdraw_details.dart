@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:jaguar_foods_mobile/common/constants/assets_constants.dart';
+import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 
 class WithdrawDetailsScreen extends StatefulWidget {
   const WithdrawDetailsScreen({super.key});
@@ -58,18 +62,21 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
                   child: Text(
                     'Redeem your free lunch!',
                     style: GoogleFonts.lato(
-                        fontWeight: FontWeight.bold, fontSize: 24),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18.sp,
+                    ),
                   ),
                 ),
 
                 // container with png
                 Container(
-                  height: 204,
-                  width: 375,
+                  alignment: Alignment.bottomCenter,
+                  height: 200,
+                  width: double.infinity,
                   decoration: BoxDecoration(
-                      color: theme.colorScheme.secondaryContainer,
-                      borderRadius: BorderRadius.circular(8)),
-                  child: Center(child: Image.asset(Assets.lunchImagePath)),
+                      color: AppColor.imageBackground,
+                      borderRadius: BorderRadius.circular(8.r)),
+                  child: Image.asset(Assets.lunchImagePath),
                 ),
                 // text
                 Padding(
@@ -77,7 +84,7 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
                   child: Text(
                     'Withdraw Details',
                     style: GoogleFonts.lato(
-                        fontSize: 24,
+                        fontSize: 18.sp,
                         color: theme.colorScheme.primary,
                         fontWeight: FontWeight.bold),
                   ),
@@ -154,11 +161,11 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
                       borderRadius: BorderRadius.circular(10.0),
                       border: Border.all(color: Colors.grey),
                     ),
-                    child: const TextField(
+                    child: TextField(
                       decoration: InputDecoration(
                         hintText: "How much do you want to redeem?",
                         contentPadding: EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 16),
+                            horizontal: 16.w, vertical: 16.h),
                       ),
                     )),
 
@@ -170,7 +177,9 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
                 Text(
                   'Triple Lunch = N 500',
                   style: GoogleFonts.lato(
-                      fontWeight: FontWeight.bold, fontSize: 14),
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14.sp,
+                  ),
                 ),
                 const SizedBox(
                   height: 30,
@@ -180,11 +189,17 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
                   height: 52,
                   width: MediaQuery.of(context).size.width,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context.push(
+                        RoutesPath.successScreen,
+                      );
+                    },
                     child: Text(
                       'Withdraw',
                       style: GoogleFonts.lato(
-                          fontWeight: FontWeight.bold, fontSize: 18),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18.sp,
+                      ),
                     ),
                   ),
                 ),
