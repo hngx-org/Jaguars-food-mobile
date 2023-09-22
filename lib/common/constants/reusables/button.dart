@@ -7,19 +7,25 @@ class ButtonWidget extends StatefulWidget {
   final void Function() onPressed;
   final String? buttonText;
   final double fontSize;
+  final bool? iconAllowed;
+  final Icon? icon;
+  final Color? textColor;
+
+  const ButtonWidget({
+    super.key,
+    required this.onPressed,
+    required this.buttonText,
+    required this.fontSize,
+    this.icon,
+    this.iconAllowed = false,
+    this.textColor,
+    this.child,
+    this.buttonColor,
+    this.borderSideColor,
+  });
   final Widget? child;
   final Color? buttonColor;
   final Color? borderSideColor;
-  final Color? textColor;
-  const ButtonWidget(
-      {super.key,
-      required this.onPressed,
-      this.buttonText,
-      required this.fontSize,
-      this.child,
-      this.borderSideColor,
-      this.buttonColor,
-      this.textColor});
 
   @override
   State<ButtonWidget> createState() => _ButtonWidgetState();

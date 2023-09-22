@@ -1,20 +1,28 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/landing_screen.dart';
+import 'package:jaguar_foods_mobile/3_presentation/screens/nav_screen/nav_screen.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/button.dart';
+import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 
 import '../../../common/constants/assets_constants.dart';
 import '../../../common/constants/reusables/back_icon.dart';
 
-class CopyShareLink extends StatelessWidget {
-  final String companyName;
-  const CopyShareLink({
-    super.key,
-    required this.companyName,
-  });
+class CopyShareLink extends StatefulWidget {
+  const CopyShareLink({super.key, required this.orgName});
 
+  final String orgName;
+
+  @override
+  State<CopyShareLink> createState() => _CopyShareLinkState();
+}
+
+class _CopyShareLinkState extends State<CopyShareLink> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +47,7 @@ class CopyShareLink extends StatelessWidget {
           ),
           30.verticalSpace,
           Text(
-            'Who else is on the $companyName?',
+            'Who else is on the ${widget.orgName} team?',
             style: GoogleFonts.lato(
               fontWeight: FontWeight.w700,
               fontSize: 22.sp,
@@ -61,7 +69,7 @@ class CopyShareLink extends StatelessWidget {
           ButtonWidget(
             onPressed: () {},
             fontSize: 16.sp,
-            buttonText: 'Copy shareable link',
+            buttonText: null,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -84,21 +92,21 @@ class CopyShareLink extends StatelessWidget {
             onPressed: () {},
             fontSize: 16.sp,
             borderSideColor: AppColor.borderColor,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SvgPicture.asset(Assets.emailIcon),
-                10.horizontalSpace,
-                Text(
-                  'Add by email',
-                  style: GoogleFonts.lato(
-                    color: const Color(0xFF55506D),
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ],
+            buttonText: 'Add by email',
+            textColor: AppColor.appBrandColor,
+            iconAllowed: true,
+            icon: const Icon(
+              Icons.email_outlined,
+              color: AppColor.appBrandColor,
             ),
+          ),
+          60.verticalSpace,
+          ButtonWidget(
+            buttonText: 'Continue',
+            onPressed: () {
+              context.push(RoutesPath.navScreen);
+            },
+            fontSize: 16.sp,
           )
         ],
       ),

@@ -3,11 +3,14 @@ import 'package:go_router/go_router.dart';
 import 'package:jaguar_foods_mobile/3_presentation/auth_complete_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/double_lunch/double_lunch.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/landing_screen.dart';
+import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/org_name_register.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/send_lunch_deal.dart';
+import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/set_lunch_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/successful_lunch.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/employee_screen/employee_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/home/home_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/nav_screen/nav_screen.dart';
+import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/verification_screen.dart';
 import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/screens_barrel.dart';
 import '../../3_presentation/confirm_redeem_screen.dart';
@@ -79,6 +82,13 @@ final GoRouter routerConfig = GoRouter(
       ),
     ),
     GoRoute(
+      path: RoutesPath.landingScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const LandingScreen(),
+        key: state.pageKey,
+      ),
+    ),
+    GoRoute(
       path: RoutesPath.successScreen,
       pageBuilder: (context, state) => CupertinoPage<void>(
         child: const SuccessScreen(),
@@ -120,14 +130,14 @@ final GoRouter routerConfig = GoRouter(
           Map<String, dynamic> args = state.extra as Map<String, dynamic>;
           return CupertinoPage<void>(
             child: CreateOrganizationScreen(
-              companyName: args['companyName'],
+              orgName: args['companyName'],
             ),
             key: state.pageKey,
           );
         } else {
           return CupertinoPage<void>(
             child: const CreateOrganizationScreen(
-              companyName: '',
+              orgName: '',
             ),
             key: state.pageKey,
           );
@@ -141,14 +151,14 @@ final GoRouter routerConfig = GoRouter(
           Map<String, dynamic> args = state.extra as Map<String, dynamic>;
           return CupertinoPage<void>(
             child: CopyShareLink(
-              companyName: args['companyName'],
+              orgName: args['companyName'],
             ),
             key: state.pageKey,
           );
         } else {
           return CupertinoPage<void>(
             child: const CopyShareLink(
-              companyName: '',
+              orgName: '',
             ),
             key: state.pageKey,
           );
@@ -163,11 +173,58 @@ final GoRouter routerConfig = GoRouter(
       ),
     ),
     GoRoute(
+      path: RoutesPath.orgNameScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const RegisterOrgNameScreen(),
+        key: state.pageKey,
+      ),
+    ),
+    GoRoute(
+        path: RoutesPath.verificationScreen,
+        pageBuilder: (context, state) {
+          if (state.extra != null) {
+            Map<String, dynamic> args = state.extra as Map<String, dynamic>;
+            return CupertinoPage<void>(
+              child: VerificationScreen(
+                orgName: args['companyName'],
+              ),
+              key: state.pageKey,
+            );
+          } else {
+            return CupertinoPage<void>(
+              child: const VerificationScreen(
+                orgName: '',
+              ),
+              key: state.pageKey,
+            );
+          }
+        }),
+    GoRoute(
       path: RoutesPath.authCompleteScreen,
       pageBuilder: (context, state) => CupertinoPage<void>(
         child: const AuthCompleteScreen(),
         key: state.pageKey,
       ),
     ),
+    GoRoute(
+        path: RoutesPath.setLunchPriceScreen,
+        pageBuilder: (context, state) {
+          if (state.extra != null) {
+            Map<String, dynamic> args = state.extra as Map<String, dynamic>;
+            return CupertinoPage<void>(
+              child: SetLunchPriceScreen(
+                orgName: args['companyName'],
+              ),
+              key: state.pageKey,
+            );
+          } else {
+            return CupertinoPage<void>(
+              child: const SetLunchPriceScreen(
+                orgName: '',
+              ),
+              key: state.pageKey,
+            );
+          }
+        }),
   ],
 );

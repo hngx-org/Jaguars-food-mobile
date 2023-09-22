@@ -10,8 +10,10 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType keyboardType;
   final bool obscureText;
+  final Widget? prefix;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
+  final Widget? suffixIcon;
 
   const CustomTextField({
     super.key,
@@ -23,6 +25,8 @@ class CustomTextField extends StatelessWidget {
     this.obscureText = false,
     this.validator,
     this.onChanged,
+    this.suffixIcon,
+    this.prefix,
   });
 
   @override
@@ -37,15 +41,23 @@ class CustomTextField extends StatelessWidget {
               fontSize: 14,
               color: const Color(0xFF475466)),
         ),
-        const SizedBox(height: 8),
+        SizedBox(height: 5.h),
         TextFormField(
           validator: validator,
           onChanged: onChanged,
           controller: controller,
           keyboardType: keyboardType,
           obscureText: obscureText,
+          cursorColor: AppColor.appBrandColor,
           decoration: InputDecoration(
+              prefixIcon: prefix,
+              suffixIcon: suffixIcon,
               labelText: labelText,
+              labelStyle: GoogleFonts.lato(
+                color: const Color(0xFF475466),
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+              ),
               hintStyle: const TextStyle(color: AppColor.hinttextfieldColor),
               hintText: hintText,
               border: OutlineInputBorder(
@@ -122,9 +134,21 @@ class _CustomTextFieldWithDropdownState
           },
           decoration: InputDecoration(
             hintText: widget.hintText,
+            labelStyle: GoogleFonts.lato(
+              color: const Color(0xFF475466),
+              fontSize: 14,
+              fontWeight: FontWeight.w700,
+            ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.0),
             ),
+            hintStyle: const TextStyle(color: Colors.grey),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+                borderSide: const BorderSide(color: AppColor.appBrandColor)),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+                borderSide: const BorderSide(color: AppColor.appBrandColor)),
             suffixIcon: InkWell(
               onTap: () {
                 setState(() {

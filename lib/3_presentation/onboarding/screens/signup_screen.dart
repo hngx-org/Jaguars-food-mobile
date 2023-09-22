@@ -47,7 +47,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       fontWeight: FontWeight.w700,
                       fontSize: 24.sp,
                       color: AppColor.appBrandColor)),
-              50.verticalSpace,
+              40.verticalSpace,
               Form(
                 key: _formKey,
                 child: CustomTextField(
