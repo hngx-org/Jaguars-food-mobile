@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jaguar_foods_mobile/core/config/router_config.dart';
 import 'common/constants/app_color.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarBrightness: Brightness.light,
+      statusBarIconBrightness: Brightness.dark,
+    ),
+  );
   runApp(const MyApp());
 }
 
@@ -22,9 +30,9 @@ class MyApp extends StatelessWidget {
             title: 'Jaguar Foods Mobile',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
-                primaryColor: AppColor.appBrandColor,
-                scaffoldBackgroundColor: AppColor.white,
-                visualDensity: VisualDensity.adaptivePlatformDensity,
+              primaryColor: AppColor.appBrandColor,
+              scaffoldBackgroundColor: AppColor.white,
+              visualDensity: VisualDensity.adaptivePlatformDensity,
             ),
           );
         });

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -8,6 +10,8 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType keyboardType;
   final bool obscureText;
+  final String? Function(String?)? validator;
+  final void Function(String)? onChanged;
 
   const CustomTextField({
     super.key,
@@ -17,6 +21,8 @@ class CustomTextField extends StatelessWidget {
     this.controller,
     this.keyboardType = TextInputType.text,
     this.obscureText = false,
+    this.validator,
+    this.onChanged,
   });
 
   @override
@@ -26,25 +32,158 @@ class CustomTextField extends StatelessWidget {
       children: <Widget>[
         Text(
           headerText,
-          style: const TextStyle(
-            fontWeight: FontWeight.w700,
-            fontSize: 14,
-          ),
+          style: GoogleFonts.lato(
+              fontWeight: FontWeight.w700,
+              fontSize: 14,
+              color: const Color(0xFF475466)),
         ),
         const SizedBox(height: 8),
-        TextField(
+        TextFormField(
+          validator: validator,
+          onChanged: onChanged,
           controller: controller,
           keyboardType: keyboardType,
           obscureText: obscureText,
           decoration: InputDecoration(
-            labelText: labelText,
-            hintStyle: const TextStyle(color: AppColor.hinttextfieldColor),
-            hintText: hintText,
+              labelText: labelText,
+              hintStyle: const TextStyle(color: AppColor.hinttextfieldColor),
+              hintText: hintText,
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: const BorderSide(color: AppColor.appBrandColor),
+              ),
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: const BorderSide(color: Colors.red),
+              )),
+        ),
+      ],
+    );
+  }
+}
+
+class CustomTextFieldWithDropdown extends StatefulWidget {
+  final String headerText;
+  final String hintText;
+  final List<String> dropdownItems;
+  final ValueChanged<String> onChanged;
+
+  const CustomTextFieldWithDropdown({
+    super.key,
+    required this.headerText,
+    required this.hintText,
+    required this.dropdownItems,
+    required this.onChanged,
+  });
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _CustomTextFieldWithDropdownState createState() =>
+      _CustomTextFieldWithDropdownState();
+}
+
+class _CustomTextFieldWithDropdownState
+    extends State<CustomTextFieldWithDropdown> {
+  String selectedDropdownValue = "";
+  bool isDropdownOpen = false;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedDropdownValue = widget.dropdownItems.first;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widget.headerText,
+          style: GoogleFonts.lato(
+            fontWeight: FontWeight.w700,
+            fontSize: 14,
+            color: const Color(0xFF475466),
+          ),
+        ),
+        const SizedBox(height: 8),
+        TextFormField(
+          readOnly: true, // Prevent manual editing
+          controller: TextEditingController(
+            text: selectedDropdownValue,
+          ),
+          onTap: () {
+            setState(() {
+              isDropdownOpen = !isDropdownOpen;
+            });
+          },
+          decoration: InputDecoration(
+            hintText: widget.hintText,
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            suffixIcon: InkWell(
+              onTap: () {
+                setState(() {
+                  isDropdownOpen = !isDropdownOpen;
+                });
+              },
+              child: Icon(
+                isDropdownOpen
+                    ? Icons.keyboard_arrow_up_outlined
+                    : Icons.keyboard_arrow_down_outlined,
+              ),
             ),
           ),
         ),
+        if (isDropdownOpen)
+          AnimatedContainer(
+            margin: EdgeInsets.symmetric(
+              vertical: 5.h,
+            ),
+            width: double.infinity,
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey),
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            duration: const Duration(
+              milliseconds: 1000,
+            ),
+            curve: Curves.easeInOut,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: widget.dropdownItems
+                  .map(
+                    (item) => InkWell(
+                      onTap: () {
+                        setState(() {
+                          selectedDropdownValue = item;
+                          isDropdownOpen = false;
+                        });
+                      },
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          top: 5.h,
+                          bottom: 10.0.h,
+                          left: 10.w,
+                          right: 10.w,
+                        ),
+                        child: Text(
+                          item,
+                          style: GoogleFonts.lato(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 14,
+                              color: const Color(0xFF475466)),
+                        ),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
       ],
     );
   }
