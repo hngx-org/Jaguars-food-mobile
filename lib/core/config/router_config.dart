@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jaguar_foods_mobile/3_presentation/double_lunch/double_lunch.dart';
-import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/send_lunch_deal.dart';
+import 'package:jaguar_foods_mobile/3_presentation/screens/send_lunch_deal/send_lunch_deal.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/successful_lunch.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/employee_screen/employee_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/home/home_screen.dart';
