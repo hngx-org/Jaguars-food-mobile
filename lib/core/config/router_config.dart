@@ -17,7 +17,6 @@ import '../../3_presentation/onboarding/screens/copy_share_link.dart';
 import '../../3_presentation/onboarding/screens/create_organization.dart';
 
 final GoRouter routerConfig = GoRouter(
-  //TODO: return initialLocation to splash screen
   initialLocation: RoutesPath.splashScreen,
   errorBuilder: (context, state) => const Placeholder(),
   routes: [
@@ -35,12 +34,13 @@ final GoRouter routerConfig = GoRouter(
         key: state.pageKey,
       ),
     ),
- GoRoute(
-        path: RoutesPath.sendLunchDealScreen,
+    GoRoute(
+      path: RoutesPath.sendLunchDealScreen,
       pageBuilder: (context, state) => CupertinoPage<void>(
         child: const SendLunchDealScreen(),
         key: state.pageKey,
       ),
+    ),
     GoRoute(
       path: RoutesPath.signUpScreen,
       pageBuilder: (context, state) => CupertinoPage<void>(
@@ -114,32 +114,32 @@ final GoRouter routerConfig = GoRouter(
       ),
     ),
     GoRoute(
-        path: RoutesPath.landingScreen,
-        pageBuilder: (context, state) => CupertinoPage<void>(
+      path: RoutesPath.landingScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
         child: const LandingScreen(),
         key: state.pageKey,
-      ), 
-
-    
+      ),
+    ),
     GoRoute(
-        path: RoutesPath.copyShareLink,
-        pageBuilder: (context, state) => CupertinoPage<void>(
+      path: RoutesPath.copyShareLink,
+      pageBuilder: (context, state) => CupertinoPage<void>(
         child: const CopyShareLink(),
         key: state.pageKey,
       ),
-   
- GoRoute(
+    ),
+    GoRoute(
+      path: RoutesPath.createOrganizationScreen,
       pageBuilder: (context, state) => CupertinoPage<void>(
         child: const CreateOrganizationScreen(),
         key: state.pageKey,
       ),
-         ),
- 
+    ),
     GoRoute(
       path: RoutesPath.authCompleteScreen,
       pageBuilder: (context, state) => CupertinoPage<void>(
         child: const AuthCompleteScreen(),
         key: state.pageKey,
-      ), ),
+      ),
+    ),
   ],
 );
