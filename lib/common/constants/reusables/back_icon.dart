@@ -5,23 +5,24 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 
 class BackIconWidget extends StatelessWidget {
-  final GoRouter? router;
-  const BackIconWidget({super.key, this.router});
+  const BackIconWidget({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       // width: double.infinity,
       height: 50.h,
-      child: GestureDetector(
+      child: InkWell(
         onTap: () {
-          if (router?.canPop() == true) {
-            router?.pop(); // Navigate back using go_router
-          } else {
-            Navigator.of(context).pop();
+          if (context.canPop() == true) {
+            context.pop();
+            // Navigate back using go_router
           }
         },
         child: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
               Icons.arrow_back_ios,
@@ -30,7 +31,10 @@ class BackIconWidget extends StatelessWidget {
             ),
             Text(
               'Back',
-              style: TextStyle(color: AppColor.backArrowColor),
+              style: GoogleFonts.lato(
+                color: AppColor.backArrowColor,
+                fontSize: 14,
+              ),
             )
           ],
         ),

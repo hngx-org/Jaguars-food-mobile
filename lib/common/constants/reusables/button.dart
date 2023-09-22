@@ -15,7 +15,13 @@ class ButtonWidget extends StatefulWidget {
     super.key,
     required this.onPressed,
     required this.buttonText,
-    required this.fontSize, this.icon , this.iconAllowed = false, this.textColor, this.child, this.buttonColor, this.borderSideColor,
+    required this.fontSize,
+    this.icon,
+    this.iconAllowed = false,
+    this.textColor,
+    this.child,
+    this.buttonColor,
+    this.borderSideColor,
   });
   final Widget? child;
   final Color? buttonColor;
@@ -32,7 +38,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
       padding: EdgeInsets.symmetric(vertical: 10.h),
       child: SizedBox(
         width: double.infinity,
-        height: 65.h,
+        height: 55.h,
         child: ElevatedButton(
           onPressed: widget.onPressed,
           style: ButtonStyle(
@@ -51,19 +57,19 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                   color: widget.borderSideColor ?? Colors.transparent,
                   width: 1,
                 ),
-                borderRadius: BorderRadius.circular(8.r),
+                borderRadius: BorderRadius.circular(5.r),
               ),
             ),
             elevation: MaterialStateProperty.all(0),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              widget.iconAllowed == false ? const SizedBox.shrink() : widget.icon ?? const SizedBox.shrink() ,
-              10.horizontalSpace,
-              Text(widget.buttonText ?? '', style: TextStyle(color: widget.textColor ?? Colors.white),),
-            ],
-          ),
+          child: widget.child ??
+              Text(
+                widget.buttonText ?? '',
+                style: GoogleFonts.lato(
+                  color: widget.textColor,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
         ),
       ),
     );
