@@ -11,6 +11,7 @@ class Assets {
   static String buildingImagePath = '$pngPath/building.png';
   static String peopleImagePath = '$pngPath/people.png';
   static String cheeseImagePath = '$pngPath/cheese.png';
+  static String splashImagePath = '$pngPath/splash_logo.png';
 
   static String employeesIconPath = '$svgPath/employees_icon.svg';
   static String giftIconPath = '$svgPath/gift_icon.svg';

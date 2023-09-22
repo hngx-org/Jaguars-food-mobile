@@ -19,14 +19,13 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
       //   backgroundColor: AppColor.white,
       // ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 24),
+          child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                BackButton(),
-                SizedBox(height: 28),
+                SizedBox(height: 60),
                 Text(
                   "Search for an employee",
                   style: TextStyle(

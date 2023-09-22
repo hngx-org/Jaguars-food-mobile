@@ -139,7 +139,6 @@ final GoRouter routerConfig = GoRouter(
       pageBuilder: (context, state) => CupertinoPage<void>(
         child: const AuthCompleteScreen(),
         key: state.pageKey,
-      ),
-    ),
+      ), ),
   ],
 );

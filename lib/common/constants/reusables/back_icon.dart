@@ -18,7 +18,7 @@ class BackIconWidget extends StatelessWidget {
           if (router?.canPop() == true) {
             router?.pop(); // Navigate back using go_router
           } else {
-            print("No pages left to pop.");
+            Navigator.of(context).pop();
           }
         },
         child: Row(
