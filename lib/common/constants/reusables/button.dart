@@ -57,7 +57,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
                   color: widget.borderSideColor ?? Colors.transparent,
                   width: 1,
                 ),
-                borderRadius: BorderRadius.circular(5.r),
+                borderRadius: BorderRadius.circular(12.r),
               ),
             ),
             elevation: MaterialStateProperty.all(0),
