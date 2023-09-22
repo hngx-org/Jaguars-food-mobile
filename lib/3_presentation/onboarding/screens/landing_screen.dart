@@ -72,7 +72,7 @@ class _LandingScreenState extends State<LandingScreen> {
               fontSize: 16,
               buttonText: 'Join an existing organization',
               buttonColor: Colors.transparent,
-              borderSideColor: AppColor.appBrandColor,
+              borderSideColor: AppColor.appBrandColor.withOpacity(0.5),
               textColor: AppColor.appBrandColor,
             ),
             Padding(
