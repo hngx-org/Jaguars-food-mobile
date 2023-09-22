@@ -1,13 +1,13 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jaguar_foods_mobile/1_data/models/transactions.dart';
+import 'package:jaguar_foods_mobile/3_presentation/screens/nav_screen/nav_screen.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:intl/intl.dart';
 import 'package:jaguar_foods_mobile/common/constants/assets_constants.dart';
-import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
-import 'package:jaguar_foods_mobile/core/config/router_config.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -79,10 +79,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return SafeArea(
       child: Scaffold(
-        body: SizedBox(
-          width: mediaQuery.width,
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: SingleChildScrollView(
             child: Column(
               children: [
                 //welcome title and profile image
@@ -131,9 +130,15 @@ class _HomeScreenState extends State<HomeScreen> {
                 //redeem , gift
                 Material(
                   color: Colors.transparent,
+                  elevation: 3,
+                  shape: RoundedRectangleBorder(
+                    side: const BorderSide(
+                        width: 1, color: Color(0xFFEBEBEB)),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
                   child: Container(
                     width: mediaQuery.width,
-                    height: 100.h,
+                    height: 150.h,
                     clipBehavior: Clip.antiAlias,
                     decoration: ShapeDecoration(
                       color: const Color(0xFF222222),
@@ -151,17 +156,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    'Lunch Balance',
-                                    style: GoogleFonts.lato(
-                                      color: Colors.white,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ],
+                              Text(
+                                'Lunch Balance 💰',
+                                style: GoogleFonts.lato(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                ),
                               ),
                               SizedBox(
                                 height: 15.h,
@@ -171,7 +172,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    '5,000',
+                                    '₦5,000',
                                     style: GoogleFonts.lato(
                                       color: Colors.white,
                                       fontSize: 24,
@@ -181,7 +182,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                   Material(
                                     color: Colors.transparent,
                                     child: InkWell(
-                                      onTap: () {},
+                                      onTap: () {
+                                        Navigator.of(context).pushReplacement(
+                                          CupertinoPageRoute<void>(
+                                            builder: (BuildContext context) {
+                                              return NavigationScreen(initialIndex: 0);
+                                            },
+                                          ),
+                                        );
+                                      },
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.end,
@@ -261,15 +270,26 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       //redeem
-
                       Expanded(
                         child: Material(
                           color: Colors.transparent,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(7)),
+                          elevation: 3,
                           child: InkWell(
-                            onTap: () => setState(() {}),
+                            onTap: () => setState(() {
+                              Navigator.of(context).pushReplacement(
+                                CupertinoPageRoute<void>(
+                                  builder: (BuildContext context) {
+                                    return NavigationScreen(initialIndex: 2);
+                                  },
+                                ),
+                              );
+                            }),
                             child: Container(
-                              width: double.infinity,
-                              height: double.infinity,
+                              width: 182,
+                              height: 100,
+                              padding: EdgeInsets.all(5),
                               clipBehavior: Clip.antiAlias,
                               decoration: ShapeDecoration(
                                 color: const Color(0xFFE8DDFF),
@@ -277,15 +297,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                     borderRadius: BorderRadius.circular(7)),
                               ),
                               child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  SvgPicture.asset(
-                                    Assets.redeemNewPath,
-                                  ),
-                                  SizedBox(
-                                    width: 10.w,
-                                  ),
+                                  Container(
+                                      padding: EdgeInsets.all(4),
+                                      decoration: ShapeDecoration(
+                                        color: const Color(0x3D571FCD),
+                                        shape: CircleBorder(),
+                                      ),
+                                      child: Image.asset(Assets.tagImagePath)),
                                   Text(
                                     'Redeem',
                                     style: GoogleFonts.lato(
@@ -303,14 +323,27 @@ class _HomeScreenState extends State<HomeScreen> {
                       SizedBox(
                         width: 20.w,
                       ),
+                      //gift lunch
                       Expanded(
                         child: Material(
+                          color: Colors.transparent,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(7)),
+                          elevation: 3,
                           child: InkWell(
-                            onTap: () =>
-                                routerConfig.push(RoutesPath.employeeScreen),
+                            onTap: () => setState(() {
+                              Navigator.of(context).pushReplacement(
+                                CupertinoPageRoute<void>(
+                                  builder: (BuildContext context) {
+                                    return NavigationScreen(initialIndex: 2);
+                                  },
+                                ),
+                              );
+                            }),
                             child: Container(
-                              width: double.infinity,
-                              height: double.infinity,
+                              width: 182,
+                              height: 100,
+                              padding: EdgeInsets.all(5),
                               clipBehavior: Clip.antiAlias,
                               decoration: ShapeDecoration(
                                 color: const Color(0xFFD3FFE5),
@@ -318,13 +351,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                     borderRadius: BorderRadius.circular(7)),
                               ),
                               child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  SvgPicture.asset(Assets.giftBagPath),
-                                  SizedBox(
-                                    width: 10.w,
-                                  ),
+                                  Container(
+                                      padding: EdgeInsets.all(4),
+                                      decoration: ShapeDecoration(
+                                        color: const Color(0x3A07A537),
+                                        shape: CircleBorder(),
+                                      ),
+                                      child: Image.asset(Assets.giftImagePath)),
                                   Text(
                                     'Gift Lunch',
                                     style: GoogleFonts.lato(
@@ -332,7 +367,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       fontSize: 18,
                                       fontWeight: FontWeight.w500,
                                     ),
-                                  ),
+                                  )
                                 ],
                               ),
                             ),
@@ -347,232 +382,177 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(
                   height: 40,
                 ),
-                Flexible(
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Received Rewards',
-                            style: GoogleFonts.lato(
-                              color: const Color(0xFF55506D),
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          Text(
-                            'See all',
-                            style: GoogleFonts.lato(
-                              color: const Color(0xFFABABAB),
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      //item
-                      Expanded(
-                        child: Material(
-                          color: Colors.transparent,
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: transactions.length,
-                            itemBuilder: (context, index) {
-                              final transaction = transactions[index];
-                              final formattedTransactionDate =
-                                  DateFormat('d MMM, HH:mm')
-                                      .format(transaction.createdAt);
-
-                              return Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  Container(
-                                    margin: const EdgeInsets.only(bottom: 20),
-                                    child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        //gift icon
-                                        Material(
-                                          elevation: 2,
-                                          color: Colors.transparent,
-                                          shape: const OvalBorder(),
-                                          child: Container(
-                                            width: 36,
-                                            height: 36,
-                                            padding: const EdgeInsets.all(10),
-                                            decoration: const ShapeDecoration(
-                                              color: Color(0xFFE8DDFF),
-                                              shape: OvalBorder(),
-                                            ),
-                                            child: ColorFiltered(
-                                              colorFilter:
-                                                  const ColorFilter.mode(
-                                                AppColor.appBrandColor,
-                                                BlendMode.srcIn,
-                                              ),
-                                              child: SvgPicture.asset(
-                                                'assets/svg/gift_icon.svg',
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 15,
-                                        ),
-                                        Expanded(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text.rich(
-                                                TextSpan(
-                                                  children: [
-                                                    TextSpan(
-                                                      text: transaction
-                                                          .receiverId,
-                                                      style: GoogleFonts.lato(
-                                                        color: const Color(
-                                                            0xFF1A1920),
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                      ),
-                                                    ),
-                                                    TextSpan(
-                                                      text:
-                                                          ' just gifted you ${transaction.amount.toInt()} Plts',
-                                                      style: GoogleFonts.lato(
-                                                        color: const Color(
-                                                          0xFF55506D,
-                                                        ),
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                overflow: TextOverflow.ellipsis,
-                                                maxLines: 1,
-                                              ),
-                                              // Date
-                                              const SizedBox(height: 8),
-                                              Text(
-                                                formattedTransactionDate,
-                                                style: GoogleFonts.lato(
-                                                  color:
-                                                      const Color(0xFFABABAB),
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          width: 10,
-                                        ),
-                                        // text
-                                        Material(
-                                          color: Colors.transparent,
-                                          child: Container(
-                                            alignment: Alignment.centerRight,
-                                            child: Text(
-                                              'View',
-                                              style: GoogleFonts.lato(
-                                                color: const Color(0xFF2EAA60),
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  Divider(
-                                    color: AppColor.secondaryColor
-                                        .withOpacity(0.7),
-                                  ),
-                                ],
-                              );
-                            },
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Received Rewards',
+                          style: GoogleFonts.lato(
+                            color: const Color(0xFF55506D),
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
+                        Text(
+                          'See all',
+                          style: GoogleFonts.lato(
+                            color: const Color(0xFFABABAB),
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    //item
+                    Material(
+                      color: Colors.transparent,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: transactions.length,
+                        itemBuilder: (context, index) {
+                          final transaction = transactions[index];
+                          final formattedTransactionDate =
+                              DateFormat('d MMM, HH:mm')
+                                  .format(transaction.createdAt);
+
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                margin: const EdgeInsets.only(bottom: 20),
+                                child: Row(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    //gift icon
+                                    Material(
+                                      elevation: 2,
+                                      color: Colors.transparent,
+                                      shape: const OvalBorder(),
+                                      child: Container(
+                                        width: 36,
+                                        height: 36,
+                                        padding: const EdgeInsets.all(10),
+                                        decoration: const ShapeDecoration(
+                                          color: Color(0xFFE8DDFF),
+                                          shape: OvalBorder(),
+                                        ),
+                                        child: ColorFiltered(
+                                          colorFilter:
+                                              const ColorFilter.mode(
+                                            AppColor.appBrandColor,
+                                            BlendMode.srcIn,
+                                          ),
+                                          child: SvgPicture.asset(
+                                            'assets/svg/gift_icon.svg',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 15,
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text.rich(
+                                            TextSpan(
+                                              children: [
+                                                TextSpan(
+                                                  text: transaction
+                                                      .receiverId,
+                                                  style: GoogleFonts.lato(
+                                                    color: const Color(
+                                                        0xFF1A1920),
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.w700,
+                                                  ),
+                                                ),
+                                                TextSpan(
+                                                  text:
+                                                      ' just gifted you ${transaction.amount.toInt()} Plts',
+                                                  style: GoogleFonts.lato(
+                                                    color: const Color(
+                                                      0xFF55506D,
+                                                    ),
+                                                    fontSize: 14,
+                                                    fontWeight:
+                                                        FontWeight.w600,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            overflow: TextOverflow.ellipsis,
+                                            maxLines: 1,
+                                          ),
+                                          // Date
+                                          const SizedBox(height: 8),
+                                          Text(
+                                            formattedTransactionDate,
+                                            style: GoogleFonts.lato(
+                                              color:
+                                                  const Color(0xFFABABAB),
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    ),
+                                    // text
+                                    Material(
+                                      color: Colors.transparent,
+                                      child: Container(
+                                        alignment: Alignment.centerRight,
+                                        child: Text(
+                                          'View',
+                                          style: GoogleFonts.lato(
+                                            color: const Color(0xFF2EAA60),
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Divider(
+                                color: AppColor.secondaryColor
+                                    .withOpacity(0.7),
+                              ),
+                              10.verticalSpace
+                            ],
+                          );
+                        },
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 )
               ],
             ),
           ),
         ),
       ),
-    );
-  }
-}
-
-class CustomImageText extends StatelessWidget {
-  const CustomImageText({
-    super.key,
-    required this.image,
-    required this.text,
-  });
-
-  final String image;
-  final String text;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Material(
-          elevation: 4,
-          shape: const OvalBorder(),
-          child: Container(
-            width: 81,
-            height: 81,
-            alignment: Alignment.center,
-            decoration: const ShapeDecoration(
-              color: Color(0xFFE8DDFF),
-              shape: OvalBorder(),
-            ),
-            child: Image.asset(
-              image,
-              width: 101,
-              height: 55.50,
-            ),
-          ),
-        ),
-        Material(
-          elevation: 6,
-          shadowColor: Colors.black.withOpacity(0.4),
-          color: Colors.transparent,
-          child: Text(
-            text,
-            style: const TextStyle(
-              color: Color(0xFF33313E),
-              fontSize: 14,
-              fontFamily: 'Lato',
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        )
-      ],
     );
   }
 }

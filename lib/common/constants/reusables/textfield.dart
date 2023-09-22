@@ -8,6 +8,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final TextInputType keyboardType;
   final bool obscureText;
+  final BorderSide? borderSide;
 
   const CustomTextField({
     super.key,
@@ -16,7 +17,7 @@ class CustomTextField extends StatelessWidget {
     this.hintText,
     this.controller,
     this.keyboardType = TextInputType.text,
-    this.obscureText = false,
+    this.obscureText = false, this.borderSide,
   });
 
   @override
@@ -40,8 +41,13 @@ class CustomTextField extends StatelessWidget {
             labelText: labelText,
             hintStyle: const TextStyle(color: AppColor.hinttextfieldColor),
             hintText: hintText,
-            border: OutlineInputBorder(
+            enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
+              borderSide: borderSide ?? BorderSide(color: Colors.transparent),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(13.0),
+              borderSide: borderSide ?? BorderSide(color: Colors.transparent),
             ),
           ),
         ),
@@ -104,8 +110,14 @@ class _CustomTextFieldWithDropdownState
           },
           decoration: InputDecoration(
             hintText: widget.hintText,
-            border: OutlineInputBorder(
+            hintStyle: TextStyle(color: Colors.grey),
+            enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10.0),
+              borderSide: BorderSide(color: AppColor.appBrandColor)
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10.0),
+              borderSide: BorderSide(color: AppColor.appBrandColor)
             ),
             suffixIcon: GestureDetector(
               onTap: () {
