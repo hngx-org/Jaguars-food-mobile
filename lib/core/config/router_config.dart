@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jaguar_foods_mobile/3_presentation/auth_complete_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/double_lunch/double_lunch.dart';
+import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/landing_screen.dart';
+import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/org_name_register.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/send_lunch_deal.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/successful_lunch.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/employee_screen/employee_screen.dart';
@@ -12,7 +14,7 @@ import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/screens_ba
 import '../../3_presentation/confirm_redeem_screen.dart';
 import '../../3_presentation/redeem_screen.dart';
 import '../../3_presentation/success_screen.dart';
-
+import '../../3_presentation/onboarding/screens/copy_share_link.dart';
 import '../../3_presentation/onboarding/screens/create_organization.dart';
 
 final GoRouter routerConfig = GoRouter(
@@ -33,12 +35,13 @@ final GoRouter routerConfig = GoRouter(
         key: state.pageKey,
       ),
     ),
- GoRoute(
-        path: RoutesPath.sendLunchDealScreen,
+    GoRoute(
+      path: RoutesPath.sendLunchDealScreen,
       pageBuilder: (context, state) => CupertinoPage<void>(
         child: const SendLunchDealScreen(),
         key: state.pageKey,
       ),
+    ),
     GoRoute(
       path: RoutesPath.signUpScreen,
       pageBuilder: (context, state) => CupertinoPage<void>(
@@ -77,6 +80,13 @@ final GoRouter routerConfig = GoRouter(
       ),
     ),
     GoRoute(
+      path: RoutesPath.landingScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: const LandingScreen(),
+        key: state.pageKey,
+      ),
+    ),
+    GoRoute(
       path: RoutesPath.successScreen,
       pageBuilder: (context, state) => CupertinoPage<void>(
         child: const SuccessScreen(),
@@ -111,21 +121,35 @@ final GoRouter routerConfig = GoRouter(
         key: state.pageKey,
       ),
     ),
-
     GoRoute(
-        path: RoutesPath.createOrganizationScreen,
+      path: RoutesPath.landingScreen,
       pageBuilder: (context, state) => CupertinoPage<void>(
-        child: const CreateOrganizationScreen(),
+        child: const LandingScreen(),
         key: state.pageKey,
       ),
-         ),
-      
+    ),
+    GoRoute(
+      path: RoutesPath.copyShareLink,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child:  CopyShareLink(
+         orgName: ''),
+        key: state.pageKey,
+      ),
+    ),
+    GoRoute(
+      path: RoutesPath.orgNameScreen,
+      pageBuilder: (context, state) => CupertinoPage<void>(
+        child: RegisterOrgNameScreen(
+        ),
+        key: state.pageKey,
+      ),
+    ),
     GoRoute(
       path: RoutesPath.authCompleteScreen,
       pageBuilder: (context, state) => CupertinoPage<void>(
         child: const AuthCompleteScreen(),
         key: state.pageKey,
-      ), ),
-
+      ),
+    ),
   ],
 );

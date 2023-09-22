@@ -4,7 +4,6 @@ class RoutesPath {
   static const String signUpScreen = '/signUp-screen';
   static const String loginScreen = '/login-screen';
 
-
   static const String withdrawDetailsScreen = '/withdraw_screen';
   static const String homeScreen = '/home';
   static const String navScreen = '/nav_screen';
@@ -16,5 +15,8 @@ class RoutesPath {
   static const String doubleLunchScreen = '/double_lunch';
   static const String successfulLunchScreen = '/successful_lunch';
   static const String createOrganizationScreen = '/create_organization';
+  static const String landingScreen = '/landing_screen';
+  static const String orgNameScreen = '/org_name_screen';
+  static const String copyShareLink = '/copy_share_link';
   static const String authCompleteScreen = '/auth_complete_screen';
 }
