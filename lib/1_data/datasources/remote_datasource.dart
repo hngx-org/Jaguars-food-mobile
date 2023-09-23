@@ -157,6 +157,7 @@ class Lunch{
   }
 
   static Future allLunch(authToken) async {
+    // returns a list
     String getUrl = "api/lunch";
     var headers = {
       "authorization": "Bearer $authToken"
@@ -168,7 +169,7 @@ class Lunch{
       );
       return jsonDecode(response.body);
     } catch(e){
-      return {"status": "fail", "message": "something went wrong"};
+      return [];
     }
   }
 }
