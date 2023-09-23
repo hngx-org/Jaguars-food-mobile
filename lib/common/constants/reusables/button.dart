@@ -5,14 +5,27 @@ import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 
 class ButtonWidget extends StatefulWidget {
   final void Function() onPressed;
-  final String buttonText;
+  final String? buttonText;
   final double fontSize;
+  final bool? iconAllowed;
+  final Icon? icon;
+  final Color? textColor;
+
   const ButtonWidget({
     super.key,
     required this.onPressed,
     required this.buttonText,
     required this.fontSize,
+    this.icon,
+    this.iconAllowed = false,
+    this.textColor,
+    this.child,
+    this.buttonColor,
+    this.borderSideColor,
   });
+  final Widget? child;
+  final Color? buttonColor;
+  final Color? borderSideColor;
 
   @override
   State<ButtonWidget> createState() => _ButtonWidgetState();
@@ -25,12 +38,12 @@ class _ButtonWidgetState extends State<ButtonWidget> {
       padding: EdgeInsets.symmetric(vertical: 10.h),
       child: SizedBox(
         width: double.infinity,
-        height: 65.h,
+        height: 55.h,
         child: ElevatedButton(
           onPressed: widget.onPressed,
           style: ButtonStyle(
             backgroundColor: MaterialStateColor.resolveWith(
-              (states) => AppColor.appBrandColor,
+              (states) => widget.buttonColor ?? AppColor.appBrandColor,
             ),
             textStyle: MaterialStateTextStyle.resolveWith(
               (states) => GoogleFonts.lato(
@@ -41,14 +54,22 @@ class _ButtonWidgetState extends State<ButtonWidget> {
             shape: MaterialStateProperty.resolveWith<OutlinedBorder>(
               (states) => RoundedRectangleBorder(
                 side: BorderSide(
-                  color: Colors.transparent,
+                  color: widget.borderSideColor ?? Colors.transparent,
                   width: 1,
                 ),
-                borderRadius: BorderRadius.circular(8.r),
+                borderRadius: BorderRadius.circular(12.r),
               ),
             ),
+            elevation: MaterialStateProperty.all(0),
           ),
-          child: Text(widget.buttonText),
+          child: widget.child ??
+              Text(
+                widget.buttonText ?? '',
+                style: GoogleFonts.lato(
+                  color: widget.textColor,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
         ),
       ),
     );

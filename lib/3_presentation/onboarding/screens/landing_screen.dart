@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
+import 'package:jaguar_foods_mobile/common/constants/assets_constants.dart';
+import 'package:jaguar_foods_mobile/common/constants/custom_error_dialog.dart';
+import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:jaguar_foods_mobile/common/constants/reusables/button.dart';
 
 class LandingScreen extends StatefulWidget {
   const LandingScreen({super.key});
@@ -9,84 +16,84 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreenState extends State<LandingScreen> {
-  bool button1 = true;
-  bool button2 = false;
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          body: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          SizedBox(
-              height: 100,
-              width: 100,
-              child: SvgPicture.asset(
-                'assets/svg/mcdonald.svg',
-              )),
-          FancyButton(
-              text: 'Log In',
-              isPressed: button1,
-              onTapped: () {
-                if (button1 == false) {
-                  setState(() {
-                    button1 = true;
-                    button2 = false;
-                  });
-                }
-              }),
-          FancyButton(
-            text: 'Register',
-            isPressed: button2,
-            onTapped: () {
-              if (button2 == false) {
-                setState(() {
-                  button2 = true;
-                  button1 = false;
-                });
-              }
-            },
-          ),
-          const SizedBox(
-            height: 35,
-          ),
-        ],
-      )),
-    );
-  }
-}
-
-class FancyButton extends StatelessWidget {
-  final String text;
-  final bool isPressed;
-  final VoidCallback onTapped;
-  const FancyButton(
-      {super.key,
-      required this.text,
-      required this.isPressed,
-      required this.onTapped});
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onTapped,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 8.0),
-        child: Container(
-          height: 45,
-          decoration: BoxDecoration(
-            color: isPressed ? Colors.blue : Colors.grey.shade300,
-            borderRadius: BorderRadius.circular(10),
-            //border: BoxShadow()
-          ),
-          child: Center(
-            child: Text(
-              text,
-              style: TextStyle(color: isPressed ? Colors.white : Colors.blue),
+    double height = MediaQuery.of(context).size.height;
+    return Scaffold(
+        body: Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.0.w),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            60.verticalSpace,
+            Text(
+              'Welcome to AppreciAte',
+              style: GoogleFonts.lato(
+                color: const Color(0xFF571FCD),
+                fontSize: 28.sp,
+                fontWeight: FontWeight.w700,
+              ),
             ),
-          ),
+            SizedBox(
+              height: 5.h,
+            ),
+            Text(
+              'Gift employees and co-workers',
+              style: GoogleFonts.lato(
+                color: const Color(0xFF98A1B2),
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            SizedBox(
+              height: height * 0.075,
+            ),
+            SizedBox(
+              height: 200,
+              width: 200,
+              child: Image.asset(Assets.peopleImagePath),
+            ),
+            SizedBox(
+              height: height * 0.125,
+            ),
+            ButtonWidget(
+              onPressed: () => context.push(RoutesPath.signUpScreen),
+              fontSize: 16.sp,
+              buttonText: 'Create your organisation',
+            ),
+            SizedBox(
+              height: 10.h,
+            ),
+            ButtonWidget(
+              onPressed: () => context.push(RoutesPath.signUpScreen),
+              fontSize: 16,
+              buttonText: 'Join an existing organization',
+              buttonColor: Colors.transparent,
+              borderSideColor: AppColor.appBrandColor.withOpacity(0.5),
+              textColor: AppColor.appBrandColor,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GestureDetector(
+                onTap: (){
+                },
+                child: Text(
+                  'Sign into your organization',
+                  style: GoogleFonts.lato(
+                    color: AppColor.appBrandColor,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+            20.verticalSpace
+          ],
         ),
       ),
-    );
+    ));
   }
 }

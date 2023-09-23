@@ -11,6 +11,8 @@ class Assets {
   static String buildingImagePath = '$pngPath/building.png';
   static String peopleImagePath = '$pngPath/people.png';
   static String cheeseImagePath = '$pngPath/cheese.png';
+  static String splashImagePath = '$pngPath/splash_logo.png';
+  static String sendImagePath = '$pngPath/send.png';
 
   static String employeesIconPath = '$svgPath/employees_icon.svg';
   static String giftIconPath = '$svgPath/gift_icon.svg';
@@ -24,4 +26,7 @@ class Assets {
   static String searchIconPath = '$svgPath/search_icon.svg';
   static String buildingIconPath = '$svgPath/building_icon.svg';
   static String smallHomeIconPath = '$svgPath/home.svg';
+  static String arrowDownIcon = '$svgPath/arrow-down.svg';
+  static String copyIcon = '$svgPath/copy_icon.svg';
+  static String emailIcon = '$svgPath/email_icon.svg';
 }

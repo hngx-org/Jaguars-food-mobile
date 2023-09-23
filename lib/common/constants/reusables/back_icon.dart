@@ -11,20 +11,32 @@ class BackIconWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 10.h),
-      child: SizedBox(
-        // width: double.infinity,
-        height: 50.h,
-        child: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          color: AppColor.black,
-          icon: Icon(
-            Icons.arrow_back_rounded,
-            size: 18.w,
-          ),
+    return SizedBox(
+      // width: double.infinity,
+      height: 50.h,
+      child: InkWell(
+        onTap: () {
+          if (context.canPop() == true) {
+            context.pop();
+            // Navigate back using go_router
+          }
+        },
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              Icons.arrow_back_ios,
+              size: 18.w,
+              color: AppColor.backArrowColor,
+            ),
+            Text(
+              'Back',
+              style: GoogleFonts.lato(
+                color: AppColor.backArrowColor,
+                fontSize: 14,
+              ),
+            )
+          ],
         ),
       ),
     );
