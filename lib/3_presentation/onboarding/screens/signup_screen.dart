@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/back_icon.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/button.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/textfield.dart';
-
 import '../../../common/constants/assets_constants.dart';
 import '../../../common/constants/route_constant.dart';
 import '../../../core/config/router_config.dart';
@@ -30,97 +30,95 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).unfocus();
-      },
-      child: Scaffold(
-        resizeToAvoidBottomInset: false,
-        body: SafeArea(
-            child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const BackIconWidget(),
-              Text('Create an Organization',
-                  style: GoogleFonts.lato(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 24.sp,
-                      color: AppColor.appBrandColor)),
-              40.verticalSpace,
-              Form(
-                key: _formKey,
-                child: CustomTextField(
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Required field';
-                    } else {
-                      return null;
-                    }
-                  },
-                  onChanged: (value) {
-                    _formKey.currentState!.validate();
-                  },
-                  headerText: "Enter your Organization name",
-                  controller: orgController,
-                  hintText: 'e.g PricewaterhouseCoopers Ltd.',
-                  keyboardType: TextInputType.text,
-                ),
-              ),
-              20.verticalSpace,
-              Text(
-                'This is the name that would appear to your employees',
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      body: SafeArea(
+          child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20.h),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const BackIconWidget(),
+            10.verticalSpace,
+            Text('Create an Organization',
                 style: GoogleFonts.lato(
-                    color: AppColor.subText,
-                    fontSize: 13.sp,
-                    fontWeight: FontWeight.w400),
-              ),
-              30.verticalSpace,
-              ButtonWidget(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    routerConfig
-                        .push(RoutesPath.createOrganizationScreen, extra: {
-                      'companyName': orgController.text,
-                    });
+                    fontWeight: FontWeight.w700,
+                    fontSize: 24.sp,
+                    color: AppColor.appBrandColor)),
+            40.verticalSpace,
+            Form(
+              key: _formKey,
+              child: CustomTextField(
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Required field';
+                  } else {
+                    return null;
                   }
                 },
-                buttonText: "Next",
-                fontSize: 18.sp,
+                onChanged: (value) {
+                  _formKey.currentState!.validate();
+                },
+                headerText: "Enter your Organization name",
+                controller: orgController,
+                hintText: 'e.g PricewaterhouseCoopers Ltd.',
+                keyboardType: TextInputType.text,
               ),
-              20.verticalSpace,
-              const Divider(),
-              20.verticalSpace,
-              Text(
-                'Want to join an existing organization?',
-                style: GoogleFonts.lato(
-                  color: const Color(0xFF475466),
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w700,
-                ),
+            ),
+            20.verticalSpace,
+            Text(
+              'This is the name that would appear to your employees',
+              style: GoogleFonts.lato(
+                  color: AppColor.subText,
+                  fontSize: 13.sp,
+                  fontWeight: FontWeight.w400),
+            ),
+            30.verticalSpace,
+            ButtonWidget(
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  routerConfig
+                      .push(RoutesPath.createOrganizationScreen, extra: {
+                    'companyName': orgController.text,
+                  });
+                }
+              },
+              buttonText: "Next",
+              fontSize: 18.sp,
+            ),
+            20.verticalSpace,
+            const Divider(),
+            20.verticalSpace,
+            Text(
+              'Want to join an existing organization?',
+              style: GoogleFonts.lato(
+                color: const Color(0xFF475466),
+                fontSize: 14.sp,
+                fontWeight: FontWeight.w700,
               ),
-              20.verticalSpace,
-              GestureDetector(
-                child: Row(
-                  children: [
-                    SvgPicture.asset(Assets.smallHomeIconPath),
-                    10.horizontalSpace,
-                    Text(
-                      "Join with company invite code",
-                      style: GoogleFonts.lato(
-                        color: const Color(0xFF475466),
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
+            ),
+            20.verticalSpace,
+            InkWell(
+              onTap: () =>
+                  context.pushReplacement(RoutesPath.joinOrganizationScreen),
+              child: Row(
+                children: [
+                  SvgPicture.asset(Assets.smallHomeIconPath),
+                  10.horizontalSpace,
+                  Text(
+                    "Join with company invite code",
+                    style: GoogleFonts.lato(
+                      color: const Color(0xFF475466),
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w500,
                     ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        )),
-      ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        ),
+      )),
     );
   }
 }

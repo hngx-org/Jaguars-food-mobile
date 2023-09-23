@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jaguar_foods_mobile/1_data/datasources/remote_datasource.dart';
+import 'package:jaguar_foods_mobile/common/constants/custom_error_dialog.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/button.dart';
+import 'package:jaguar_foods_mobile/core/config/router_config.dart';
 import '../../../common/constants/app_color.dart';
 import '../../../common/constants/reusables/back_icon.dart';
 import '../../../common/constants/reusables/textfield.dart';
@@ -15,7 +17,6 @@ class SetLunchPriceScreen extends StatefulWidget {
   final String email;
   final String lastName;
   final String phoneNumber;
-  final String confirmPassword;
 
   const SetLunchPriceScreen({
     super.key,
@@ -25,7 +26,6 @@ class SetLunchPriceScreen extends StatefulWidget {
     required this.lastName,
     required this.phoneNumber,
     required this.password,
-    required this.confirmPassword,
   });
 
   @override
@@ -34,7 +34,13 @@ class SetLunchPriceScreen extends StatefulWidget {
 
 class _SetLunchPriceScreenState extends State<SetLunchPriceScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  TextEditingController _priceController = TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
+
+  @override
+  void dispose() {
+    _priceController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +73,9 @@ class _SetLunchPriceScreenState extends State<SetLunchPriceScreen> {
                 Form(
                   key: _formKey,
                   child: CustomTextField(
+                    onChanged: (value) {
+                      _formKey.currentState!.validate();
+                    },
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Required field';
@@ -80,7 +89,7 @@ class _SetLunchPriceScreenState extends State<SetLunchPriceScreen> {
                     headerText: 'Enter lunch price',
                     prefix: Container(
                       margin: EdgeInsets.only(
-                        left: 1.h,
+                        left: 2.w,
                         right: 20.w,
                         bottom: 1.h,
                         top: 1.h,
@@ -88,11 +97,11 @@ class _SetLunchPriceScreenState extends State<SetLunchPriceScreen> {
                       width: 50.w,
                       height: 55,
                       alignment: Alignment.center,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(8),
-                            bottomLeft: Radius.circular(8)),
-                        color: Color(0xFFF2F2F2),
+                            topLeft: Radius.circular(8.r),
+                            bottomLeft: Radius.circular(8.r)),
+                        color: const Color(0xFFF2F2F2),
                       ),
                       child: const Text(
                         '₦',
@@ -114,10 +123,61 @@ class _SetLunchPriceScreenState extends State<SetLunchPriceScreen> {
                     )),
                 30.verticalSpace,
                 ButtonWidget(
-                  onPressed: () {
-                    //TODO: call register api
-                    context.push(RoutesPath.copyShareLink,
-                        extra: {'companyName': widget.orgName});
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate()) {
+                      CustomDialog().showLoadDialog(context);
+
+                      final response = await Auth.signUpAdmin(
+                        widget.orgName,
+                        int.parse(_priceController.text),
+                        'naira',
+                        "NGN",
+                        widget.email,
+                        widget.password,
+                        widget.firstName,
+                        widget.lastName,
+                        widget.phoneNumber,
+                      );
+
+                      if (response.containsValue('error') ||
+                          response.containsValue('fail')) {
+                        routerConfig.pop();
+                        _showDialog(
+                          'error',
+                          'Error',
+                          response['message'],
+                          'Ok',
+                        );
+                      } else {
+                        final loginResponse = await Auth.login(
+                          widget.email,
+                          widget.password,
+                        );
+                        if (loginResponse.containsValue('error') ||
+                            loginResponse.containsValue('fail')) {
+                          routerConfig.pop();
+                          _showDialog(
+                            'error',
+                            'Error',
+                            loginResponse['message'],
+                            'Ok',
+                          );
+                        } else {
+                          final token = loginResponse['token'];
+
+                          routerConfig.pop();
+                          while (routerConfig.canPop()) {
+                            routerConfig.pop();
+                          }
+                          routerConfig.pushReplacement(
+                              RoutesPath.authCompleteScreen,
+                              extra: {
+                                'companyName': widget.orgName,
+                                'token': token,
+                              });
+                        }
+                      }
+                    }
                   },
                   buttonText: 'Create Organization',
                   fontSize: 16.sp,
@@ -172,6 +232,21 @@ class _SetLunchPriceScreenState extends State<SetLunchPriceScreen> {
           ),
         ),
       ),
+    );
+  }
+
+  _showDialog(
+    String type,
+    String title,
+    String body,
+    String buttontext,
+  ) {
+    CustomDialog().showAlertDialog(
+      context,
+      type,
+      title,
+      body,
+      buttontext,
     );
   }
 }

@@ -29,4 +29,6 @@ class Assets {
   static String arrowDownIcon = '$svgPath/arrow-down.svg';
   static String copyIcon = '$svgPath/copy_icon.svg';
   static String emailIcon = '$svgPath/email_icon.svg';
+  static String addIcon = '$svgPath/add_org.svg';
+  static String sendIcon = '$svgPath/message.svg';
 }

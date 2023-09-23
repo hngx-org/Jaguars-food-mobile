@@ -34,7 +34,7 @@ class Auth {
       var response = await http.post(Uri.parse(baseUrl + postUrl), body: body);
       return jsonDecode(response.body);
     } catch (e) {
-      return {"status": "fail", "message": 'something went wrong'};
+      return {"status": "fail", "message": 'Something went wrong '};
     }
   }
 
@@ -87,7 +87,7 @@ class Auth {
     // returns {"message":"Invitation sent successfully","statusCode":200} on success
     // returns {"status":"fail","message":"Error: Unauthorized"} on failure
 
-    String postUrl = "api/auth/organization/invite";
+    String postUrl = "api/orgs/invite";
     Map<String, dynamic> body = {"email": email};
     Map<String, String> headers = {"authorization": "Bearer $token"};
     try {

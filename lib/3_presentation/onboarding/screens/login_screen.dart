@@ -1,8 +1,12 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jaguar_foods_mobile/1_data/datasources/remote_datasource.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
+import 'package:jaguar_foods_mobile/common/constants/custom_error_dialog.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/back_icon.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/button.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/textfield.dart';
@@ -22,6 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _password = TextEditingController();
   final TextEditingController _email = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _passKey = GlobalKey<FormState>();
   bool _isObscured = true;
   @override
   void dispose() {
@@ -53,57 +58,85 @@ class _LoginScreenState extends State<LoginScreen> {
               40.verticalSpace,
               Form(
                 key: _formKey,
-                child: Column(
-                  children: [
-                    CustomTextField(
-                      keyboardType: TextInputType.emailAddress,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Required field';
-                        } else {
-                          return null;
-                        }
-                      },
-                      headerText: 'Enter your Email address',
-                      controller: _email,
-                    ),
-                    20.verticalSpace,
-                    CustomTextField(
-                      keyboardType: TextInputType.visiblePassword,
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Required field';
-                        } else {
-                          return null;
-                        }
-                      },
-                      controller: _password,
-                      headerText: 'Password',
-                      obscureText: _isObscured,
-                      suffixIcon: InkWell(
-                        onTap: () {
-                          setState(() {
-                            _isObscured = !_isObscured;
-                          });
-                        },
-                        child: _isObscured
-                            ? const Icon(
-                                Icons.visibility_off_outlined,
-                              )
-                            : const Icon(Icons.visibility_outlined),
-                      ),
-                    ),
-                  ],
+                child: CustomTextField(
+                  onChanged: (value) {
+                    _formKey.currentState!.validate();
+                  },
+                  keyboardType: TextInputType.emailAddress,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Required field';
+                    } else if (!EmailValidator.validate(
+                      _email.text,
+                      true,
+                      true,
+                    )) {
+                      return 'Invalid email format';
+                    } else {
+                      return null;
+                    }
+                  },
+                  headerText: 'Enter your Email address',
+                  controller: _email,
+                ),
+              ),
+              20.verticalSpace,
+              Form(
+                key: _passKey,
+                child: CustomTextField(
+                  onChanged: (value) {
+                    _passKey.currentState!.validate();
+                  },
+                  keyboardType: TextInputType.visiblePassword,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Required field';
+                    } else {
+                      return null;
+                    }
+                  },
+                  controller: _password,
+                  headerText: 'Password',
+                  obscureText: _isObscured,
+                  suffixIcon: InkWell(
+                    onTap: () {
+                      setState(() {
+                        _isObscured = !_isObscured;
+                      });
+                    },
+                    child: _isObscured
+                        ? const Icon(
+                            Icons.visibility_off_outlined,
+                          )
+                        : const Icon(Icons.visibility_outlined),
+                  ),
                 ),
               ),
               30.verticalSpace,
               ButtonWidget(
-                  onPressed: () {
-                    //TODO: login API
-                    if (_formKey.currentState!.validate()) {
-                      routerConfig.push(
-                        RoutesPath.navScreen,
+                  onPressed: () async {
+                    if (_formKey.currentState!.validate() &&
+                        _passKey.currentState!.validate()) {
+                      CustomDialog().showLoadDialog(context);
+
+                      final loginResponse = await Auth.login(
+                        _email.text.trim(),
+                        _password.text,
                       );
+                      routerConfig.pop();
+
+                      if (loginResponse.toString().contains('error')) {
+                        _showDialog(
+                          'error',
+                          'Error',
+                          loginResponse['message'],
+                          'Ok',
+                        );
+                      } else {
+                        routerConfig.push(
+                          RoutesPath.navScreen,
+                        );
+                      }
                     }
                   },
                   buttonText: "Sign in",
@@ -120,7 +153,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               20.verticalSpace,
-              GestureDetector(
+              InkWell(
+                onTap: () =>
+                    context.pushReplacement(RoutesPath.joinOrganizationScreen),
                 child: Row(
                   children: [
                     SvgPicture.asset(Assets.smallHomeIconPath),
@@ -137,13 +172,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               SizedBox(
-                height: 10.h,
+                height: 15.h,
               ),
               InkWell(
-                onTap: () {},
+                onTap: () => context.pushReplacement(RoutesPath.signUpScreen),
                 child: Row(
                   children: [
-                    SvgPicture.asset(Assets.smallHomeIconPath),
+                    SvgPicture.asset(Assets.addIcon),
                     10.horizontalSpace,
                     Text(
                       "Create a new organization",
@@ -160,6 +195,21 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         )),
       ),
+    );
+  }
+
+  _showDialog(
+    String type,
+    String title,
+    String body,
+    String buttontext,
+  ) {
+    CustomDialog().showAlertDialog(
+      context,
+      type,
+      title,
+      body,
+      buttontext,
     );
   }
 }

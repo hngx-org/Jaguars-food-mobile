@@ -5,9 +5,9 @@ import 'package:jaguar_foods_mobile/3_presentation/double_lunch/double_lunch.dar
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/join_organization.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/landing_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/org_name_register.dart';
+import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/redeem_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/send_lunch_deal.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/set_lunch_screen.dart';
-import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/successful_lunch.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/employee_screen/employee_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/home/home_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/nav_screen/nav_screen.dart';
@@ -16,9 +16,8 @@ import 'package:jaguar_foods_mobile/3_presentation/withdraw_details/withdraw_det
 import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/screens_barrel.dart';
 import '../../3_presentation/confirm_redeem_screen.dart';
-import '../../3_presentation/redeem_screen.dart';
 import '../../3_presentation/success_screen.dart';
-import '../../3_presentation/onboarding/screens/copy_share_link.dart';
+import '../../3_presentation/onboarding/screens/share_invite_screen.dart';
 import '../../3_presentation/onboarding/screens/create_organization.dart';
 
 final GoRouter routerConfig = GoRouter(
@@ -163,13 +162,6 @@ final GoRouter routerConfig = GoRouter(
           }
         }),
     GoRoute(
-      path: RoutesPath.successfulLunchScreen,
-      pageBuilder: (context, state) => CupertinoPage<void>(
-        child: const SuccessfulLunchScreen(),
-        key: state.pageKey,
-      ),
-    ),
-    GoRoute(
       path: RoutesPath.redeemScreen,
       pageBuilder: (context, state) => CupertinoPage<void>(
         child: const RedeemScreen(),
@@ -205,20 +197,22 @@ final GoRouter routerConfig = GoRouter(
       },
     ),
     GoRoute(
-      path: RoutesPath.copyShareLink,
+      path: RoutesPath.shareInviteScreen,
       pageBuilder: (context, state) {
         if (state.extra != null) {
           Map<String, dynamic> args = state.extra as Map<String, dynamic>;
           return CupertinoPage<void>(
-            child: CopyShareLink(
+            child: ShareInviteScreen(
               orgName: args['companyName'],
+              token: args['token'],
             ),
             key: state.pageKey,
           );
         } else {
           return CupertinoPage<void>(
-            child: const CopyShareLink(
+            child: const ShareInviteScreen(
               orgName: '',
+              token: '',
             ),
             key: state.pageKey,
           );
@@ -260,12 +254,27 @@ final GoRouter routerConfig = GoRouter(
           }
         }),
     GoRoute(
-      path: RoutesPath.authCompleteScreen,
-      pageBuilder: (context, state) => CupertinoPage<void>(
-        child: const AuthCompleteScreen(),
-        key: state.pageKey,
-      ),
-    ),
+        path: RoutesPath.authCompleteScreen,
+        pageBuilder: (context, state) {
+          if (state.extra != null) {
+            Map<String, dynamic> args = state.extra as Map<String, dynamic>;
+            return CupertinoPage<void>(
+              child: AuthCompleteScreen(
+                orgName: args['companyName'],
+                token: args['token'],
+              ),
+              key: state.pageKey,
+            );
+          } else {
+            return CupertinoPage<void>(
+              child: const AuthCompleteScreen(
+                orgName: '',
+                token: '',
+              ),
+              key: state.pageKey,
+            );
+          }
+        }),
     GoRoute(
         path: RoutesPath.setLunchPriceScreen,
         pageBuilder: (context, state) {
@@ -274,25 +283,24 @@ final GoRouter routerConfig = GoRouter(
             return CupertinoPage<void>(
               child: SetLunchPriceScreen(
                 orgName: args['companyName'],
-                email: '',
-                firstName: '',
-                lastName: '',
-                phoneNumber: '',
-                password: '',
-                confirmPassword: '',
+                email: args['email'],
+                firstName: args['first_name'],
+                lastName: args['last_name'],
+                phoneNumber: args['phone_number'],
+                password: args['password'],
               ),
               key: state.pageKey,
             );
           } else {
             return CupertinoPage<void>(
               child: const SetLunchPriceScreen(
-                  orgName: '',
-                  email: '',
-                  firstName: '',
-                  lastName: '',
-                  phoneNumber: '',
-                  password: '',
-                  confirmPassword: ''),
+                orgName: '',
+                email: '',
+                firstName: '',
+                lastName: '',
+                phoneNumber: '',
+                password: '',
+              ),
               key: state.pageKey,
             );
           }

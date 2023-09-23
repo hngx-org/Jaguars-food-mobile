@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/back_icon.dart';
@@ -55,6 +56,8 @@ class _JoinOrganizationScreenState extends State<JoinOrganizationScreen> {
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Required field';
+                    } else if (value.length > 6 || value.length < 6) {
+                      return 'A six digit code is required';
                     } else {
                       return null;
                     }
@@ -64,21 +67,22 @@ class _JoinOrganizationScreenState extends State<JoinOrganizationScreen> {
                   },
                   headerText: "Input your invite code",
                   controller: orgController,
-                  keyboardType: TextInputType.text,
+                  keyboardType: TextInputType.number,
                 ),
               ),
               30.verticalSpace,
               ButtonWidget(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      routerConfig
-                          .push(RoutesPath.createOrganizationScreen, extra: {
-                        'companyName': orgController.text,
-                      });
-                    }
-                  },
-                  buttonText: "Verify",
-                  fontSize: 18.sp),
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    routerConfig
+                        .push(RoutesPath.createOrganizationScreen, extra: {
+                      'companyName': orgController.text,
+                    });
+                  }
+                },
+                buttonText: "Continue",
+                fontSize: 18.sp,
+              ),
               20.verticalSpace,
               const Divider(),
               20.verticalSpace,
@@ -91,13 +95,14 @@ class _JoinOrganizationScreenState extends State<JoinOrganizationScreen> {
                 ),
               ),
               20.verticalSpace,
-              GestureDetector(
+              InkWell(
+                onTap: () => context.pushReplacement(RoutesPath.signUpScreen),
                 child: Row(
                   children: [
-                    SvgPicture.asset(Assets.smallHomeIconPath),
+                    SvgPicture.asset(Assets.addIcon),
                     10.horizontalSpace,
                     Text(
-                      "Join with company invite code",
+                      "Create a new organization",
                       style: GoogleFonts.lato(
                         color: const Color(0xFF475466),
                         fontSize: 16.sp,
