@@ -11,7 +11,10 @@ class SendLunchDealScreen extends StatefulWidget {
 }
 
 class _SendLunchState extends State<SendLunchDealScreen> {
-  String selectedDeal = 'Single';
+  String selectedDeal = '';
+  bool isLunchDealSelected = false; // Track whether a lunch deal is selected
+  String selectMessage1 = 'Select lunch offer!';
+  String selectMessage2 = 'You can choose to gift multiple items';
 
   // Function to build custom Circular Checkbox
   Widget buildCustomCheckbox({
@@ -19,12 +22,13 @@ class _SendLunchState extends State<SendLunchDealScreen> {
     required String subtitle,
     required String value,
   }) {
-    final isSelected = selectedDeal == value;
+    bool isSelected = selectedDeal == value; // Move isSelected inside this function
 
     return InkWell(
       onTap: () {
         setState(() {
           selectedDeal = value;
+          isLunchDealSelected = true; // Lunch deal is selected
         });
       },
       child: Container(
@@ -63,8 +67,7 @@ class _SendLunchState extends State<SendLunchDealScreen> {
               children: [
                 Text(
                   title,
-                  style:
-                  GoogleFonts.lato(
+                  style: GoogleFonts.lato(
                     color: AppColor.black,
                     fontSize: 16,
                     fontWeight: FontWeight.w400,
@@ -72,8 +75,7 @@ class _SendLunchState extends State<SendLunchDealScreen> {
                 ),
                 Text(
                   subtitle,
-                  style:
-                  GoogleFonts.lato(
+                  style: GoogleFonts.lato(
                     color: AppColor.subText,
                     fontSize: 12,
                   ),
@@ -109,9 +111,8 @@ class _SendLunchState extends State<SendLunchDealScreen> {
               ),
               const SizedBox(height: 10.0,),
               Text(
-                'Select lunch offer!',
-                style:
-                GoogleFonts.lato(
+                isLunchDealSelected ? selectMessage2 : selectMessage1, // Display the appropriate message
+                style: GoogleFonts.lato(
                   color: AppColor.subText,
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
@@ -120,8 +121,7 @@ class _SendLunchState extends State<SendLunchDealScreen> {
               const SizedBox(height: 30.0,),
               Text(
                 'Send a Lunch deal!',
-                style:
-                GoogleFonts.lato(
+                style: GoogleFonts.lato(
                   color: AppColor.appBrandColor,
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
@@ -163,16 +163,13 @@ class _SendLunchState extends State<SendLunchDealScreen> {
                 child: Container(
                   alignment: Alignment.bottomCenter,
                   width: double.infinity,
-                  child:
-                  ButtonWidget(
+                  child: ButtonWidget(
                     onPressed: () {
-
+                      // Add functionality for the "Proceed" button
                     },
-
                     buttonText: 'Proceed',
                     fontSize: 14,
                   ),
-
                 ),
               )
             ],
