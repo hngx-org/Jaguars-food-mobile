@@ -253,8 +253,10 @@ class _StaffSignUpScreenState extends State<StaffSignUpScreen>
                           _lastName.text.trim(),
                           _phone.text.trim());
 
+                      print(' signup response : ${response.values}');
+
                       if (response.containsValue('error') ||
-                          response.containsValue('fail')) {
+                          response.containsValue('fail') || response.values.toString() == '(Invalid token)') {
                         routerConfig.pop();
                         _showDialog(
                           'error',
@@ -264,6 +266,7 @@ class _StaffSignUpScreenState extends State<StaffSignUpScreen>
                         );
                         print('++++++++++++++sign up+++++++++++++++${response['message']}');
                       } else {
+                        print('++++++++++++++sign up+++++++++++++++${response['message']}');
                         final loginResponse = await Auth.login(
                           _email.text.trim(),
                           _password.text.trim()
@@ -278,7 +281,7 @@ class _StaffSignUpScreenState extends State<StaffSignUpScreen>
                             'Ok',
                           );
 
-                          print('+++++++++++++++++++++++++++++${loginResponse['message']}');
+                          print('+++++++++++login++++++++++++++++++${loginResponse['message']}');
                         } else {
                           final token = loginResponse['token'];
 
