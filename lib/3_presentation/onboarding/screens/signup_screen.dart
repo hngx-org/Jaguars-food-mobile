@@ -78,7 +78,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   routerConfig
-                      .push(RoutesPath.createOrganizationScreen, extra: {
+                      .push(RoutesPath.adminSignUp, extra: {
                     'companyName': orgController.text,
                   });
                 }

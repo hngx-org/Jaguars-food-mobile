@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:jaguar_foods_mobile/3_presentation/auth_complete_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/double_lunch/double_lunch.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/join_organization.dart';
+import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/staff_signup/staff_signup.dart';
+import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/staff_signup/staff_signup_success.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/send_lunch_deal/send_lunch_deal.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/landing_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/org_name_register.dart';
@@ -18,7 +20,7 @@ import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/screens_ba
 import '../../3_presentation/confirm_redeem_screen.dart';
 import '../../3_presentation/success_screen.dart';
 import '../../3_presentation/onboarding/screens/share_invite_screen.dart';
-import '../../3_presentation/onboarding/screens/create_organization.dart';
+import '../../3_presentation/onboarding/screens/admin_signup.dart';
 
 final GoRouter routerConfig = GoRouter(
   initialLocation: RoutesPath.splashScreen,
@@ -176,20 +178,41 @@ final GoRouter routerConfig = GoRouter(
       ),
     ),
     GoRoute(
-      path: RoutesPath.createOrganizationScreen,
+      path: RoutesPath.adminSignUp,
       pageBuilder: (context, state) {
         if (state.extra != null) {
           Map<String, dynamic> args = state.extra as Map<String, dynamic>;
           return CupertinoPage<void>(
-            child: CreateOrganizationScreen(
+            child: AdminSignUpScreen(
               orgName: args['companyName'],
             ),
             key: state.pageKey,
           );
         } else {
           return CupertinoPage<void>(
-            child: const CreateOrganizationScreen(
+            child: const AdminSignUpScreen(
               orgName: '',
+            ),
+            key: state.pageKey,
+          );
+        }
+      },
+    ),
+    GoRoute(
+      path: RoutesPath.staffSignUp,
+      pageBuilder: (context, state) {
+        if (state.extra != null) {
+          Map<String, dynamic> args = state.extra as Map<String, dynamic>;
+          return CupertinoPage<void>(
+            child: StaffSignUpScreen(
+              otpToken: args['otp_token'],
+            ),
+            key: state.pageKey,
+          );
+        } else {
+          return CupertinoPage<void>(
+            child: const StaffSignUpScreen(
+              otpToken: '',
             ),
             key: state.pageKey,
           );
@@ -260,6 +283,28 @@ final GoRouter routerConfig = GoRouter(
             Map<String, dynamic> args = state.extra as Map<String, dynamic>;
             return CupertinoPage<void>(
               child: AuthCompleteScreen(
+                orgName: args['companyName'],
+                token: args['token'],
+              ),
+              key: state.pageKey,
+            );
+          } else {
+            return CupertinoPage<void>(
+              child: const AuthCompleteScreen(
+                orgName: '',
+                token: '',
+              ),
+              key: state.pageKey,
+            );
+          }
+        }),
+    GoRoute(
+        path: RoutesPath.staffSuccess,
+        pageBuilder: (context, state) {
+          if (state.extra != null) {
+            Map<String, dynamic> args = state.extra as Map<String, dynamic>;
+            return CupertinoPage<void>(
+              child: StaffSignUpSuccessScreen(
                 orgName: args['companyName'],
                 token: args['token'],
               ),
