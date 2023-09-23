@@ -34,6 +34,7 @@ class Auth {
       var response = await http.post(Uri.parse(baseUrl + postUrl), body: body);
       return jsonDecode(response.body);
     } catch (e) {
+      print('_-----------____- admin signup: $e');
       return {"status": "fail", "message": 'Something went wrong '};
     }
   }
@@ -49,7 +50,7 @@ class Auth {
       String firstName,
       String lastName,
       String phoneNumber) async {
-    String postUrl = "api/auth/organization/staff/signup";
+    String postUrl = "api/auth/staff/signup";
     Map<String, dynamic> body = {
       "email": orgEmail,
       "otp_token": otpToken,
@@ -62,6 +63,7 @@ class Auth {
       var response = await http.post(Uri.parse(baseUrl + postUrl), body: body);
       return jsonDecode(response.body);
     } catch (e) {
+      print('sign up error: $e');
       return {"status": 'fail', "message": 'something went wrong'};
     }
   }

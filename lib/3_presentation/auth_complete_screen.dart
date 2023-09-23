@@ -24,79 +24,79 @@ class AuthCompleteScreen extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(25),
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 160,
-                ),
-                Text(
-                  'Hurray! Your organization is all set up',
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.lato(
-                    color: Theme.of(context).primaryColor,
-                    fontSize: 24.sp,
-                    fontWeight: FontWeight.w700,
-                  ),
-                ),
-                SizedBox(
-                  height: 40.h,
-                ),
-                Container(
-                  alignment: Alignment.bottomCenter,
-                  height: 200.h,
-                  width: double.infinity,
-                  decoration: ShapeDecoration(
-                    color: Colors.grey.shade100,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5)),
-                  ),
-                  child: Image.asset(Assets.buildingImagePath),
-                ),
-                SizedBox(
-                  height: 37.h,
-                ),
-                Text(
-                  orgName,
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.lato(
-                    color: const Color(0xff98a2b3),
-                    fontSize: 22.sp,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                SizedBox(
-                  height: 65.h,
-                ),
-                TextButton(
-                  onPressed: () =>
-                      context.push(RoutesPath.shareInviteScreen, extra: {
-                    'companyName': orgName,
-                    'token': token,
-                  }),
-                  child: Text(
-                    'Invite members',
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  120.verticalSpace,
+                  Text(
+                    'Hurray! Your organization is all set up',
                     textAlign: TextAlign.center,
                     style: GoogleFonts.lato(
-                      color: AppColor.appBrandColor,
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w600,
+                      color: Theme.of(context).primaryColor,
+                      fontSize: 24.sp,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                ButtonWidget(
-                  onPressed: () {
-                    while (routerConfig.canPop() == true) {
-                      routerConfig.pop();
-                    }
-                    routerConfig.pushReplacement(RoutesPath.navScreen);
-                  },
-                  buttonText: 'Get Started',
-                  fontSize: 16.sp,
-                ),
-              ],
+                  SizedBox(
+                    height: 40.h,
+                  ),
+                  Container(
+                    alignment: Alignment.bottomCenter,
+                    height: 200.h,
+                    width: double.infinity,
+                    decoration: ShapeDecoration(
+                      color: Colors.grey.shade100,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5)),
+                    ),
+                    child: Image.asset(Assets.buildingImagePath),
+                  ),
+                  SizedBox(
+                    height: 37.h,
+                  ),
+                  Text(
+                    orgName,
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.lato(
+                      color: const Color(0xff98a2b3),
+                      fontSize: 22.sp,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 65.h,
+                  ),
+                  TextButton(
+                    onPressed: () =>
+                        context.push(RoutesPath.shareInviteScreen, extra: {
+                      'companyName': orgName,
+                      'token': token,
+                    }),
+                    child: Text(
+                      'Invite members',
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.lato(
+                        color: AppColor.appBrandColor,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  ButtonWidget(
+                    onPressed: () {
+                      while (routerConfig.canPop() == true) {
+                        routerConfig.pop();
+                      }
+                      routerConfig.pushReplacement(RoutesPath.navScreen);
+                    },
+                    buttonText: 'Get Started',
+                    fontSize: 16.sp,
+                  ),
+                ],
+              ),
             ),
           ),
           Positioned(

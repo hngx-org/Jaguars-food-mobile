@@ -10,17 +10,17 @@ import '../../../common/constants/reusables/back_icon.dart';
 import '../../../common/constants/reusables/textfield.dart';
 import '../../../common/constants/route_constant.dart';
 
-class CreateOrganizationScreen extends StatefulWidget {
-  const CreateOrganizationScreen({super.key, required this.orgName});
+class AdminSignUpScreen extends StatefulWidget {
+  const AdminSignUpScreen({super.key, required this.orgName});
   final String orgName;
 
   @override
-  State<CreateOrganizationScreen> createState() =>
-      _CreateOrganizationScreenState();
+  State<AdminSignUpScreen> createState() =>
+      _AdminSignUpScreenState();
 }
 
-class _CreateOrganizationScreenState extends State<CreateOrganizationScreen>
-    with AutomaticKeepAliveClientMixin<CreateOrganizationScreen> {
+class _AdminSignUpScreenState extends State<AdminSignUpScreen>
+    with AutomaticKeepAliveClientMixin<AdminSignUpScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey();
   final GlobalKey<FormState> _nameKey = GlobalKey();
   final GlobalKey<FormState> _lNameKey = GlobalKey();
@@ -50,9 +50,9 @@ class _CreateOrganizationScreenState extends State<CreateOrganizationScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      body: SafeArea(
-        child: SingleChildScrollView(
+    return SafeArea(
+      child: Scaffold(
+        body: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 20.h),
             child: Column(

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/create_organization.dart';
+import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/admin_signup.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/button.dart';
 
@@ -42,7 +42,7 @@ class _RegisterOrgNameScreenState extends State<RegisterOrgNameScreen> {
       Navigator.of(context).push(
         CupertinoPageRoute<void>(
           builder: (BuildContext context) {
-            return CreateOrganizationScreen(orgName: inputText);
+            return AdminSignUpScreen(orgName: inputText);
           },
         ),
       );

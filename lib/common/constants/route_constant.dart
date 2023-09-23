@@ -13,7 +13,9 @@ class RoutesPath {
   static const String confirmRedeemScreen = '/confirmRedeem-screen';
   static const String successScreen = '/success-screen';
   static const String doubleLunchScreen = '/double_lunch';
-  static const String createOrganizationScreen = '/create_organization';
+  static const String adminSignUp = '/admin_signup';
+  static const String staffSignUp = '/staff_signup';
+  static const String staffSuccess = '/staff_success';
   static const String orgNameScreen = '/org_name_screen';
   static const String shareInviteScreen = '/share_invite_screen';
   static const String authCompleteScreen = '/auth_complete_screen';
