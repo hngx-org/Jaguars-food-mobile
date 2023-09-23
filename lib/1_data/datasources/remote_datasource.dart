@@ -99,3 +99,85 @@ class Auth {
     }
   }
 }
+
+class Lunch{
+
+  static Future<Map> sendLunch(List<int> receivers, int quantity, String note, String authToken) {
+    String postUrl = "api/lunch/send";
+    var headers = {
+      "authorization": "Bearer $authToken"
+    };
+    var body = {
+      "receivers": '$receivers',
+      "quantity": '$quantity',
+      "note": note
+    };
+    try{
+      var response = http.post(
+        Uri.parse(baseUrl + postUrl),
+        headers: headers,
+        body: body
+      );
+      return response.then((value){
+        return jsonDecode(value.body);
+      });
+    } catch (e){
+      return Future.value({"status": "fail", "message": "something went wrong"});
+    }
+  }
+
+  static Future<Map> getLunch(authToken){
+    String getUrl = 'api/lunch/1';
+    var headers = {
+      "authorization": "Bearer $authToken"
+    };
+    try{
+      var response = http.get(
+        Uri.parse(baseUrl + getUrl),
+        headers: headers
+      );
+      return response.then((value){
+        return jsonDecode(value.body);
+      });
+    } catch(e){
+      return Future.value({"status": "fail", "message": "something went wrong"});
+    }
+  }
+
+  static Future<Map> redeemLunch(authToken){
+    String getUrl = "api/redeem/1";
+    var headers = {
+      "authorization": "Bearer $authToken"
+    };
+    try{
+      var response = http.get(
+        Uri.parse(baseUrl + getUrl),
+        headers: headers
+      );
+      return response.then((value){
+        return jsonDecode(value.body);
+      });
+    } catch(e){
+      return Future.value({"status": "fail", "message": "something went wrong"});
+    }
+  }
+
+  static Future<Map> allLunch(authToken){
+    String getUrl = "api/lunch";
+    var headers = {
+      "authorization": "Bearer $authToken"
+    };
+    try{
+      var response = http.get(
+        Uri.parse(baseUrl + getUrl),
+        headers: headers
+      );
+      return response.then((value){
+        return jsonDecode(value.body);
+      });
+    } catch(e){
+      return Future.value({"status": "fail", "message": "something went wrong"});
+    }
+  }
+}
+
