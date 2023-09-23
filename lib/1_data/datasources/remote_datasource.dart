@@ -102,7 +102,7 @@ class Auth {
 
 class Lunch{
 
-  static Future<Map> sendLunch(List<int> receivers, int quantity, String note, String authToken) {
+  static Future<Map> sendLunch(List<int> receivers, int quantity, String note, String authToken) async{
     String postUrl = "api/lunch/send";
     var headers = {
       "authorization": "Bearer $authToken"
@@ -113,70 +113,62 @@ class Lunch{
       "note": note
     };
     try{
-      var response = http.post(
+      var response = await http.post(
         Uri.parse(baseUrl + postUrl),
         headers: headers,
         body: body
       );
-      return response.then((value){
-        return jsonDecode(value.body);
-      });
+        return jsonDecode(response.body);
     } catch (e){
-      return Future.value({"status": "fail", "message": "something went wrong"});
+      return {"status": "fail", "message": "something went wrong"};
     }
   }
 
-  static Future<Map> getLunch(authToken){
+  static Future<Map> getLunch(authToken) async {
     String getUrl = 'api/lunch/1';
     var headers = {
       "authorization": "Bearer $authToken"
     };
     try{
-      var response = http.get(
+      var response = await http.get(
         Uri.parse(baseUrl + getUrl),
         headers: headers
       );
-      return response.then((value){
-        return jsonDecode(value.body);
-      });
+      return jsonDecode(response.body);
     } catch(e){
-      return Future.value({"status": "fail", "message": "something went wrong"});
+      return {"status": "fail", "message": "something went wrong"};
     }
   }
 
-  static Future<Map> redeemLunch(authToken){
+  static Future redeemLunch(authToken) async {
     String getUrl = "api/redeem/1";
     var headers = {
       "authorization": "Bearer $authToken"
     };
     try{
-      var response = http.get(
+      var response = await http.get(
         Uri.parse(baseUrl + getUrl),
         headers: headers
       );
-      return response.then((value){
-        return jsonDecode(value.body);
-      });
+      return jsonDecode(response.body);
     } catch(e){
-      return Future.value({"status": "fail", "message": "something went wrong"});
+      return {"status": "fail", "message": "something went wrong"};
     }
   }
 
-  static Future<Map> allLunch(authToken){
+  static Future allLunch(authToken) async {
     String getUrl = "api/lunch";
     var headers = {
       "authorization": "Bearer $authToken"
     };
     try{
-      var response = http.get(
+      var response = await http.get(
         Uri.parse(baseUrl + getUrl),
         headers: headers
       );
-      return response.then((value){
-        return jsonDecode(value.body);
-      });
+      return jsonDecode(response.body);
     } catch(e){
-      return Future.value({"status": "fail", "message": "something went wrong"});
+      return {"status": "fail", "message": "something went wrong"};
     }
   }
 }
