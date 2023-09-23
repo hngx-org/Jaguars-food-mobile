@@ -99,3 +99,78 @@ class Auth {
     }
   }
 }
+
+class Lunch{
+
+  static Future<Map> sendLunch(List<int> receivers, int quantity, String note, String authToken) async{
+    String postUrl = "api/lunch/send";
+    var headers = {
+      "authorization": "Bearer $authToken"
+    };
+    var body = {
+      "receivers": '$receivers',
+      "quantity": '$quantity',
+      "note": note
+    };
+    try{
+      var response = await http.post(
+        Uri.parse(baseUrl + postUrl),
+        headers: headers,
+        body: body
+      );
+        return jsonDecode(response.body);
+    } catch (e){
+      return {"status": "fail", "message": "something went wrong"};
+    }
+  }
+
+  static Future<Map> getLunch(authToken) async {
+    String getUrl = 'api/lunch/1';
+    var headers = {
+      "authorization": "Bearer $authToken"
+    };
+    try{
+      var response = await http.get(
+        Uri.parse(baseUrl + getUrl),
+        headers: headers
+      );
+      return jsonDecode(response.body);
+    } catch(e){
+      return {"status": "fail", "message": "something went wrong"};
+    }
+  }
+
+  static Future redeemLunch(authToken) async {
+    String getUrl = "api/redeem/1";
+    var headers = {
+      "authorization": "Bearer $authToken"
+    };
+    try{
+      var response = await http.get(
+        Uri.parse(baseUrl + getUrl),
+        headers: headers
+      );
+      return jsonDecode(response.body);
+    } catch(e){
+      return {"status": "fail", "message": "something went wrong"};
+    }
+  }
+
+  static Future allLunch(authToken) async {
+    // returns a list
+    String getUrl = "api/lunch";
+    var headers = {
+      "authorization": "Bearer $authToken"
+    };
+    try{
+      var response = await http.get(
+        Uri.parse(baseUrl + getUrl),
+        headers: headers
+      );
+      return jsonDecode(response.body);
+    } catch(e){
+      return [];
+    }
+  }
+}
+
