@@ -2,12 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jaguar_foods_mobile/1_data/models/transactions.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/nav_screen/nav_screen.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:intl/intl.dart';
 import 'package:jaguar_foods_mobile/common/constants/assets_constants.dart';
+import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -130,10 +132,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 //redeem , gift
                 Material(
                   color: Colors.transparent,
-                  elevation: 3,
                   shape: RoundedRectangleBorder(
-                    side: const BorderSide(
-                        width: 1, color: Color(0xFFEBEBEB)),
+                    side: const BorderSide(width: 1, color: Color(0xFFEBEBEB)),
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Container(
@@ -171,9 +171,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
+                                  const Text(
                                     '₦5,000',
-                                    style: GoogleFonts.lato(
+                                    style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 24,
                                       fontWeight: FontWeight.w600,
@@ -186,7 +186,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         Navigator.of(context).pushReplacement(
                                           CupertinoPageRoute<void>(
                                             builder: (BuildContext context) {
-                                              return NavigationScreen(initialIndex: 0);
+                                              return const NavigationScreen(
+                                                  initialIndex: 0);
                                             },
                                           ),
                                         );
@@ -275,21 +276,27 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.transparent,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(7)),
-                          elevation: 3,
+                          elevation: 2,
                           child: InkWell(
-                            onTap: () => setState(() {
-                              Navigator.of(context).pushReplacement(
-                                CupertinoPageRoute<void>(
-                                  builder: (BuildContext context) {
-                                    return NavigationScreen(initialIndex: 2);
-                                  },
-                                ),
-                              );
+                            onTap: () => context
+                                .pushReplacement(RoutesPath.navScreen, extra: {
+                              "id": 2,
                             }),
+
+                            // setState(() {
+                            //   Navigator.of(context).pushReplacement(
+                            //     CupertinoPageRoute<void>(
+                            //       builder: (BuildContext context) {
+                            //         return const NavigationScreen(
+                            //             initialIndex: 2);
+                            //       },
+                            //     ),
+                            //   );
+                            // }),
                             child: Container(
-                              width: 182,
+                              width: double.infinity,
                               height: 100,
-                              padding: EdgeInsets.all(5),
+                              padding: const EdgeInsets.all(7),
                               clipBehavior: Clip.antiAlias,
                               decoration: ShapeDecoration(
                                 color: const Color(0xFFE8DDFF),
@@ -300,9 +307,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Container(
-                                      padding: EdgeInsets.all(4),
-                                      decoration: ShapeDecoration(
-                                        color: const Color(0x3D571FCD),
+                                      padding: const EdgeInsets.all(5),
+                                      decoration: const ShapeDecoration(
+                                        color: Color(0x3D571FCD),
                                         shape: CircleBorder(),
                                       ),
                                       child: Image.asset(Assets.tagImagePath)),
@@ -310,7 +317,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     'Redeem',
                                     style: GoogleFonts.lato(
                                       color: const Color(0xFF571FCD),
-                                      fontSize: 18,
+                                      fontSize: 18.sp,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   )
@@ -329,21 +336,15 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.transparent,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(7)),
-                          elevation: 3,
+                          elevation: 2,
                           child: InkWell(
                             onTap: () => setState(() {
-                              Navigator.of(context).pushReplacement(
-                                CupertinoPageRoute<void>(
-                                  builder: (BuildContext context) {
-                                    return NavigationScreen(initialIndex: 2);
-                                  },
-                                ),
-                              );
+                              context.push(RoutesPath.employeeScreen);
                             }),
                             child: Container(
-                              width: 182,
-                              height: 100,
-                              padding: EdgeInsets.all(5),
+                              width: double.infinity,
+                              height: 100.h,
+                              padding: const EdgeInsets.all(7),
                               clipBehavior: Clip.antiAlias,
                               decoration: ShapeDecoration(
                                 color: const Color(0xFFD3FFE5),
@@ -354,17 +355,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Container(
-                                      padding: EdgeInsets.all(4),
-                                      decoration: ShapeDecoration(
-                                        color: const Color(0x3A07A537),
+                                      padding: const EdgeInsets.all(5),
+                                      decoration: const ShapeDecoration(
+                                        color: Color(0x3A07A537),
                                         shape: CircleBorder(),
                                       ),
                                       child: Image.asset(Assets.giftImagePath)),
                                   Text(
                                     'Gift Lunch',
                                     style: GoogleFonts.lato(
-                                      color: const Color(0xFF571FCD),
-                                      fontSize: 18,
+                                      color: const Color(0xFF2EAA60),
+                                      fontSize: 18.sp,
                                       fontWeight: FontWeight.w500,
                                     ),
                                   )
@@ -430,8 +431,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Container(
                                 margin: const EdgeInsets.only(bottom: 20),
                                 child: Row(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
@@ -449,8 +449,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           shape: OvalBorder(),
                                         ),
                                         child: ColorFiltered(
-                                          colorFilter:
-                                              const ColorFilter.mode(
+                                          colorFilter: const ColorFilter.mode(
                                             AppColor.appBrandColor,
                                             BlendMode.srcIn,
                                           ),
@@ -474,14 +473,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                             TextSpan(
                                               children: [
                                                 TextSpan(
-                                                  text: transaction
-                                                      .receiverId,
+                                                  text: transaction.receiverId,
                                                   style: GoogleFonts.lato(
-                                                    color: const Color(
-                                                        0xFF1A1920),
+                                                    color:
+                                                        const Color(0xFF1A1920),
                                                     fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.w700,
+                                                    fontWeight: FontWeight.w700,
                                                   ),
                                                 ),
                                                 TextSpan(
@@ -492,8 +489,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       0xFF55506D,
                                                     ),
                                                     fontSize: 14,
-                                                    fontWeight:
-                                                        FontWeight.w600,
+                                                    fontWeight: FontWeight.w600,
                                                   ),
                                                 ),
                                               ],
@@ -506,8 +502,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           Text(
                                             formattedTransactionDate,
                                             style: GoogleFonts.lato(
-                                              color:
-                                                  const Color(0xFFABABAB),
+                                              color: const Color(0xFFABABAB),
                                               fontSize: 12,
                                               fontWeight: FontWeight.w600,
                                             ),
@@ -537,8 +532,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               Divider(
-                                color: AppColor.secondaryColor
-                                    .withOpacity(0.7),
+                                color: AppColor.secondaryColor.withOpacity(0.7),
                               ),
                               10.verticalSpace
                             ],

@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
+import 'package:jaguar_foods_mobile/common/constants/reusables/back_icon.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/button.dart';
+import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 
 class SendLunchDealScreen extends StatefulWidget {
-  const SendLunchDealScreen({Key? key}) : super(key: key);
+  final String giftee;
+  const SendLunchDealScreen({
+    Key? key,
+    required this.giftee,
+  }) : super(key: key);
 
   @override
   State<SendLunchDealScreen> createState() => _SendLunchState();
@@ -22,7 +29,8 @@ class _SendLunchState extends State<SendLunchDealScreen> {
     required String subtitle,
     required String value,
   }) {
-    bool isSelected = selectedDeal == value; // Move isSelected inside this function
+    bool isSelected =
+        selectedDeal == value; // Move isSelected inside this function
 
     return InkWell(
       onTap: () {
@@ -56,10 +64,10 @@ class _SendLunchState extends State<SendLunchDealScreen> {
               ),
               child: isSelected
                   ? const Icon(
-                Icons.check,
-                size: 20.0,
-                color: AppColor.white,
-              )
+                      Icons.check,
+                      size: 20.0,
+                      color: AppColor.white,
+                    )
                   : null,
             ),
             Column(
@@ -96,29 +104,39 @@ class _SendLunchState extends State<SendLunchDealScreen> {
           height: MediaQuery.sizeOf(context).height,
           width: MediaQuery.sizeOf(context).width,
           margin: const EdgeInsets.only(
-              top: 50.0, left: 10.0, right: 10.0, bottom: 20.0),
+            left: 20.0,
+            right: 20.0,
+            bottom: 20.0,
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const BackIconWidget(),
               Text(
-                'Gift Adekunle Emmanuel',
+                'Gift ${widget.giftee}',
                 style: GoogleFonts.lato(
                   color: AppColor.black,
                   fontSize: 28,
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              const SizedBox(height: 10.0,),
+              const SizedBox(
+                height: 10.0,
+              ),
               Text(
-                isLunchDealSelected ? selectMessage2 : selectMessage1, // Display the appropriate message
+                isLunchDealSelected
+                    ? selectMessage2
+                    : selectMessage1, // Display the appropriate message
                 style: GoogleFonts.lato(
                   color: AppColor.subText,
                   fontSize: 16,
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              const SizedBox(height: 30.0,),
+              const SizedBox(
+                height: 30.0,
+              ),
               Text(
                 'Send a Lunch deal!',
                 style: GoogleFonts.lato(
@@ -165,7 +183,10 @@ class _SendLunchState extends State<SendLunchDealScreen> {
                   width: double.infinity,
                   child: ButtonWidget(
                     onPressed: () {
-                      // Add functionality for the "Proceed" button
+                      context.push(RoutesPath.doubleLunchScreen, extra: {
+                        "giftee": widget.giftee,
+                        "lunch": selectedDeal,
+                      });
                     },
                     buttonText: 'Proceed',
                     fontSize: 14,

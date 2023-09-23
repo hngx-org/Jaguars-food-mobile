@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 
 class ButtonWidget extends StatefulWidget {
-  final void Function() onPressed;
+  final void Function()? onPressed;
   final String? buttonText;
   final double fontSize;
   final bool? iconAllowed;
   final Icon? icon;
   final Color? textColor;
-
+  final MaterialStateProperty<Color?>? backgroundColor;
+  final Widget? child;
+  final Color? buttonColor;
+  final Color? borderSideColor;
   const ButtonWidget({
     super.key,
-    required this.onPressed,
+    this.onPressed,
     required this.buttonText,
     required this.fontSize,
     this.icon,
@@ -22,10 +24,8 @@ class ButtonWidget extends StatefulWidget {
     this.child,
     this.buttonColor,
     this.borderSideColor,
+    this.backgroundColor,
   });
-  final Widget? child;
-  final Color? buttonColor;
-  final Color? borderSideColor;
 
   @override
   State<ButtonWidget> createState() => _ButtonWidgetState();
@@ -42,22 +42,20 @@ class _ButtonWidgetState extends State<ButtonWidget> {
         child: ElevatedButton(
           onPressed: widget.onPressed,
           style: ButtonStyle(
-            backgroundColor: MaterialStateColor.resolveWith(
-              (states) => widget.buttonColor ?? AppColor.appBrandColor,
-            ),
             textStyle: MaterialStateTextStyle.resolveWith(
               (states) => GoogleFonts.lato(
                 fontSize: widget.fontSize,
                 fontWeight: FontWeight.w600,
               ),
             ),
+            backgroundColor: widget.backgroundColor,
             shape: MaterialStateProperty.resolveWith<OutlinedBorder>(
               (states) => RoundedRectangleBorder(
                 side: BorderSide(
                   color: widget.borderSideColor ?? Colors.transparent,
-                  width: 1,
+                  width: 1.w,
                 ),
-                borderRadius: BorderRadius.circular(12.r),
+                borderRadius: BorderRadius.circular(5.r),
               ),
             ),
             elevation: MaterialStateProperty.all(0),

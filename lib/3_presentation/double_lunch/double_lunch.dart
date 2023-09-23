@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:jaguar_foods_mobile/common/constants/assets_constants.dart';
+import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 
-class DoubleLunch extends StatelessWidget {
-  const DoubleLunch({super.key});
+class DoubleLunch extends StatefulWidget {
+  final String lunchType;
+  final String? giftee;
+  const DoubleLunch({
+    super.key,
+    required this.lunchType,
+    this.giftee,
+  });
 
+  @override
+  State<DoubleLunch> createState() => _DoubleLunchState();
+}
+
+class _DoubleLunchState extends State<DoubleLunch> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -19,10 +34,12 @@ class DoubleLunch extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(top: 100, bottom: 40),
                 child: Text(
-                  "You’re gifting Adekunle Emmanuel!",
+                  "You’re gifting ${widget.giftee}!",
                   textAlign: TextAlign.center,
                   style: GoogleFonts.lato(
-                      fontWeight: FontWeight.bold, fontSize: 24),
+                    fontWeight: FontWeight.w600,
+                    fontSize: 24.sp,
+                  ),
                 ),
               ),
 
@@ -32,21 +49,24 @@ class DoubleLunch extends StatelessWidget {
                 padding: const EdgeInsets.only(top: 33, bottom: 24),
                 child: Align(
                   child: Text(
-                    'Double Lunch',
+                    "${widget.lunchType} Lunch",
                     style: GoogleFonts.lato(
-                        fontSize: 24,
+                        fontSize: 24.sp,
                         color: theme.colorScheme.primary,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
               Container(
-                height: 204,
-                width: 375,
+                alignment: Alignment.bottomCenter,
+                height: 200.h,
+                width: double.infinity,
                 decoration: BoxDecoration(
-                    color: theme.colorScheme.secondaryContainer,
-                    borderRadius: BorderRadius.circular(8)),
-                child: Center(child: Image.asset(Assets.lunchImagePath)),
+                    color: AppColor.imageBackground,
+                    borderRadius: BorderRadius.circular(8.r)),
+                child: Image.asset(
+                  Assets.lunchImagePath,
+                ),
               ),
 
               Padding(
@@ -77,7 +97,12 @@ class DoubleLunch extends StatelessWidget {
                 height: 52,
                 width: MediaQuery.of(context).size.width,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.push(RoutesPath.successScreen, extra: {
+                      "giftee": "Adekunle Emmanuel",
+                      "lunch": widget.lunchType,
+                    });
+                  },
                   child: Text(
                     'Send',
                     style: GoogleFonts.lato(

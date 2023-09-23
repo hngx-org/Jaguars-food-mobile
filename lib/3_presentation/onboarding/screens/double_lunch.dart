@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:jaguar_foods_mobile/common/constants/assets_constants.dart';
+import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 
-class DoubleLunch extends StatelessWidget {
+class DoubleLunch extends StatefulWidget {
   const DoubleLunch({super.key});
 
+  @override
+  State<DoubleLunch> createState() => _DoubleLunchState();
+}
+
+class _DoubleLunchState extends State<DoubleLunch> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -41,10 +50,11 @@ class DoubleLunch extends StatelessWidget {
                 ),
               ),
               Container(
-                height: 204,
-                width: 375,
+                alignment: Alignment.bottomCenter,
+                height: 200,
+                width: double.infinity,
                 decoration: BoxDecoration(
-                    color: theme.colorScheme.secondaryContainer,
+                    color: AppColor.imageBackground,
                     borderRadius: BorderRadius.circular(8)),
                 child: Center(child: Image.asset(Assets.lunchImagePath)),
               ),
@@ -81,11 +91,18 @@ class DoubleLunch extends StatelessWidget {
                 height: 52,
                 width: MediaQuery.of(context).size.width,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.push(RoutesPath.successScreen, extra: {
+                      "giftee": "Adekunle Emmanuel",
+                      "lunch": "Double Lunch",
+                    });
+                  },
                   child: Text(
                     'Send',
                     style: GoogleFonts.lato(
-                        fontWeight: FontWeight.bold, fontSize: 18),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18.sp,
+                    ),
                   ),
                 ),
               ),

@@ -17,5 +17,5 @@ class AppColor {
   static const Color hinttextfieldColor = Color(0XFFD0D5DD);
   static const Color backArrowColor = Color(0XFF777777);
   static const Color greyColor = Color(0XFF475467);
-  static const Color borderColor = Color(0XFF55516D);
+  static const Color borderColor = Color(0xFF55506D);
 }

@@ -32,32 +32,21 @@ class SuccessScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          InkWell(
-                            onTap: () => routerConfig.pop(),
-                            child: Icon(
-                              Icons.close,
-                              size: 20.w,
-                            ),
-                          )
-                        ],
-                      ),
                       Expanded(
                           child: SizedBox(
                         height: 1.h,
                       )),
                       Flexible(
                         child: Text(
-                          'You have succesfully\nwithdrawn your Reward!',
+                          giftee == '' || giftee == null
+                              ? 'You have succesfully\nwithdrawn your Reward!'
+                              : "You have successfullly gifted\n$giftee\nfree $lunchType Lunch",
                           textAlign: TextAlign.center,
-                          maxLines: 2,
+                          maxLines: 3,
                           overflow: TextOverflow.clip,
                           style: GoogleFonts.lato(
                             color: AppColor.appBrandColor,
-                            fontSize: 28.w,
+                            fontSize: 24.w,
                             fontWeight: FontWeight.w700,
                           ),
                         ),

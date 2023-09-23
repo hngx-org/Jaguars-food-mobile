@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:jaguar_foods_mobile/common/constants/assets_constants.dart';
+import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 
 class EmployeeScreen extends StatefulWidget {
   const EmployeeScreen({super.key});
@@ -13,20 +17,16 @@ class EmployeeScreen extends StatefulWidget {
 class _EmployeeScreenState extends State<EmployeeScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: AppColor.white,
-      // appBar: AppBar(
-      //   backgroundColor: AppColor.white,
-      // ),
+    return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24),
+          padding: EdgeInsets.symmetric(horizontal: 20.w),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 60),
-                Text(
+                SizedBox(height: 30.h),
+                const Text(
                   "Search for an employee",
                   style: TextStyle(
                       fontSize: 24,
@@ -34,36 +34,36 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                       color: AppColor.black,
                       fontWeight: FontWeight.bold),
                 ),
-                SizedBox(height: 20),
-                MySearchWidget(),
-                SizedBox(height: 36),
+                const SizedBox(height: 20),
+                const MySearchWidget(),
+                const SizedBox(height: 36),
                 Text(
                   "All Employees",
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: 'Lato',
-                      fontWeight: FontWeight.w600),
+                  style: GoogleFonts.lato(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-                SizedBox(height: 18),
-                SearchBox(
+                const SizedBox(height: 18),
+                const SearchBox(
                   text1: "Adekunle Emmanuel",
                 ),
-                SearchBox(
+                const SearchBox(
                   text1: "Kehinde Ojapa",
                 ),
-                SearchBox(
+                const SearchBox(
                   text1: "Bolaji Nifemi",
                 ),
-                SearchBox(
+                const SearchBox(
                   text1: "Oluwanifemi Balogunimil",
                 ),
-                SearchBox(
+                const SearchBox(
                   text1: "Sandra Imolel",
                 ),
-                SearchBox(
+                const SearchBox(
                   text1: "Jude bellingham",
                 ),
-                SearchBox(
+                const SearchBox(
                   text1: "Busayo Davis",
                 ),
               ],
@@ -98,36 +98,31 @@ class _MySearchWidgetState extends State<MySearchWidget> {
 
     return Column(
       children: [
-        Container(
-          decoration: BoxDecoration(
-            color: AppColor.textfieldColor1,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
-            child: TextField(
-              onChanged: (value) {
-                setState(() {
-                  _searchText = value;
-                });
-              },
-              decoration: InputDecoration(
-                focusedBorder: InputBorder.none,
-
-                fillColor: AppColor.textfieldColor1,
-                hintText: 'Search for an employee',
-                suffixIcon: const Icon(
-                  Icons.search,
-                  size: 35,
-                  color: AppColor.brand1,
-                ),
-                // SvgPicture.asset(
-                //   Assets.searchPath,
-                // ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
+        TextField(
+          onChanged: (value) {
+            setState(() {
+              _searchText = value;
+            });
+          },
+          decoration: InputDecoration(
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(
+                  color: AppColor.appBrandColor,
+                  width: 1,
+                )),
+            fillColor: AppColor.textfieldColor1,
+            hintText: 'Search for an employee',
+            suffixIcon: const Icon(
+              Icons.search,
+              size: 35,
+              color: AppColor.brand1,
+            ),
+            // SvgPicture.asset(
+            //   Assets.searchPath,
+            // ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
         ),
@@ -152,9 +147,7 @@ class SearchBox extends StatelessWidget {
     required this.text1,
     this.onTap,
   });
-
   final String text1;
-
   final void Function()? onTap;
 
   @override
@@ -168,33 +161,30 @@ class SearchBox extends StatelessWidget {
                 radius: 18,
                 child: SvgPicture.asset(
                   Assets.giftIconPath,
-                  colorFilter: const ColorFilter.mode(
-                    AppColor.appBrandColor,
-                    BlendMode.clear,
-                  ),
                 )),
             const SizedBox(width: 13),
             Expanded(
               child: Text(
                 text1,
-                style: const TextStyle(
+                style: GoogleFonts.lato(
                   fontSize: 14,
-                  fontFamily: 'Lato',
                   color: AppColor.black,
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
             ),
             InkWell(
-              onTap: () {},
-              child: const Expanded(
-                child: Text(
-                  "Send gift",
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontFamily: 'Lato',
-                      color: AppColor.lightgreen),
-                ),
+              onTap: () {
+                context.push(RoutesPath.sendLunchDealScreen, extra: {
+                  "giftee": text1,
+                });
+              },
+              child: Text(
+                "Send gift",
+                style: TextStyle(
+                    fontSize: 12.sp,
+                    fontFamily: 'Lato',
+                    color: AppColor.lightgreen),
               ),
             ),
           ],

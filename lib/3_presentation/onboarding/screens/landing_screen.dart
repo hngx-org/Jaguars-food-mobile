@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:jaguar_foods_mobile/common/constants/assets_constants.dart';
-import 'package:jaguar_foods_mobile/common/constants/custom_error_dialog.dart';
 import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/button.dart';
@@ -16,19 +15,16 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreenState extends State<LandingScreen> {
-
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-        body: Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20.0.w),
-      child: SingleChildScrollView(
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20.0.w),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            60.verticalSpace,
             Text(
               'Welcome to AppreciAte',
               style: GoogleFonts.lato(
@@ -49,11 +45,11 @@ class _LandingScreenState extends State<LandingScreen> {
               ),
             ),
             SizedBox(
-              height: height * 0.075,
+              height: 100.h,
             ),
             SizedBox(
-              height: 200,
-              width: 200,
+              height: 200.w,
+              width: 200.h,
               child: Image.asset(Assets.peopleImagePath),
             ),
             SizedBox(
@@ -68,32 +64,36 @@ class _LandingScreenState extends State<LandingScreen> {
               height: 10.h,
             ),
             ButtonWidget(
-              onPressed: () => context.push(RoutesPath.signUpScreen),
-              fontSize: 16,
+              onPressed: () => context.push(RoutesPath.joinOrganizationScreen),
+              fontSize: 16.sp,
+              backgroundColor: MaterialStateColor.resolveWith(
+                (states) => Colors.transparent,
+              ),
               buttonText: 'Join an existing organization',
               buttonColor: Colors.transparent,
-              borderSideColor: AppColor.appBrandColor.withOpacity(0.5),
+              borderSideColor: AppColor.appBrandColor,
               textColor: AppColor.appBrandColor,
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: GestureDetector(
-                onTap: (){
+              child: InkWell(
+                onTap: () {
+                  context.push(RoutesPath.loginScreen);
                 },
                 child: Text(
                   'Sign into your organization',
                   style: GoogleFonts.lato(
                     color: AppColor.appBrandColor,
-                    fontSize: 16,
+                    fontSize: 16.sp,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
             ),
-            20.verticalSpace
+            80.verticalSpace,
           ],
         ),
       ),
-    ));
+    );
   }
 }

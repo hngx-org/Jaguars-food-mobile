@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:jaguar_foods_mobile/common/constants/assets_constants.dart';
 import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
@@ -30,12 +29,13 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: AppColor.appBrandColor,
       body: Center(
-        child: Image.asset(Assets.splashImagePath, width: MediaQuery.of(context).size.width *0.5,)
-      ),
+          child: Image.asset(
+        Assets.splashImagePath,
+        width: MediaQuery.of(context).size.width * 0.5,
+      )),
     );
   }
 }
