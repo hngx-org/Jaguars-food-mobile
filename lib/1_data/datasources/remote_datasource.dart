@@ -192,3 +192,52 @@ class Lunch{
   }
 }
 
+class User{
+
+  static Future getProfile(String authToken) async {
+    String getUrl = "api/user/profile";
+    var headers = {"authorization": "Bearer $authToken"};
+    var response = await http.get(
+      Uri.parse(baseUrl + getUrl),
+      headers: headers);
+    return jsonDecode(response.body); 
+  }
+
+  static Future getAllUsers(String authToken) async{
+    String getUrl = "api/users";
+    var headers = {"authorization": "Bearer $authToken"};
+    var response = await http.get(
+      Uri.parse(baseUrl + getUrl),
+      headers: headers
+    );
+    return jsonDecode(response.body);
+  }
+
+  static Future addBankAccount(String bankNumber, String bankCode, String bankName, String authToken) async{
+    String patchUrl = "api/user/bank";
+    var body = {
+      "bank_number": bankNumber,
+      "bank_code": bankCode,
+      "bank_name": bankName
+    };
+    var headers = {
+      "authorization": "Bearer $authToken"
+    };
+    var response = await http.patch(
+      Uri.parse(baseUrl + patchUrl),
+      headers: headers,
+      body: body
+    );
+    return jsonDecode(response.body);
+  }
+  
+  static Future searchUsers(String authToken) async {
+    String getUrl = "api/search/ment";
+    var headers = {"authorization": "Bearer $authToken"};
+    var response = await http.get(
+      Uri.parse(baseUrl + getUrl),
+      headers: headers
+    );
+    return jsonDecode(response.body);
+  }
+}
