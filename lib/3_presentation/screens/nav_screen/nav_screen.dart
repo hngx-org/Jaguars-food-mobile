@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/redeem_screen.dart';
+import 'package:jaguar_foods_mobile/3_presentation/redeem_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/employee_screen/employee_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/home/home_screen.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';

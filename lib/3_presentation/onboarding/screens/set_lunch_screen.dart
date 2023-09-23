@@ -74,6 +74,7 @@ class _SetLunchPriceScreenState extends State<SetLunchPriceScreen> {
                         return null;
                       }
                     },
+                    controller: _priceController,
                     hintText: '0.00',
                     keyboardType: TextInputType.number,
                     headerText: 'Enter lunch price',
