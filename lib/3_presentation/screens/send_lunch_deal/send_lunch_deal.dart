@@ -18,7 +18,10 @@ class SendLunchDealScreen extends StatefulWidget {
 }
 
 class _SendLunchState extends State<SendLunchDealScreen> {
-  String selectedDeal = 'Single';
+  String selectedDeal = '';
+  bool isLunchDealSelected = false; // Track whether a lunch deal is selected
+  String selectMessage1 = 'Select lunch offer!';
+  String selectMessage2 = 'You can choose to gift multiple items';
 
   // Function to build custom Circular Checkbox
   Widget buildCustomCheckbox({
@@ -26,12 +29,14 @@ class _SendLunchState extends State<SendLunchDealScreen> {
     required String subtitle,
     required String value,
   }) {
-    final isSelected = selectedDeal == value;
+    bool isSelected =
+        selectedDeal == value; // Move isSelected inside this function
 
     return InkWell(
       onTap: () {
         setState(() {
           selectedDeal = value;
+          isLunchDealSelected = true; // Lunch deal is selected
         });
       },
       child: Container(
@@ -120,7 +125,9 @@ class _SendLunchState extends State<SendLunchDealScreen> {
                 height: 10.0,
               ),
               Text(
-                'Select lunch offer!',
+                isLunchDealSelected
+                    ? selectMessage2
+                    : selectMessage1, // Display the appropriate message
                 style: GoogleFonts.lato(
                   color: AppColor.subText,
                   fontSize: 16,
