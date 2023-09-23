@@ -100,6 +100,22 @@ class Auth {
       return {"status": "fail", "message": "something went wrong"};
     }
   }
+  static Future orgExists(String orgName) async {
+    // returns true if an org exists
+    // returns false if it doesnt
+    // returns {"status": "fail", "message": "something went wrong"} for other issues
+    String getUrl = "api/auth/organization/$orgName";
+    try{
+      var response = await http.get(Uri.parse(baseUrl + getUrl));
+      if (response.body == ""){
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e){
+      return {"status": "fail", "message": "something went wrong"};
+    }
+  }
 }
 
 class Lunch{
