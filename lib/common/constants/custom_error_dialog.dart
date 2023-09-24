@@ -113,6 +113,7 @@ class CustomDialog {
     final alert = Center(
       child: SizedBox(
         width: 25.w,
+        height: 25.h,
         child: const CircularProgressIndicator(
           color: AppColor.appBrandColor,
           strokeWidth: 2,

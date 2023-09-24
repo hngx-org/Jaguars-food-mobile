@@ -34,7 +34,6 @@ class Auth {
       var response = await http.post(Uri.parse(baseUrl + postUrl), body: body);
       return jsonDecode(response.body);
     } catch (e) {
-      print('_-----------____- admin signup: $e');
       return {"status": "fail", "message": 'Something went wrong '};
     }
   }
@@ -63,8 +62,7 @@ class Auth {
       var response = await http.post(Uri.parse(baseUrl + postUrl), body: body);
       return jsonDecode(response.body);
     } catch (e) {
-      print('sign up error: $e');
-      return {"status": 'fail', "message": 'something went wrong'};
+      return {"status": 'fail', "message": 'Something went wrong'};
     }
   }
 
@@ -81,7 +79,7 @@ class Auth {
       var response = await http.post(Uri.parse(baseUrl + postUrl), body: body);
       return jsonDecode(response.body);
     } catch (e) {
-      return {"status": "fail", "message": 'something went wrong'};
+      return {"status": "fail", "message": 'Something went wrong'};
     }
   }
 
@@ -97,98 +95,115 @@ class Auth {
           headers: headers, body: body);
       return jsonDecode(response.body);
     } catch (e) {
-      return {"status": "fail", "message": "something went wrong"};
+      return {"status": "fail", "message": "Something went wrong"};
     }
   }
+
   static Future orgExists(String orgName) async {
     // returns true if an org exists
     // returns false if it doesnt
     // returns {"status": "fail", "message": "something went wrong"} for other issues
     String getUrl = "api/auth/organization/$orgName";
-    try{
+    try {
       var response = await http.get(Uri.parse(baseUrl + getUrl));
-      if (response.body == ""){
+      if (response.body == "" || response.statusCode == 200) {
         return true;
       } else {
         return false;
       }
-    } catch (e){
-      return {"status": "fail", "message": "something went wrong"};
+    } catch (e) {
+      return {"status": "fail", "message": "Something went wrong"};
+    }
+  }
+
+  static Future<Map> forgotPassword(email) async {
+    String getUrl = 'api/auth/forgot-password';
+    var body = {
+      "email": email,
+    };
+    try {
+      var response = await http.post(
+        Uri.parse(baseUrl + getUrl),
+        body: body,
+      );
+      return jsonDecode(response.body);
+    } catch (e) {
+      return {"status": "fail", "message": "Something went wrong"};
+    }
+  }
+
+  static Future<Map> resetPassword(email, password, otp) async {
+    String getUrl = 'api/auth/reset-password';
+    var body = {
+      "email": email,
+      "password": password, // the new password
+      "otp": otp,
+    };
+    try {
+      var response = await http.post(
+        Uri.parse(baseUrl + getUrl),
+        body: body,
+      );
+      return jsonDecode(response.body);
+    } catch (e) {
+      return {"status": "fail", "message": "Something went wrong $e"};
     }
   }
 }
 
-class Lunch{
-
-  static Future<Map> sendLunch(List<int> receivers, int quantity, String note, String authToken) async{
+class Lunch {
+  static Future<Map> sendLunch(
+      List<int> receivers, int quantity, String note, String authToken) async {
     String postUrl = "api/lunch/send";
-    var headers = {
-      "authorization": "Bearer $authToken"
-    };
+    var headers = {"authorization": "Bearer $authToken"};
     var body = {
       "receivers": '$receivers',
       "quantity": '$quantity',
       "note": note
     };
-    try{
-      var response = await http.post(
-        Uri.parse(baseUrl + postUrl),
-        headers: headers,
-        body: body
-      );
-        return jsonDecode(response.body);
-    } catch (e){
-      return {"status": "fail", "message": "something went wrong"};
+    try {
+      var response = await http.post(Uri.parse(baseUrl + postUrl),
+          headers: headers, body: body);
+      return jsonDecode(response.body);
+    } catch (e) {
+      return {"status": "fail", "message": "Something went wrong"};
     }
   }
 
   static Future<Map> getLunch(authToken) async {
     String getUrl = 'api/lunch/1';
-    var headers = {
-      "authorization": "Bearer $authToken"
-    };
-    try{
-      var response = await http.get(
-        Uri.parse(baseUrl + getUrl),
-        headers: headers
-      );
+    var headers = {"authorization": "Bearer $authToken"};
+    try {
+      var response =
+          await http.get(Uri.parse(baseUrl + getUrl), headers: headers);
       return jsonDecode(response.body);
-    } catch(e){
-      return {"status": "fail", "message": "something went wrong"};
+    } catch (e) {
+      return {"status": "fail", "message": "Something went wrong"};
     }
   }
 
   static Future redeemLunch(authToken) async {
     String getUrl = "api/redeem/1";
-    var headers = {
-      "authorization": "Bearer $authToken"
-    };
-    try{
-      var response = await http.get(
-        Uri.parse(baseUrl + getUrl),
-        headers: headers
-      );
+    var headers = {"authorization": "Bearer $authToken"};
+    try {
+      var response =
+          await http.get(Uri.parse(baseUrl + getUrl), headers: headers);
       return jsonDecode(response.body);
-    } catch(e){
-      return {"status": "fail", "message": "something went wrong"};
+    } catch (e) {
+      return {"status": "fail", "message": "Something went wrong"};
     }
   }
 
   static Future allLunch(authToken) async {
     // returns a list
     String getUrl = "api/lunch";
-    var headers = {
-      "authorization": "Bearer $authToken"
-    };
-    try{
-      var response = await http.get(
-        Uri.parse(baseUrl + getUrl),
-        headers: headers
-      );
+    var headers = {"authorization": "Bearer $authToken"};
+    try {
+      var response =
+          await http.get(Uri.parse(baseUrl + getUrl), headers: headers);
       return jsonDecode(response.body);
-    } catch(e){
+    } catch (e) {
       return [];
     }
   }
 }
-

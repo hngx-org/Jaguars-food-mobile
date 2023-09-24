@@ -2,7 +2,6 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jaguar_foods_mobile/1_data/datasources/remote_datasource.dart';
 import 'package:jaguar_foods_mobile/common/constants/custom_error_dialog.dart';
@@ -14,8 +13,11 @@ import '../../../../common/constants/reusables/textfield.dart';
 import '../../../../common/constants/route_constant.dart';
 
 class StaffSignUpScreen extends StatefulWidget {
-  const StaffSignUpScreen({super.key, required this.otpToken});
   final String otpToken;
+  const StaffSignUpScreen({
+    super.key,
+    required this.otpToken,
+  });
 
   @override
   State<StaffSignUpScreen> createState() => _StaffSignUpScreenState();
@@ -52,9 +54,9 @@ class _StaffSignUpScreenState extends State<StaffSignUpScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 20.h),
             child: Column(
@@ -69,11 +71,6 @@ class _StaffSignUpScreenState extends State<StaffSignUpScreen>
                     fontSize: 24.sp,
                     color: AppColor.appBrandColor,
                   ),
-                ),
-                5.verticalSpace,
-                Text(
-                  widget.otpToken,
-                  style: GoogleFonts.lato(color: AppColor.subText),
                 ),
                 20.verticalSpace,
                 Form(
@@ -177,6 +174,8 @@ class _StaffSignUpScreenState extends State<StaffSignUpScreen>
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Required field';
+                      } else if (value.length < 6) {
+                        return 'Password must be at least 6 digits long';
                       } else {
                         return null;
                       }
@@ -253,24 +252,22 @@ class _StaffSignUpScreenState extends State<StaffSignUpScreen>
                           _lastName.text.trim(),
                           _phone.text.trim());
 
-                      print(' signup response : ${response.values}');
+                      print(response);
 
                       if (response.containsValue('error') ||
-                          response.containsValue('fail') || response.values.toString() == '(Invalid token)') {
+                          response.containsValue('fail') ||
+                          response.containsKey('error')) {
                         routerConfig.pop();
                         _showDialog(
                           'error',
                           'Error',
-                          response['message'],
+                          "${response['message']} or\nInvalid invite otp",
                           'Ok',
                         );
-                        print('++++++++++++++sign up+++++++++++++++${response['message']}');
                       } else {
-                        print('++++++++++++++sign up+++++++++++++++${response['message']}');
                         final loginResponse = await Auth.login(
-                          _email.text.trim(),
-                          _password.text.trim()
-                        );
+                            _email.text.trim(), _password.text.trim());
+                        print(loginResponse);
                         if (loginResponse.containsValue('error') ||
                             loginResponse.containsValue('fail')) {
                           routerConfig.pop();
@@ -280,8 +277,6 @@ class _StaffSignUpScreenState extends State<StaffSignUpScreen>
                             loginResponse['message'],
                             'Ok',
                           );
-
-                          print('+++++++++++login++++++++++++++++++${loginResponse['message']}');
                         } else {
                           final token = loginResponse['token'];
 
@@ -289,12 +284,11 @@ class _StaffSignUpScreenState extends State<StaffSignUpScreen>
                           while (routerConfig.canPop()) {
                             routerConfig.pop();
                           }
-                          routerConfig.pushReplacement(
-                              RoutesPath.staffSuccess,
-                              extra: {
-                                'companyName': '',
-                                'token': token,
-                              });
+                          routerConfig
+                              .pushReplacement(RoutesPath.staffSuccess, extra: {
+                            'companyName': '',
+                            'token': token,
+                          });
                         }
                       }
                     }
@@ -310,12 +304,13 @@ class _StaffSignUpScreenState extends State<StaffSignUpScreen>
       ),
     );
   }
+
   _showDialog(
-      String type,
-      String title,
-      String body,
-      String buttontext,
-      ) {
+    String type,
+    String title,
+    String body,
+    String buttontext,
+  ) {
     CustomDialog().showAlertDialog(
       context,
       type,

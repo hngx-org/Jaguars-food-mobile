@@ -15,8 +15,7 @@ class AdminSignUpScreen extends StatefulWidget {
   final String orgName;
 
   @override
-  State<AdminSignUpScreen> createState() =>
-      _AdminSignUpScreenState();
+  State<AdminSignUpScreen> createState() => _AdminSignUpScreenState();
 }
 
 class _AdminSignUpScreenState extends State<AdminSignUpScreen>
@@ -50,9 +49,9 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return SafeArea(
-      child: Scaffold(
-        body: SingleChildScrollView(
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 20.h),
             child: Column(
@@ -175,6 +174,8 @@ class _AdminSignUpScreenState extends State<AdminSignUpScreen>
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Required field';
+                      } else if (value.length < 6) {
+                        return 'Password must be at least 6 digits long';
                       } else {
                         return null;
                       }

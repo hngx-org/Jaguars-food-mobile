@@ -22,4 +22,5 @@ class RoutesPath {
   static const String verificationScreen = '/verification_screen';
   static const String setLunchPriceScreen = '/set_lunch_price_screen';
   static const String joinOrganizationScreen = '/join_organization_screen';
+  static const String forgotPasswordScreen = '/forgot_password_screen';
 }

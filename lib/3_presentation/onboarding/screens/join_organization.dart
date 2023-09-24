@@ -35,84 +35,84 @@ class _JoinOrganizationScreenState extends State<JoinOrganizationScreen> {
       onTap: () {
         FocusScope.of(context).unfocus();
       },
-      child: SafeArea(
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: Container(
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: SafeArea(
+          child: Container(
             padding: EdgeInsets.symmetric(horizontal: 20.h),
             child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const BackIconWidget(),
-            Text('Join an Organization',
-                style: GoogleFonts.lato(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 24.sp,
-                    color: AppColor.appBrandColor)),
-            40.verticalSpace,
-            Form(
-              key: _formKey,
-              child: CustomTextField(
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Required field';
-                  } else if (value.length > 6 || value.length < 6) {
-                    return 'A six digit code is required';
-                  } else {
-                    return null;
-                  }
-                },
-                onChanged: (value) {
-                  _formKey.currentState!.validate();
-                },
-                headerText: "Input your invite code",
-                controller: otpController,
-                keyboardType: TextInputType.number,
-              ),
-            ),
-            30.verticalSpace,
-            ButtonWidget(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  routerConfig
-                      .push(RoutesPath.staffSignUp, extra: {
-                    'otp_token': otpController.text,
-                  });
-                }
-              },
-              buttonText: "Continue",
-              fontSize: 18.sp,
-            ),
-            20.verticalSpace,
-            const Divider(),
-            20.verticalSpace,
-            Text(
-              'Want to create an existing organization?',
-              style: GoogleFonts.lato(
-                color: const Color(0xFF475466),
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            20.verticalSpace,
-            InkWell(
-              onTap: () => context.pushReplacement(RoutesPath.orgNameScreen),
-              child: Row(
-                children: [
-                  SvgPicture.asset(Assets.addIcon),
-                  10.horizontalSpace,
-                  Text(
-                    "Create a new organization",
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const BackIconWidget(),
+                Text('Join an Organization',
                     style: GoogleFonts.lato(
-                      color: const Color(0xFF475466),
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
+                        fontWeight: FontWeight.w700,
+                        fontSize: 24.sp,
+                        color: AppColor.appBrandColor)),
+                40.verticalSpace,
+                Form(
+                  key: _formKey,
+                  child: CustomTextField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Required field';
+                      } else if (value.length > 6 || value.length < 6) {
+                        return 'A six digit code is required';
+                      } else {
+                        return null;
+                      }
+                    },
+                    onChanged: (value) {
+                      _formKey.currentState!.validate();
+                    },
+                    headerText: "Input your invite code",
+                    controller: otpController,
+                    keyboardType: TextInputType.number,
                   ),
-                ],
-              ),
-            )
-          ],
+                ),
+                30.verticalSpace,
+                ButtonWidget(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      routerConfig.push(RoutesPath.staffSignUp, extra: {
+                        'otp_token': otpController.text,
+                      });
+                    }
+                  },
+                  buttonText: "Continue",
+                  fontSize: 18.sp,
+                ),
+                20.verticalSpace,
+                const Divider(),
+                20.verticalSpace,
+                Text(
+                  'Want to create an existing organization?',
+                  style: GoogleFonts.lato(
+                    color: const Color(0xFF475466),
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                20.verticalSpace,
+                InkWell(
+                  onTap: () =>
+                      context.pushReplacement(RoutesPath.orgNameScreen),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(Assets.addIcon),
+                      10.horizontalSpace,
+                      Text(
+                        "Create a new organization",
+                        style: GoogleFonts.lato(
+                          color: const Color(0xFF475466),
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
         ),

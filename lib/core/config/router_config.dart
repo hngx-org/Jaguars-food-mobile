@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:jaguar_foods_mobile/3_presentation/auth_complete_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/double_lunch/double_lunch.dart';
+import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/forgot_password_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/join_organization.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/staff_signup/staff_signup.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/staff_signup/staff_signup_success.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/send_lunch_deal/send_lunch_deal.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/landing_screen.dart';
-import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/org_name_register.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/redeem_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/set_lunch_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/employee_screen/employee_screen.dart';
@@ -250,9 +250,9 @@ final GoRouter routerConfig = GoRouter(
       ),
     ),
     GoRoute(
-      path: RoutesPath.orgNameScreen,
+      path: RoutesPath.forgotPasswordScreen,
       pageBuilder: (context, state) => CupertinoPage<void>(
-        child: const RegisterOrgNameScreen(),
+        child: const ForgotPasswordScreen(),
         key: state.pageKey,
       ),
     ),
@@ -263,14 +263,14 @@ final GoRouter routerConfig = GoRouter(
             Map<String, dynamic> args = state.extra as Map<String, dynamic>;
             return CupertinoPage<void>(
               child: VerificationScreen(
-                orgName: args['companyName'],
+                email: args['email'],
               ),
               key: state.pageKey,
             );
           } else {
             return CupertinoPage<void>(
               child: const VerificationScreen(
-                orgName: '',
+                email: '',
               ),
               key: state.pageKey,
             );

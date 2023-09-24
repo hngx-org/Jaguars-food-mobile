@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:jaguar_foods_mobile/common/constants/assets_constants.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/button.dart';
 import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
@@ -19,9 +17,9 @@ class StaffSignUpSuccessScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: Stack(
+    return Scaffold(
+      body: SafeArea(
+        child: Stack(
           children: [
             Padding(
               padding: const EdgeInsets.all(25),
@@ -53,22 +51,7 @@ class StaffSignUpSuccessScreen extends StatelessWidget {
                       child: Image.asset(Assets.buildingImagePath),
                     ),
                     SizedBox(
-                      height: 37.h,
-                    ),
-                    Text(
-                      orgName,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.lato(
-                        color: const Color(0xff98a2b3),
-                        fontSize: 22.sp,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    SizedBox(
                       height: 65.h,
-                    ),
-                    SizedBox(
-                      height: 10.h,
                     ),
                     ButtonWidget(
                       onPressed: () {
