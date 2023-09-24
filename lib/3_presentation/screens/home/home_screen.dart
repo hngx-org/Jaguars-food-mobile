@@ -12,13 +12,22 @@ import 'package:jaguar_foods_mobile/common/constants/assets_constants.dart';
 import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  final String? token;
+  final String firstName;
+  final String lunchBalance;
+  const HomeScreen({
+    Key? key,
+    this.token,
+    required this.firstName,
+    required this.lunchBalance,
+  }) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen>
+    with AutomaticKeepAliveClientMixin {
   late List<Transactions> transactions;
 
   @override
@@ -74,9 +83,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final mediaQuery = MediaQuery.of(context).size;
     final currentDateTime = DateTime.now();
-    String firstName = 'User';
     final formattedDate = DateFormat('d, MMMM yyyy').format(currentDateTime);
 
     return Scaffold(
@@ -90,23 +99,24 @@ class _HomeScreenState extends State<HomeScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(
-                      width: mediaQuery.width * 0.6,
-                      height: 100,
+                    Flexible(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Welcome $firstName! 👋',
+                            'Welcome ${widget.firstName} 👋',
                             style: GoogleFonts.lato(
                               color: AppColor.black,
-                              fontSize: mediaQuery.width * 0.065,
+                              fontSize: 20.sp,
                               fontWeight: FontWeight.w700,
                             ),
                             maxLines: 2,
                             softWrap: true,
                             overflow: TextOverflow.ellipsis,
+                          ),
+                          SizedBox(
+                            height: 5.h,
                           ),
                           Text(
                             formattedDate,
@@ -130,6 +140,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
                 //redeem , gift
+
+                SizedBox(
+                  height: 30.h,
+                ),
                 Material(
                   color: Colors.transparent,
                   shape: RoundedRectangleBorder(
@@ -171,9 +185,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const Text(
-                                    '₦5,000',
-                                    style: TextStyle(
+                                  Text(
+                                    "₦${widget.lunchBalance}",
+                                    style: const TextStyle(
                                       color: Colors.white,
                                       fontSize: 24,
                                       fontWeight: FontWeight.w600,
@@ -280,6 +294,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: InkWell(
                             onTap: () => context
                                 .pushReplacement(RoutesPath.navScreen, extra: {
+                              "token": widget.token,
                               "id": 2,
                             }),
 
@@ -549,4 +564,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

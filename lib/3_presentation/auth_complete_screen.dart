@@ -90,7 +90,11 @@ class AuthCompleteScreen extends StatelessWidget {
                       while (routerConfig.canPop() == true) {
                         routerConfig.pop();
                       }
-                      routerConfig.pushReplacement(RoutesPath.navScreen);
+                      routerConfig
+                          .pushReplacement(RoutesPath.navScreen, extra: {
+                        "token": token,
+                        "id": 0,
+                      });
                     },
                     buttonText: 'Get Started',
                     fontSize: 16.sp,
@@ -101,7 +105,7 @@ class AuthCompleteScreen extends StatelessWidget {
           ),
           Positioned(
             left: 7.w,
-            top: 260.h,
+            top: 220.h,
             child: Image.asset(
               Assets.circleTickImagePath,
             ),

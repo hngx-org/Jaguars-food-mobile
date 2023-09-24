@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:jaguar_foods_mobile/1_data/datasources/remote_datasource.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/redeem_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/employee_screen/employee_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/home/home_screen.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
+import 'package:jaguar_foods_mobile/common/constants/custom_error_dialog.dart';
 import 'package:jaguar_foods_mobile/common/constants/custom_nav_bar.dart';
+import 'package:jaguar_foods_mobile/core/config/router_config.dart';
 
 class NavigationScreen extends StatefulWidget {
   const NavigationScreen({
     Key? key,
     required this.initialIndex,
+    this.token,
   }) : super(key: key);
-
+  final String? token;
   final int initialIndex;
 
   @override
@@ -20,17 +24,57 @@ class NavigationScreen extends StatefulWidget {
 class _NavigationScreenState extends State<NavigationScreen> {
   int _selectedIndex = 0;
   late List<Widget> _tabScreens;
+  late Map<String, dynamic> _user = {};
 
   @override
   void initState() {
     super.initState();
+    _loadUser();
     _selectedIndex = widget.initialIndex;
     _tabScreens = [
-      const HomeScreen(),
+      HomeScreen(
+        token: widget.token,
+        firstName: _user['firstName'] ?? '',
+        lunchBalance: _user['launchCreditBalance'] ?? '',
+      ),
       const EmployeeScreen(),
       const RedeemScreen(),
       const SettingsScreen(),
     ];
+  }
+
+// load user details
+  _loadUser() async {
+    await Future.delayed(
+        const Duration(
+          milliseconds: 1500,
+        ), () async {
+      CustomDialog().showLoadDialog(context);
+      final response = await Auth.loadUser(widget.token!);
+      routerConfig.pop();
+      if (response.toString().contains('error')) {
+        _showDialog(
+          'error',
+          'Error',
+          response['message'],
+          'Ok',
+        );
+      } else {
+        setState(() {
+          _user = response;
+          _tabScreens = [
+            HomeScreen(
+              token: widget.token,
+              firstName: _user['firstName'] ?? '',
+              lunchBalance: _user['launchCreditBalance'] ?? '',
+            ),
+            const EmployeeScreen(),
+            const RedeemScreen(),
+            const SettingsScreen(),
+          ];
+        });
+      }
+    });
   }
 
   // Function to handle tab selection
@@ -38,6 +82,21 @@ class _NavigationScreenState extends State<NavigationScreen> {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  _showDialog(
+    String type,
+    String title,
+    String body,
+    String buttontext,
+  ) {
+    CustomDialog().showAlertDialog(
+      context,
+      type,
+      title,
+      body,
+      buttontext,
+    );
   }
 
   @override
