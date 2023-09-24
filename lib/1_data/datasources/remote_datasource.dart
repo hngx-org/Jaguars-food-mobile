@@ -33,7 +33,9 @@ class Auth {
       "phone_number": phoneNumber
     };
     try {
-      var response = await http.post(Uri.parse(baseUrl + postUrl), body: body).timeout(timeoutDuration, onTimeout: () {
+      var response = await http
+          .post(Uri.parse(baseUrl + postUrl), body: body)
+          .timeout(timeoutDuration, onTimeout: () {
         throw TimeoutException('The request timed out');
       });
       return jsonDecode(response.body);
@@ -59,7 +61,6 @@ class Auth {
       String firstName,
       String lastName,
       String phoneNumber) async {
-
     const Duration timeoutDuration = Duration(seconds: 15);
     String postUrl = "api/auth/staff/signup";
     Map<String, dynamic> body = {
@@ -71,7 +72,9 @@ class Auth {
       "phone_number": phoneNumber
     };
     try {
-      var response = await http.post(Uri.parse(baseUrl + postUrl), body: body).timeout(timeoutDuration, onTimeout: () {
+      var response = await http
+          .post(Uri.parse(baseUrl + postUrl), body: body)
+          .timeout(timeoutDuration, onTimeout: () {
         throw TimeoutException('The request timed out');
       });
       return jsonDecode(response.body);
@@ -86,11 +89,10 @@ class Auth {
     }
   }
 
+  static Duration timeoutDuration = const Duration(seconds: 15);
   static Future<Map> login(String email, String password) async {
     // returns {"token": ...} on success
     // returns {"status": "fail", "message": ...} on failure
-
-    const Duration timeoutDuration = Duration(seconds: 15);
 
     String postUrl = "api/auth/login";
     Map<String, dynamic> body = {
@@ -98,7 +100,9 @@ class Auth {
       "password": password,
     };
     try {
-      var response = await http.post(Uri.parse(baseUrl + postUrl), body: body).timeout(timeoutDuration, onTimeout: () {
+      var response = await http
+          .post(Uri.parse(baseUrl + postUrl), body: body)
+          .timeout(timeoutDuration, onTimeout: () {
         throw TimeoutException('The request timed out');
       });
       if (response.statusCode == 200) {
@@ -130,8 +134,11 @@ class Auth {
     Map<String, dynamic> body = {"email": email};
     Map<String, String> headers = {"authorization": "Bearer $token"};
     try {
-      var response = await http.post(Uri.parse(baseUrl + postUrl),
-          headers: headers, body: body);
+      var response = await http
+          .post(Uri.parse(baseUrl + postUrl), headers: headers, body: body)
+          .timeout(timeoutDuration, onTimeout: () {
+        throw TimeoutException('The request timed out');
+      });
       return jsonDecode(response.body);
     } catch (e) {
       return {"status": "fail", "message": "Something went wrong"};
@@ -184,16 +191,66 @@ class Auth {
     }
   }
 
+  static Future getUserLunch(String token) async {
+    // returns user details if success
+    // returns false if it doesnt
+    // returns {"status": "fail", "message": "something went wrong"} for other issues
+    String getUrl = "api/lunch/";
+    Map<String, String> headers = {"Authorization": "Bearer $token"};
+    try {
+      var response = await http.get(
+        Uri.parse(baseUrl + getUrl),
+        headers: headers,
+      );
+      return jsonDecode(response.body);
+    } catch (e) {
+      if (e is TimeoutException) {
+        // Handle timeout error here
+        return {"status": "fail", "message": 'Request timed out'};
+      } else {
+        // Handle other network errors or exceptions
+        return {"status": "fail", "message": 'Something went wrong'};
+      }
+    }
+  }
+
+  static Future getAllUser(String token) async {
+    // returns user details if success
+    // returns false if it doesnt
+    // returns {"status": "fail", "message": "something went wrong"} for other issues
+    String getUrl = "api/users/";
+    Map<String, String> headers = {"Authorization": "Bearer $token"};
+    try {
+      var response = await http.get(
+        Uri.parse(baseUrl + getUrl),
+        headers: headers,
+      );
+      return jsonDecode(response.body);
+    } catch (e) {
+      if (e is TimeoutException) {
+        // Handle timeout error here
+        return {"status": "fail", "message": 'Request timed out'};
+      } else {
+        // Handle other network errors or exceptions
+        return {"status": "fail", "message": 'Something went wrong'};
+      }
+    }
+  }
+
   static Future<Map> forgotPassword(email) async {
     String getUrl = 'api/auth/forgot-password';
     var body = {
       "email": email,
     };
     try {
-      var response = await http.post(
+      var response = await http
+          .post(
         Uri.parse(baseUrl + getUrl),
         body: body,
-      );
+      )
+          .timeout(timeoutDuration, onTimeout: () {
+        throw TimeoutException('The request timed out');
+      });
       return jsonDecode(response.body);
     } catch (e) {
       if (e is TimeoutException) {
@@ -214,10 +271,14 @@ class Auth {
       "otp": otp,
     };
     try {
-      var response = await http.post(
+      var response = await http
+          .post(
         Uri.parse(baseUrl + getUrl),
         body: body,
-      );
+      )
+          .timeout(timeoutDuration, onTimeout: () {
+        throw TimeoutException('The request timed out');
+      });
       return jsonDecode(response.body);
     } catch (e) {
       if (e is TimeoutException) {

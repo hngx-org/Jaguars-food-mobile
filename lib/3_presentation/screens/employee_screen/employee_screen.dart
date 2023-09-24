@@ -134,7 +134,7 @@ class MySearchWidget extends StatefulWidget {
 }
 
 class _MySearchWidgetState extends State<MySearchWidget> {
-  String _searchText = '';
+  final String _searchText = '';
   final List<String> _items = [];
   List<String> _filteredItems = [];
 

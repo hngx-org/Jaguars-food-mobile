@@ -2,16 +2,18 @@ class Transactions {
   final String id;
   final String senderId;
   final String receiverId;
-  final double amount;
-  final String status;
+  final String amount;
+  final String note;
+  final bool isRedeemed;
   final DateTime createdAt;
 
   Transactions({
+    required this.isRedeemed,
     required this.id,
     required this.senderId,
     required this.receiverId,
     required this.amount,
-    required this.status,
+    required this.note,
     required this.createdAt,
   });
 
@@ -20,9 +22,10 @@ class Transactions {
       id: json['id'] as String,
       senderId: json['senderId'] as String,
       receiverId: json['receiverId'] as String,
-      amount: (json['amount'] as num).toDouble(),
-      status: json['status'] as String,
+      amount: (json['quantity']).toString(),
+      note: json['note'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
+      isRedeemed: json['redeemed'] as bool,
     );
   }
 
@@ -31,9 +34,10 @@ class Transactions {
       'id': id,
       'senderId': senderId,
       'receiverId': receiverId,
-      'amount': amount,
-      'status': status,
+      'quantity': amount,
+      'note': note,
       'createdAt': createdAt.toIso8601String(),
+      'redeemed': isRedeemed,
     };
   }
 }

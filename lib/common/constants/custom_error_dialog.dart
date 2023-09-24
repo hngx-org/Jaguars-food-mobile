@@ -1,13 +1,12 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
-import 'package:connectivity/connectivity.dart';
 
 class CustomDialog {
+  late Timer timer;
   showAlertDialog(
     BuildContext context,
     String type,
@@ -157,11 +156,19 @@ class CustomDialog {
       },
     );
 
-    const timeoutDuration =
-        Duration(seconds: 15); // Adjust the timeout duration as needed
-    Timer(timeoutDuration, () {
-      Navigator.of(context).pop();
-    });
+    if (context.mounted) {
+      const timeoutDuration =
+          Duration(seconds: 15); // Adjust the timeout duration as needed
+      timer = Timer(timeoutDuration, () {
+        if (context.canPop()) {
+          context.pop();
+        } else {
+          timer.cancel();
+        }
+      });
+    } else {
+      timer.cancel();
+    }
   }
 
   Future<void> showCustomDialog({

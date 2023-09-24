@@ -155,7 +155,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           'Ok',
                         );
                       } else {
-                        routerConfig.pushReplacement(RoutesPath.navScreen, extra: {
+                        while (routerConfig.canPop()) {
+                          routerConfig.pop();
+                        }
+                        routerConfig
+                            .pushReplacement(RoutesPath.navScreen, extra: {
                           "token": loginResponse['token'],
                           "id": 0,
                         });
@@ -222,11 +226,11 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   _showDialog(
-      String type,
-      String title,
-      String body,
-      String buttonText,
-      ) {
+    String type,
+    String title,
+    String body,
+    String buttonText,
+  ) {
     if (mounted) {
       CustomDialog().showAlertDialog(
         context,

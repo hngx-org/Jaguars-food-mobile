@@ -25,10 +25,13 @@ class _NavigationScreenState extends State<NavigationScreen> {
   int _selectedIndex = 0;
   late List<Widget> _tabScreens;
   late Map<String, dynamic> _user = {};
+  List _allLunch = [];
+  final List _allLunchSenderNames = [];
 
   @override
   void initState() {
     super.initState();
+
     Future.delayed(
         const Duration(
           milliseconds: 1500,
@@ -42,6 +45,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
         token: widget.token,
         firstName: _user['firstName'] ?? '',
         lunchBalance: _user['launchCreditBalance'] ?? '',
+        allLunch: const [],
+        allLunchSenderNames: _allLunchSenderNames,
       ),
       const EmployeeScreen(),
       const RedeemScreen(),
@@ -55,14 +60,13 @@ class _NavigationScreenState extends State<NavigationScreen> {
       CustomDialog().showLoadDialog(context);
     }
     final response = await Auth.loadUser(widget.token!);
-    if (_selectedIndex == 0) {
-      if (routerConfig.canPop()) {
-        routerConfig.pop();
-      }
-    }
 
-    print(response);
     if (response.toString().contains('error')) {
+      if (_selectedIndex == 0) {
+        if (routerConfig.canPop()) {
+          routerConfig.pop();
+        }
+      }
       _showDialog(
         'error',
         'Error',
@@ -70,19 +74,78 @@ class _NavigationScreenState extends State<NavigationScreen> {
         'Ok',
       );
     } else {
-      setState(() {
-        _user = response;
-        _tabScreens = [
-          HomeScreen(
-            token: widget.token,
-            firstName: _user['firstName'] ?? '',
-            lunchBalance: _user['launchCreditBalance'] ?? '',
-          ),
-          const EmployeeScreen(),
-          const RedeemScreen(),
-          const SettingsScreen(),
-        ];
-      });
+      final response2 = await Auth.getUserLunch(widget.token!);
+
+      if (response2.toString().contains('error')) {
+        if (_selectedIndex == 0) {
+          if (routerConfig.canPop()) {
+            routerConfig.pop();
+          }
+        }
+        _showDialog(
+          'error',
+          'Error',
+          response['message'],
+          'Ok',
+        );
+      } else {
+        final response3 = await Auth.getAllUser(widget.token!);
+
+        if (response3.toString().contains('error')) {
+          if (_selectedIndex == 0) {
+            if (routerConfig.canPop()) {
+              routerConfig.pop();
+            }
+          }
+          _showDialog(
+            'error',
+            'Error',
+            response['message'],
+            'Ok',
+          );
+        } else {
+          if (_selectedIndex == 0) {
+            if (routerConfig.canPop()) {
+              routerConfig.pop();
+            }
+          }
+
+          _allLunch = response2['data']['lunches'];
+
+          final list = response3['data'];
+
+          for (int i = 0; i < _allLunch.length; i++) {
+            for (var item in list) {
+              if (item.containsKey('id')) {
+                if (item['id'] == _allLunch[i]['senderId']) {
+                  if (_allLunch.length != _allLunchSenderNames.length) {
+                    setState(() {
+                      _allLunchSenderNames.add(item['firstName']);
+                    });
+                  }
+                }
+              }
+            }
+          }
+
+          setState(() {
+            _tabScreens = [
+              HomeScreen(
+                token: widget.token,
+                firstName: _user['firstName'] ?? '',
+                lunchBalance: _user['launchCreditBalance'] ?? '',
+                allLunch: _allLunch,
+                allLunchSenderNames: _allLunchSenderNames,
+              ),
+              const EmployeeScreen(),
+              const RedeemScreen(),
+              const SettingsScreen(),
+            ];
+            _allLunch = response2['data']['lunches'];
+            _user = response;
+          });
+        }
+      }
     }
   }
 

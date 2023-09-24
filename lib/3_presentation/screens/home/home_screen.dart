@@ -15,11 +15,15 @@ class HomeScreen extends StatefulWidget {
   final String? token;
   final String firstName;
   final String lunchBalance;
+  final List allLunch;
+  final List allLunchSenderNames;
   const HomeScreen({
     Key? key,
     this.token,
     required this.firstName,
     required this.lunchBalance,
+    required this.allLunch,
+    required this.allLunchSenderNames,
   }) : super(key: key);
 
   @override
@@ -34,49 +38,17 @@ class _HomeScreenState extends State<HomeScreen>
   void initState() {
     super.initState();
 
-    final transactionJson = [
-      {
-        'id': '123456',
-        'senderId': 'user123',
-        'receiverId': 'friend456',
-        'amount': 5.0,
-        'status': 'completed',
-        'createdAt': '2023-09-20T12:34:56Z',
-      },
-      {
-        'id': '123456',
-        'senderId': 'user123',
-        'receiverId': 'friend456',
-        'amount': 5.0,
-        'status': 'completed',
-        'createdAt': '2023-09-20T12:34:56Z',
-      },
-      {
-        'id': '123456',
-        'senderId': 'user123',
-        'receiverId': 'friend456',
-        'amount': 5.0,
-        'status': 'completed',
-        'createdAt': '2023-09-20T12:34:56Z',
-      },
-      {
-        'id': '123456',
-        'senderId': 'user123',
-        'receiverId': 'friend456',
-        'amount': 5.0,
-        'status': 'completed',
-        'createdAt': '2023-09-20T12:34:56Z',
-      }
-    ];
+    final transactionJson = widget.allLunch;
 
     transactions = transactionJson.map((json) {
       return Transactions(
-        receiverId: json['receiverId'] as String,
-        amount: (json['amount'] as num?)?.toDouble() ?? 0.0,
-        createdAt: DateTime.parse(json['createdAt'] as String),
+        receiverId: json['receiverId'].toString(),
+        amount: json['quantity'].toString(),
+        createdAt: DateTime.parse(json['createdAt'].toString()),
         id: json['id'].toString(),
-        senderId: '',
-        status: '',
+        senderId: json['senderId'].toString(),
+        note: json['note'].toString(),
+        isRedeemed: json['redeemed'],
       );
     }).toList();
   }
@@ -484,8 +456,9 @@ class _HomeScreenState extends State<HomeScreen>
                                               TextSpan(
                                                 children: [
                                                   TextSpan(
-                                                    text:
-                                                        transaction.receiverId,
+                                                    text: widget
+                                                            .allLunchSenderNames[
+                                                        index],
                                                     style: GoogleFonts.lato(
                                                       color: const Color(
                                                           0xFF1A1920),
@@ -496,7 +469,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                   ),
                                                   TextSpan(
                                                     text:
-                                                        ' just gifted you ${transaction.amount.toInt()} Plts',
+                                                        ' just gifted you ${transaction.amount} Plts',
                                                     style: GoogleFonts.lato(
                                                       color: const Color(
                                                         0xFF55506D,
