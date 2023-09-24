@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:jaguar_foods_mobile/common/constants/assets_constants.dart';
+import 'package:jaguar_foods_mobile/common/constants/reusables/back_icon.dart';
 import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 
 class DoubleLunch extends StatefulWidget {
@@ -24,6 +25,7 @@ class _DoubleLunchState extends State<DoubleLunch> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const BackIconWidget(),
               // text
               Padding(
                 padding: const EdgeInsets.only(top: 100, bottom: 40),

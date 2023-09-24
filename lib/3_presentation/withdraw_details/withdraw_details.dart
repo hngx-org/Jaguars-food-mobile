@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:jaguar_foods_mobile/common/constants/assets_constants.dart';
+import 'package:jaguar_foods_mobile/common/constants/reusables/back_icon.dart';
 import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 
 class WithdrawDetailsScreen extends StatefulWidget {
@@ -49,16 +50,17 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
     final theme = Theme.of(context);
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 27),
+        padding: const EdgeInsets.symmetric(vertical: 27, horizontal: 27),
         child: SingleChildScrollView(
           child: SizedBox(
             height: MediaQuery.of(context).size.height * 1.5,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                BackIconWidget(),
                 // text
                 Padding(
-                  padding: const EdgeInsets.only(top: 100, bottom: 40),
+                  padding: const EdgeInsets.only(top: 50, bottom: 40),
                   child: Text(
                     'Redeem your free lunch!',
                     style: GoogleFonts.lato(

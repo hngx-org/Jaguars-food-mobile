@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -88,6 +90,11 @@ class _HomeScreenState extends State<HomeScreen>
     final currentDateTime = DateTime.now();
     final formattedDate = DateFormat('d, MMMM yyyy').format(currentDateTime);
 
+    final random = Random();
+    final randomIndex = random.nextInt(Assets.jagPaths.length);
+    final randomImagePath = Assets.jagPaths[randomIndex];
+
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -130,13 +137,17 @@ class _HomeScreenState extends State<HomeScreen>
                       ),
                     ),
                     Container(
-                      width: 49,
-                      height: 49,
-                      decoration: const ShapeDecoration(
-                        shape: OvalBorder(),
+                      width: 55,
+                      height: 55,
+                      child: ClipOval(
+                        child: Image.asset(
+                          randomImagePath,
+                          width: 55,
+                          height: 55,
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                      child: Image.asset('assets/png/sample_profile.png'),
-                    ),
+                    )
                   ],
                 ),
                 //redeem , gift
