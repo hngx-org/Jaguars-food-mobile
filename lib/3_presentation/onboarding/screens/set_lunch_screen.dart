@@ -141,7 +141,6 @@ class _SetLunchPriceScreenState extends State<SetLunchPriceScreen> {
 
                       if (response.containsValue('error') ||
                           response.containsValue('fail')) {
-                        routerConfig.pop();
                         _showDialog(
                           'error',
                           'Error',
@@ -155,7 +154,6 @@ class _SetLunchPriceScreenState extends State<SetLunchPriceScreen> {
                         );
                         if (loginResponse.containsValue('error') ||
                             loginResponse.containsValue('fail')) {
-                          routerConfig.pop();
                           _showDialog(
                             'error',
                             'Error',
@@ -164,11 +162,6 @@ class _SetLunchPriceScreenState extends State<SetLunchPriceScreen> {
                           );
                         } else {
                           final token = loginResponse['token'];
-
-                          routerConfig.pop();
-                          while (routerConfig.canPop()) {
-                            routerConfig.pop();
-                          }
                           routerConfig.pushReplacement(
                               RoutesPath.authCompleteScreen,
                               extra: {
