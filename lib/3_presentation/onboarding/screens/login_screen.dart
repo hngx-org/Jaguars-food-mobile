@@ -10,6 +10,8 @@ import 'package:jaguar_foods_mobile/common/constants/custom_error_dialog.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/back_icon.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/button.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/textfield.dart';
+import 'package:jaguar_foods_mobile/core/providers/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../common/constants/assets_constants.dart';
 import '../../../common/constants/route_constant.dart';
@@ -155,6 +157,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           'Ok',
                         );
                       } else {
+                        // Save the token to shared preferences
+                        SharedPreferences prefs = SharedPreferencesManager.preferences;
+                        prefs.setString('token', loginResponse['token']);
+                        print(loginResponse['token']);
+
                         routerConfig.pushReplacement(RoutesPath.navScreen, extra: {
                           "token": loginResponse['token'],
                           "id": 0,

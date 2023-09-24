@@ -6,7 +6,6 @@ import 'package:jaguar_foods_mobile/3_presentation/screens/home/home_screen.dart
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:jaguar_foods_mobile/common/constants/custom_error_dialog.dart';
 import 'package:jaguar_foods_mobile/common/constants/custom_nav_bar.dart';
-import 'package:jaguar_foods_mobile/core/config/router_config.dart';
 
 class NavigationScreen extends StatefulWidget {
   const NavigationScreen({
