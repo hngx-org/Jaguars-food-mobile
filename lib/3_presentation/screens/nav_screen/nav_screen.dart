@@ -26,6 +26,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
   late List<Widget> _tabScreens;
   late Map<String, dynamic> _user = {};
 
+  bool _isLoading = false;
+
   @override
   void initState() {
     super.initState();
@@ -51,15 +53,11 @@ class _NavigationScreenState extends State<NavigationScreen> {
 
 // load user details
   Future<void> _loadUser() async {
-    if (_selectedIndex == 0) {
-      CustomDialog().showLoadDialog(context);
-    }
+    setState(() {
+      _isLoading = true;
+    });
+
     final response = await Auth.loadUser(widget.token!);
-    if (_selectedIndex == 0) {
-      if (routerConfig.canPop()) {
-        routerConfig.pop();
-      }
-    }
 
     print(response);
     if (response.toString().contains('error')) {
@@ -82,6 +80,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
           const RedeemScreen(),
           const SettingsScreen(),
         ];
+        _isLoading = false;
       });
     }
   }
@@ -113,7 +112,11 @@ class _NavigationScreenState extends State<NavigationScreen> {
     return Scaffold(
       body: RefreshIndicator(
         onRefresh: _loadUser,
-        child: _tabScreens[_selectedIndex],
+        child: _isLoading
+            ? Center(
+          child: CircularProgressIndicator(color: AppColor.appBrandColor, strokeAlign: 2),
+        )
+            : _tabScreens[_selectedIndex],
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
