@@ -156,7 +156,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           'Ok',
                         );
                       } else {
-                        routerConfig.push(RoutesPath.navScreen, extra: {
+                        while (routerConfig.canPop()) {
+                          routerConfig.pop();
+                        }
+                        routerConfig
+                            .pushReplacement(RoutesPath.navScreen, extra: {
                           "token": loginResponse['token'],
                           "id": 0,
                         });

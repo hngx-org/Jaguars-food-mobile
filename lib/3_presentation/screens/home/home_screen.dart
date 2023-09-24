@@ -297,17 +297,6 @@ class _HomeScreenState extends State<HomeScreen>
                               "token": widget.token,
                               "id": 2,
                             }),
-
-                            // setState(() {
-                            //   Navigator.of(context).pushReplacement(
-                            //     CupertinoPageRoute<void>(
-                            //       builder: (BuildContext context) {
-                            //         return const NavigationScreen(
-                            //             initialIndex: 2);
-                            //       },
-                            //     ),
-                            //   );
-                            // }),
                             child: Container(
                               width: double.infinity,
                               height: 100,
@@ -354,7 +343,11 @@ class _HomeScreenState extends State<HomeScreen>
                           elevation: 2,
                           child: InkWell(
                             onTap: () => setState(() {
-                              context.push(RoutesPath.employeeScreen);
+                              context.pushReplacement(RoutesPath.navScreen,
+                                  extra: {
+                                    "token": widget.token,
+                                    "id": 1,
+                                  });
                             }),
                             child: Container(
                               width: double.infinity,
@@ -370,12 +363,13 @@ class _HomeScreenState extends State<HomeScreen>
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Container(
-                                      padding: const EdgeInsets.all(5),
+                                      padding: const EdgeInsets.all(10),
                                       decoration: const ShapeDecoration(
                                         color: Color(0x3A07A537),
                                         shape: CircleBorder(),
                                       ),
-                                      child: Image.asset(Assets.giftImagePath)),
+                                      child:
+                                          Image.asset(Assets.lunchImagePath)),
                                   Text(
                                     'Gift Lunch',
                                     style: GoogleFonts.lato(
