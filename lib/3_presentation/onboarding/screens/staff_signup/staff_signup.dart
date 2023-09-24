@@ -257,7 +257,6 @@ class _StaffSignUpScreenState extends State<StaffSignUpScreen>
                       if (response.containsValue('error') ||
                           response.containsValue('fail') ||
                           response.containsKey('error')) {
-                        routerConfig.pop();
                         _showDialog(
                           'error',
                           'Error',
@@ -270,7 +269,6 @@ class _StaffSignUpScreenState extends State<StaffSignUpScreen>
                         print(loginResponse);
                         if (loginResponse.containsValue('error') ||
                             loginResponse.containsValue('fail')) {
-                          routerConfig.pop();
                           _showDialog(
                             'error',
                             'Error',
@@ -279,11 +277,6 @@ class _StaffSignUpScreenState extends State<StaffSignUpScreen>
                           );
                         } else {
                           final token = loginResponse['token'];
-
-                          routerConfig.pop();
-                          while (routerConfig.canPop()) {
-                            routerConfig.pop();
-                          }
                           routerConfig
                               .pushReplacement(RoutesPath.staffSuccess, extra: {
                             'companyName': '',
