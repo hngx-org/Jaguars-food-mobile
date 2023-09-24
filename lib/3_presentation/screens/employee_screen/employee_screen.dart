@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
@@ -29,13 +30,47 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                 const Text(
                   "Search for an employee",
                   style: TextStyle(
-                      fontSize: 24,
-                      fontFamily: 'Lato',
-                      color: AppColor.black,
-                      fontWeight: FontWeight.bold),
+                    fontSize: 24,
+                    fontFamily: 'Lato',
+                    color: AppColor.black,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 const SizedBox(height: 20),
-                const MySearchWidget(),
+                TextField(
+                  onChanged: (value) {
+                    setState(() {});
+                  },
+                  onTapOutside: (event) {
+                    SystemChannels.textInput.invokeMethod('TextInput.hide');
+                  },
+                  decoration: InputDecoration(
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.r),
+                        borderSide: const BorderSide(
+                          color: AppColor.appBrandColor,
+                          width: 1,
+                        )),
+                    filled: true,
+                    fillColor: const Color(0xFFF4F4F4),
+                    hintText: 'Search for an employee',
+                    suffixIcon: SizedBox(
+                      width: 15.w,
+                      height: 15.h,
+                      child: SvgPicture.asset(
+                        Assets.searchPath,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10.r),
+                      borderSide: BorderSide(
+                        width: 5,
+                        color: Color(0xFFF4F4F4).withOpacity(.1),
+                      ),
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 36),
                 Text(
                   "All Employees",
@@ -98,34 +133,6 @@ class _MySearchWidgetState extends State<MySearchWidget> {
 
     return Column(
       children: [
-        TextField(
-          onChanged: (value) {
-            setState(() {
-              _searchText = value;
-            });
-          },
-          decoration: InputDecoration(
-            focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(
-                  color: AppColor.appBrandColor,
-                  width: 1,
-                )),
-            fillColor: AppColor.textfieldColor1,
-            hintText: 'Search for an employee',
-            suffixIcon: const Icon(
-              Icons.search,
-              size: 35,
-              color: AppColor.brand1,
-            ),
-            // SvgPicture.asset(
-            //   Assets.searchPath,
-            // ),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-        ),
         const SizedBox(height: 16.0),
         ListView.builder(
           shrinkWrap: true,

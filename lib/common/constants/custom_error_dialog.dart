@@ -110,13 +110,16 @@ class CustomDialog {
   }
 
   showLoadDialog(BuildContext context) {
-    final alert = Center(
-      child: SizedBox(
-        width: 25.w,
-        height: 25.h,
-        child: const CircularProgressIndicator(
-          color: AppColor.appBrandColor,
-          strokeWidth: 2,
+    final alert = WillPopScope(
+      onWillPop: () => Future(() => false),
+      child: Center(
+        child: SizedBox(
+          width: 25.w,
+          height: 25.h,
+          child: const CircularProgressIndicator(
+            color: AppColor.appBrandColor,
+            strokeWidth: 2,
+          ),
         ),
       ),
     );

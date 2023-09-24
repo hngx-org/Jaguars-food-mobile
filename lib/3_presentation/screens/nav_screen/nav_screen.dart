@@ -29,7 +29,13 @@ class _NavigationScreenState extends State<NavigationScreen> {
   @override
   void initState() {
     super.initState();
-    _loadUser();
+    Future.delayed(
+        const Duration(
+          milliseconds: 1500,
+        ), () async {
+      _loadUser();
+    });
+
     _selectedIndex = widget.initialIndex;
     _tabScreens = [
       HomeScreen(
@@ -44,37 +50,40 @@ class _NavigationScreenState extends State<NavigationScreen> {
   }
 
 // load user details
-  _loadUser() async {
-    await Future.delayed(
-        const Duration(
-          milliseconds: 1500,
-        ), () async {
+  Future<void> _loadUser() async {
+    if (_selectedIndex == 0) {
       CustomDialog().showLoadDialog(context);
-      final response = await Auth.loadUser(widget.token!);
-      routerConfig.pop();
-      if (response.toString().contains('error')) {
-        _showDialog(
-          'error',
-          'Error',
-          response['message'],
-          'Ok',
-        );
-      } else {
-        setState(() {
-          _user = response;
-          _tabScreens = [
-            HomeScreen(
-              token: widget.token,
-              firstName: _user['firstName'] ?? '',
-              lunchBalance: _user['launchCreditBalance'] ?? '',
-            ),
-            const EmployeeScreen(),
-            const RedeemScreen(),
-            const SettingsScreen(),
-          ];
-        });
+    }
+    final response = await Auth.loadUser(widget.token!);
+    if (_selectedIndex == 0) {
+      if (routerConfig.canPop()) {
+        routerConfig.pop();
       }
-    });
+    }
+
+    print(response);
+    if (response.toString().contains('error')) {
+      _showDialog(
+        'error',
+        'Error',
+        response['message'],
+        'Ok',
+      );
+    } else {
+      setState(() {
+        _user = response;
+        _tabScreens = [
+          HomeScreen(
+            token: widget.token,
+            firstName: _user['firstName'] ?? '',
+            lunchBalance: _user['launchCreditBalance'] ?? '',
+          ),
+          const EmployeeScreen(),
+          const RedeemScreen(),
+          const SettingsScreen(),
+        ];
+      });
+    }
   }
 
   // Function to handle tab selection
@@ -102,7 +111,10 @@ class _NavigationScreenState extends State<NavigationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _tabScreens[_selectedIndex],
+      body: RefreshIndicator(
+        onRefresh: _loadUser,
+        child: _tabScreens[_selectedIndex],
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         type: BottomNavigationBarType.fixed,

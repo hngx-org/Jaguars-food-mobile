@@ -17,6 +17,7 @@ class CustomTextField extends StatelessWidget {
   final Widget? suffixIcon;
   final TextInputAction? textInputAction;
   final Widget? suffix;
+  final Color? fillColor;
 
   const CustomTextField({
     super.key,
@@ -32,6 +33,7 @@ class CustomTextField extends StatelessWidget {
     this.prefix,
     this.textInputAction,
     this.suffix,
+    this.fillColor,
   });
 
   @override
@@ -60,6 +62,7 @@ class CustomTextField extends StatelessWidget {
           textInputAction: textInputAction,
           cursorColor: AppColor.appBrandColor,
           decoration: InputDecoration(
+              fillColor: fillColor,
               suffix: suffix,
               prefixIcon: prefix,
               suffixIcon: suffixIcon,
