@@ -1,23 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jaguar_foods_mobile/1_data/datasources/remote_datasource.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:jaguar_foods_mobile/common/constants/assets_constants.dart';
+import 'package:jaguar_foods_mobile/common/constants/custom_error_dialog.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/back_icon.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/button.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/textfield.dart';
-import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 import 'package:jaguar_foods_mobile/core/config/router_config.dart';
 
-class VerificationScreen extends StatelessWidget {
-  final String? orgName;
-  final String? lunchType;
-
+class VerificationScreen extends StatefulWidget {
+  final String email;
   const VerificationScreen({
     super.key,
-    this.orgName,
-    this.lunchType,
+    required this.email,
   });
+
+  @override
+  State<VerificationScreen> createState() => _VerificationScreenState();
+}
+
+class _VerificationScreenState extends State<VerificationScreen> {
+  final GlobalKey<FormState> _passKey = GlobalKey();
+  final GlobalKey<FormState> _otpKey = GlobalKey();
+  final TextEditingController _password = TextEditingController();
+  final TextEditingController _otp = TextEditingController();
+  bool _isObscured = true;
+
+  @override
+  void dispose() {
+    _otp.dispose();
+    _password.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +60,7 @@ class VerificationScreen extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
-                          height: 30.h,
+                          height: 20.h,
                         ),
                         Flexible(
                           child: Text(
@@ -89,22 +105,95 @@ class VerificationScreen extends StatelessWidget {
                         SizedBox(
                           height: 40.h,
                         ),
-                        const CustomTextField(
-                          headerText: 'Enter code',
-                          keyboardType: TextInputType.number,
+                        Form(
+                          key: _otpKey,
+                          child: CustomTextField(
+                            controller: _otp,
+                            onChanged: (value) {
+                              _otpKey.currentState!.validate();
+                            },
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Required field';
+                              } else if (value.length > 6 || value.length < 6) {
+                                return 'A six digit code is required';
+                              } else {
+                                return null;
+                              }
+                            },
+                            headerText: 'Enter code',
+                            keyboardType: TextInputType.number,
+                          ),
                         ),
                         SizedBox(
-                          height: 60.h,
+                          height: 20.h,
+                        ),
+                        Form(
+                          key: _passKey,
+                          child: CustomTextField(
+                            onChanged: (value) {
+                              _passKey.currentState!.validate();
+                            },
+                            keyboardType: TextInputType.visiblePassword,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Required field';
+                              } else {
+                                return null;
+                              }
+                            },
+                            controller: _password,
+                            headerText: 'New Password',
+                            obscureText: _isObscured,
+                            suffixIcon: InkWell(
+                              onTap: () {
+                                setState(() {
+                                  _isObscured = !_isObscured;
+                                });
+                              },
+                              child: _isObscured
+                                  ? const Icon(
+                                      Icons.visibility_off_outlined,
+                                    )
+                                  : const Icon(Icons.visibility_outlined),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 50.h,
                         ),
                         ButtonWidget(
-                          onPressed: () {
-                            routerConfig
-                                .push(RoutesPath.setLunchPriceScreen, extra: {
-                              "companyName": orgName,
-                            });
+                          onPressed: () async {
+                            if (_otpKey.currentState!.validate() ||
+                                _passKey.currentState!.validate()) {
+                              CustomDialog().showLoadDialog(context);
+                              final response = await Auth.resetPassword(
+                                widget.email,
+                                _password.text,
+                                _otp.text,
+                              );
+
+                              routerConfig.pop();
+                              if (response.containsValue('error') ||
+                                  response.containsValue('fail')) {
+                                _showDialog(
+                                  'error',
+                                  'Error',
+                                  response['message'],
+                                  'Ok',
+                                );
+                              } else {
+                                _showDialog(
+                                  'success',
+                                  'Password reset successful',
+                                  response['message'],
+                                  'Ok',
+                                );
+                              }
+                            }
                           },
-                          buttonText: 'Verify',
-                          fontSize: 14,
+                          buttonText: 'Reset password',
+                          fontSize: 14.sp,
                         ),
                       ]),
                 ),
@@ -113,6 +202,21 @@ class VerificationScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  _showDialog(
+    String type,
+    String title,
+    String body,
+    String buttontext,
+  ) {
+    CustomDialog().showAlertDialog(
+      context,
+      type,
+      title,
+      body,
+      buttontext,
     );
   }
 }

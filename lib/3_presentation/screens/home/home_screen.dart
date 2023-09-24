@@ -79,9 +79,9 @@ class _HomeScreenState extends State<HomeScreen> {
     String firstName = 'User';
     final formattedDate = DateFormat('d, MMMM yyyy').format(currentDateTime);
 
-    return SafeArea(
-      child: Scaffold(
-        body: Padding(
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: SingleChildScrollView(
             child: Column(

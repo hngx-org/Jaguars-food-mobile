@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jaguar_foods_mobile/1_data/datasources/remote_datasource.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/back_icon.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/button.dart';
@@ -21,6 +22,8 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController orgController = TextEditingController();
+  bool _orgIsTaken = false;
+  bool _isLoading = true;
 
   @override
   void dispose() {
@@ -52,13 +55,52 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Required field';
+                  } else if (_orgIsTaken) {
+                    return 'Organisation already exists';
                   } else {
                     return null;
                   }
                 },
-                onChanged: (value) {
+                onChanged: (value) async {
+                  setState(() {
+                    _isLoading = true;
+                  });
+                  final response = await Auth.orgExists(value);
+                  if (response.toString() == 'true') {
+                    setState(() {
+                      _orgIsTaken = false;
+                    });
+                  } else {
+                    setState(() {
+                      _orgIsTaken = true;
+                    });
+                  }
+                  setState(() {
+                    _isLoading = false;
+                  });
                   _formKey.currentState!.validate();
                 },
+                suffix: orgController.text.isEmpty
+                    ? null
+                    : _isLoading
+                        ? SizedBox(
+                            width: 15.w,
+                            height: 15.h,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 1.5.w,
+                            ),
+                          )
+                        : _orgIsTaken
+                            ? Icon(
+                                Icons.cancel_rounded,
+                                color: Colors.red,
+                                size: 16.w,
+                              )
+                            : Icon(
+                                Icons.check_circle_outline_rounded,
+                                color: Colors.green,
+                                size: 16.w,
+                              ),
                 headerText: "Enter your Organization name",
                 controller: orgController,
                 hintText: 'e.g PricewaterhouseCoopers Ltd.',
@@ -69,16 +111,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
             Text(
               'This is the name that would appear to your employees',
               style: GoogleFonts.lato(
-                  color: AppColor.subText,
-                  fontSize: 13.sp,
-                  fontWeight: FontWeight.w400),
+                color: AppColor.subText,
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w400,
+              ),
             ),
             30.verticalSpace,
             ButtonWidget(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  routerConfig
-                      .push(RoutesPath.adminSignUp, extra: {
+                  routerConfig.push(RoutesPath.adminSignUp, extra: {
                     'companyName': orgController.text,
                   });
                 }

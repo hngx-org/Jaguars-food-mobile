@@ -91,6 +91,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Required field';
+                    } else if (value.length < 6) {
+                      return 'Password must be at least 6 digits long';
                     } else {
                       return null;
                     }
@@ -110,6 +112,27 @@ class _LoginScreenState extends State<LoginScreen> {
                           )
                         : const Icon(Icons.visibility_outlined),
                   ),
+                ),
+              ),
+              20.verticalSpace,
+              InkWell(
+                onTap: () => context.pushReplacement(RoutesPath.signUpScreen),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    InkWell(
+                      onTap: () =>
+                          context.push(RoutesPath.forgotPasswordScreen),
+                      child: Text(
+                        "Forgot password?",
+                        style: GoogleFonts.lato(
+                          color: AppColor.appBrandColor,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               30.verticalSpace,
@@ -190,7 +213,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         )),
