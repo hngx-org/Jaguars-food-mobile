@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -18,6 +19,7 @@ class Auth {
       String firstName,
       String lastName,
       String phoneNumber) async {
+    const Duration timeoutDuration = Duration(seconds: 15);
     String postUrl = "api/auth/user/signup";
     Map<String, dynamic> body = {
       "organization_name": orgName,
@@ -31,10 +33,18 @@ class Auth {
       "phone_number": phoneNumber
     };
     try {
-      var response = await http.post(Uri.parse(baseUrl + postUrl), body: body);
+      var response = await http.post(Uri.parse(baseUrl + postUrl), body: body).timeout(timeoutDuration, onTimeout: () {
+        throw TimeoutException('The request timed out');
+      });
       return jsonDecode(response.body);
     } catch (e) {
-      return {"status": "fail", "message": 'Something went wrong '};
+      if (e is TimeoutException) {
+        // Handle timeout error here
+        return {"status": "fail", "message": 'Request timed out'};
+      } else {
+        // Handle other network errors or exceptions
+        return {"status": "fail", "message": 'Something went wrong'};
+      }
     }
   }
 
@@ -49,6 +59,8 @@ class Auth {
       String firstName,
       String lastName,
       String phoneNumber) async {
+
+    const Duration timeoutDuration = Duration(seconds: 15);
     String postUrl = "api/auth/staff/signup";
     Map<String, dynamic> body = {
       "email": orgEmail,
@@ -59,10 +71,18 @@ class Auth {
       "phone_number": phoneNumber
     };
     try {
-      var response = await http.post(Uri.parse(baseUrl + postUrl), body: body);
+      var response = await http.post(Uri.parse(baseUrl + postUrl), body: body).timeout(timeoutDuration, onTimeout: () {
+        throw TimeoutException('The request timed out');
+      });
       return jsonDecode(response.body);
     } catch (e) {
-      return {"status": 'fail', "message": 'Something went wrong'};
+      if (e is TimeoutException) {
+        // Handle timeout error here
+        return {"status": "fail", "message": 'Request timed out'};
+      } else {
+        // Handle other network errors or exceptions
+        return {"status": "fail", "message": 'Something went wrong'};
+      }
     }
   }
 
@@ -70,16 +90,35 @@ class Auth {
     // returns {"token": ...} on success
     // returns {"status": "fail", "message": ...} on failure
 
+    const Duration timeoutDuration = Duration(seconds: 15);
+
     String postUrl = "api/auth/login";
     Map<String, dynamic> body = {
       "email": email,
       "password": password,
     };
     try {
-      var response = await http.post(Uri.parse(baseUrl + postUrl), body: body);
-      return jsonDecode(response.body);
+      var response = await http.post(Uri.parse(baseUrl + postUrl), body: body).timeout(timeoutDuration, onTimeout: () {
+        throw TimeoutException('The request timed out');
+      });
+      if (response.statusCode == 200) {
+        // Successful login
+        Map<String, dynamic> responseData = jsonDecode(response.body);
+        return responseData;
+      } else {
+        return {
+          "status": "fail",
+          "message": "Login failed. Please check your credentials."
+        };
+      }
     } catch (e) {
-      return {"status": "fail", "message": 'Something went wrong'};
+      if (e is TimeoutException) {
+        // Handle timeout error here
+        return {"status": "fail", "message": 'Request timed out'};
+      } else {
+        // Handle other network errors or exceptions
+        return {"status": "fail", "message": 'Something went wrong'};
+      }
     }
   }
 
@@ -112,7 +151,13 @@ class Auth {
         return response.statusCode;
       }
     } catch (e) {
-      return {"status": "fail", "message": "Something went wrong"};
+      if (e is TimeoutException) {
+        // Handle timeout error here
+        return {"status": "fail", "message": 'Request timed out'};
+      } else {
+        // Handle other network errors or exceptions
+        return {"status": "fail", "message": 'Something went wrong'};
+      }
     }
   }
 
@@ -129,7 +174,13 @@ class Auth {
       );
       return jsonDecode(response.body);
     } catch (e) {
-      return {"status": "fail", "message": "Something went wrong"};
+      if (e is TimeoutException) {
+        // Handle timeout error here
+        return {"status": "fail", "message": 'Request timed out'};
+      } else {
+        // Handle other network errors or exceptions
+        return {"status": "fail", "message": 'Something went wrong'};
+      }
     }
   }
 
@@ -145,7 +196,13 @@ class Auth {
       );
       return jsonDecode(response.body);
     } catch (e) {
-      return {"status": "fail", "message": "Something went wrong"};
+      if (e is TimeoutException) {
+        // Handle timeout error here
+        return {"status": "fail", "message": 'Request timed out'};
+      } else {
+        // Handle other network errors or exceptions
+        return {"status": "fail", "message": 'Something went wrong'};
+      }
     }
   }
 
@@ -163,7 +220,13 @@ class Auth {
       );
       return jsonDecode(response.body);
     } catch (e) {
-      return {"status": "fail", "message": "Something went wrong $e"};
+      if (e is TimeoutException) {
+        // Handle timeout error here
+        return {"status": "fail", "message": 'Request timed out'};
+      } else {
+        // Handle other network errors or exceptions
+        return {"status": "fail", "message": 'Something went wrong'};
+      }
     }
   }
 }

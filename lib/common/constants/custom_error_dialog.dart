@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
+import 'package:connectivity/connectivity.dart';
 
 class CustomDialog {
   showAlertDialog(
@@ -153,6 +156,12 @@ class CustomDialog {
         return alert;
       },
     );
+
+    const timeoutDuration =
+        Duration(seconds: 15); // Adjust the timeout duration as needed
+    Timer(timeoutDuration, () {
+      Navigator.of(context).pop();
+    });
   }
 
   Future<void> showCustomDialog({
@@ -177,7 +186,7 @@ class CustomDialog {
             child: Text(
               body,
               style: GoogleFonts.lato(
-                color: Colors.white,
+                color: AppColor.appBrandColor,
                 fontSize: 15.sp,
                 fontWeight: FontWeight.w800,
               ),
@@ -213,7 +222,7 @@ class CustomDialog {
             10.horizontalSpace
           ],
           elevation: 2,
-          backgroundColor: Colors.black.withOpacity(0.9),
+          backgroundColor: Colors.white.withOpacity(0.9),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(
                 10.0.r), // Customize the border radius as needed

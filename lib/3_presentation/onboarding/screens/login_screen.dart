@@ -146,9 +146,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         _email.text.trim(),
                         _password.text,
                       );
-                      routerConfig.pop();
 
-                      if (loginResponse.toString().contains('error')) {
+                      if (loginResponse.toString().contains('fail')) {
                         _showDialog(
                           'error',
                           'Error',
@@ -156,11 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           'Ok',
                         );
                       } else {
-                        while (routerConfig.canPop()) {
-                          routerConfig.pop();
-                        }
-                        routerConfig
-                            .pushReplacement(RoutesPath.navScreen, extra: {
+                        routerConfig.pushReplacement(RoutesPath.navScreen, extra: {
                           "token": loginResponse['token'],
                           "id": 0,
                         });
@@ -227,17 +222,19 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   _showDialog(
-    String type,
-    String title,
-    String body,
-    String buttontext,
-  ) {
-    CustomDialog().showAlertDialog(
-      context,
-      type,
-      title,
-      body,
-      buttontext,
-    );
+      String type,
+      String title,
+      String body,
+      String buttonText,
+      ) {
+    if (mounted) {
+      CustomDialog().showAlertDialog(
+        context,
+        type,
+        title,
+        body,
+        buttonText,
+      );
+    }
   }
 }
