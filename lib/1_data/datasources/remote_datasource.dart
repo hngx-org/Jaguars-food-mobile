@@ -214,6 +214,29 @@ class Auth {
     }
   }
 
+  static Future searchUser(String token, int userId) async {
+    // returns user details if success
+    // returns false if it doesnt
+    // returns {"status": "fail", "message": "something went wrong"} for other issues
+    String getUrl = "api/search/$userId";
+    Map<String, String> headers = {"Authorization": "Bearer $token"};
+    try {
+      var response = await http.get(
+        Uri.parse(baseUrl + getUrl),
+        headers: headers,
+      );
+      return jsonDecode(response.body);
+    } catch (e) {
+      if (e is TimeoutException) {
+        // Handle timeout error here
+        return {"status": "fail", "message": 'Request timed out'};
+      } else {
+        // Handle other network errors or exceptions
+        return {"status": "fail", "message": 'Something went wrong'};
+      }
+    }
+  }
+
   static Future getAllUser(String token) async {
     // returns user details if success
     // returns false if it doesnt
@@ -296,18 +319,21 @@ class Lunch {
   static Future<Map> sendLunch(
       List<int> receivers, int quantity, String note, String authToken) async {
     String postUrl = "api/lunch/send";
-    var headers = {"authorization": "Bearer $authToken"};
-    var body = {
-      "receivers": '$receivers',
-      "quantity": '$quantity',
-      "note": note
+    var headers = {
+      "Authorization": "Bearer $authToken",
+      "Content-Type": "application/json"
     };
+    var body = jsonEncode({
+      "receivers": receivers,
+      "quantity": quantity,
+      "note": note,
+    });
     try {
       var response = await http.post(Uri.parse(baseUrl + postUrl),
           headers: headers, body: body);
       return jsonDecode(response.body);
     } catch (e) {
-      return {"status": "fail", "message": "Something went wrong"};
+      return {"status": "fail", "message": "Something went wrong $e"};
     }
   }
 
@@ -323,15 +349,18 @@ class Lunch {
     }
   }
 
-  static Future redeemLunch(authToken) async {
-    String getUrl = "api/redeem/1";
+  static Future redeemLunch(authToken, String id) async {
+    String getUrl = "api/user/redeem";
+    var body = {
+      "lunchId": id,
+    };
     var headers = {"authorization": "Bearer $authToken"};
     try {
-      var response =
-          await http.get(Uri.parse(baseUrl + getUrl), headers: headers);
+      var response = await http.post(Uri.parse(baseUrl + getUrl),
+          headers: headers, body: body);
       return jsonDecode(response.body);
     } catch (e) {
-      return {"status": "fail", "message": "Something went wrong"};
+      return {"status": "fail", "message": "Something went wrong $e"};
     }
   }
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
@@ -8,9 +9,13 @@ import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 
 class SendLunchDealScreen extends StatefulWidget {
   final String giftee;
+  final String token;
+  final String gifteeId;
   const SendLunchDealScreen({
     Key? key,
     required this.giftee,
+    required this.token,
+    required this.gifteeId,
   }) : super(key: key);
 
   @override
@@ -40,35 +45,37 @@ class _SendLunchState extends State<SendLunchDealScreen> {
         });
       },
       child: Container(
-        margin: const EdgeInsets.only(bottom: 10.0),
+        padding: EdgeInsets.symmetric(vertical: 15.0.h, horizontal: 30.w),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0),
           border: Border.all(
-            color: isSelected ? Colors.deepPurple : Colors.black26,
-            width: 2.0,
+            color: isSelected ? Colors.deepPurple : const Color(0xFFD9D9D9),
+            width: 1.0.w,
           ),
         ),
         child: Row(
           children: [
             Container(
-              width: 25.0,
-              height: 50.0,
-              margin: const EdgeInsets.all(5.0),
+              width: 20.0.w,
+              height: 20.0.h,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: isSelected ? AppColor.appBrandColor : Colors.transparent,
                 border: Border.all(
                   color: isSelected ? AppColor.border : Colors.black26,
-                  width: 2.0,
+                  width: 1.w,
                 ),
               ),
               child: isSelected
-                  ? const Icon(
+                  ? Icon(
                       Icons.check,
-                      size: 20.0,
+                      size: 14.sp,
                       color: AppColor.white,
                     )
                   : null,
+            ),
+            SizedBox(
+              width: 30.w,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,17 +83,20 @@ class _SendLunchState extends State<SendLunchDealScreen> {
                 Text(
                   title,
                   style: GoogleFonts.lato(
-                    color: AppColor.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
+                    color: const Color(0xFF55506D),
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w600,
                   ),
+                ),
+                SizedBox(
+                  height: 5.h,
                 ),
                 Text(
                   subtitle,
                   style: GoogleFonts.lato(
-                    color: AppColor.subText,
-                    fontSize: 12,
-                  ),
+                      color: const Color(0xFFABABAB),
+                      fontSize: 12.sp,
+                      fontWeight: FontWeight.w600),
                 ),
               ],
             ),
@@ -138,39 +148,39 @@ class _SendLunchState extends State<SendLunchDealScreen> {
                 height: 30.0,
               ),
               Text(
-                'Send a Lunch deal!',
+                'Send Lunch deal!',
                 style: GoogleFonts.lato(
                   color: AppColor.appBrandColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-              const SizedBox(
-                height: 10.0,
+              SizedBox(
+                height: 15.0.h,
               ),
               buildCustomCheckbox(
                 title: 'Single',
                 subtitle: 'You can give a single lunch',
                 value: 'Single',
               ),
-              const SizedBox(
-                height: 10.0,
+              SizedBox(
+                height: 15.0.h,
               ),
               buildCustomCheckbox(
                 title: 'Double',
                 subtitle: 'You can give a double lunch',
                 value: 'Double',
               ),
-              const SizedBox(
-                height: 10.0,
+              SizedBox(
+                height: 15.0.h,
               ),
               buildCustomCheckbox(
                 title: 'Triple',
                 subtitle: 'You can give a triple lunch',
                 value: 'Triple',
               ),
-              const SizedBox(
-                height: 10.0,
+              SizedBox(
+                height: 15.0.h,
               ),
               buildCustomCheckbox(
                 title: 'Quadruple',
@@ -186,6 +196,8 @@ class _SendLunchState extends State<SendLunchDealScreen> {
                       context.push(RoutesPath.doubleLunchScreen, extra: {
                         "giftee": widget.giftee,
                         "lunch": selectedDeal,
+                        "token": widget.token,
+                        "gifteeId": widget.gifteeId,
                       });
                     },
                     buttonText: 'Proceed',

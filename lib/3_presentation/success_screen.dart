@@ -10,11 +10,13 @@ import 'package:jaguar_foods_mobile/core/config/router_config.dart';
 class SuccessScreen extends StatelessWidget {
   final String? giftee;
   final String? lunchType;
+  final String token;
 
   const SuccessScreen({
     super.key,
     this.giftee,
     this.lunchType,
+    required this.token,
   });
 
   @override
@@ -39,7 +41,7 @@ class SuccessScreen extends StatelessWidget {
                       Flexible(
                         child: Text(
                           giftee == '' || giftee == null
-                              ? 'You have succesfully\nwithdrawn your Reward!'
+                              ? 'You have succesfully redeemed your Lunch!'
                               : "You have successfullly gifted\n$giftee\nfree $lunchType Lunch",
                           textAlign: TextAlign.center,
                           maxLines: 3,
@@ -68,18 +70,30 @@ class SuccessScreen extends StatelessWidget {
                       SizedBox(
                         height: 100.h,
                       ),
-                      Flexible(
-                        child: TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            'Gift another employee',
-                            textAlign: TextAlign.center,
-                            maxLines: 2,
-                            overflow: TextOverflow.clip,
-                            style: GoogleFonts.lato(
-                              color: AppColor.appBrandColor,
-                              fontSize: 16.w,
-                              fontWeight: FontWeight.w700,
+                      Visibility(
+                        visible: giftee != null || giftee!.isNotEmpty,
+                        child: Flexible(
+                          child: TextButton(
+                            onPressed: () {
+                              while (routerConfig.canPop() == true) {
+                                routerConfig.pop();
+                              }
+                              routerConfig.pushReplacement(RoutesPath.navScreen,
+                                  extra: {
+                                    "id": 1,
+                                    "token": token,
+                                  });
+                            },
+                            child: Text(
+                              'Gift another employee',
+                              textAlign: TextAlign.center,
+                              maxLines: 2,
+                              overflow: TextOverflow.clip,
+                              style: GoogleFonts.lato(
+                                color: AppColor.appBrandColor,
+                                fontSize: 16.w,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                           ),
                         ),
@@ -92,12 +106,14 @@ class SuccessScreen extends StatelessWidget {
                           while (routerConfig.canPop() == true) {
                             routerConfig.pop();
                           }
-                          routerConfig.pushReplacement(
-                            RoutesPath.navScreen,
-                          );
+                          routerConfig
+                              .pushReplacement(RoutesPath.navScreen, extra: {
+                            "id": 0,
+                            "token": token,
+                          });
                         },
                         buttonText: 'Back to home',
-                        fontSize: 14,
+                        fontSize: 14.sp,
                       ),
                       Expanded(
                           child: SizedBox(

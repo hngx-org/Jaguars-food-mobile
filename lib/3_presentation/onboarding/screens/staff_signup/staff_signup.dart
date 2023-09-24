@@ -252,8 +252,6 @@ class _StaffSignUpScreenState extends State<StaffSignUpScreen>
                           _lastName.text.trim(),
                           _phone.text.trim());
 
-                      print(response);
-
                       if (response.containsValue('error') ||
                           response.containsValue('fail') ||
                           response.containsKey('error')) {
@@ -267,7 +265,7 @@ class _StaffSignUpScreenState extends State<StaffSignUpScreen>
                       } else {
                         final loginResponse = await Auth.login(
                             _email.text.trim(), _password.text.trim());
-                        print(loginResponse);
+
                         if (loginResponse.containsValue('error') ||
                             loginResponse.containsValue('fail')) {
                           routerConfig.pop();

@@ -155,20 +155,6 @@ class CustomDialog {
         return alert;
       },
     );
-
-    if (context.mounted) {
-      const timeoutDuration =
-          Duration(seconds: 15); // Adjust the timeout duration as needed
-      timer = Timer(timeoutDuration, () {
-        if (context.canPop()) {
-          context.pop();
-        } else {
-          timer.cancel();
-        }
-      });
-    } else {
-      timer.cancel();
-    }
   }
 
   Future<void> showCustomDialog({

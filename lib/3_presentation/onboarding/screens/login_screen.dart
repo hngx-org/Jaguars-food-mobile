@@ -147,7 +147,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         _password.text,
                       );
 
-                      if (loginResponse.toString().contains('fail')) {
+                      if (loginResponse.toString().contains('fail') ||
+                          loginResponse.toString().contains('error')) {
+                        routerConfig.pop();
                         _showDialog(
                           'error',
                           'Error',

@@ -1,14 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jaguar_foods_mobile/1_data/datasources/remote_datasource.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:jaguar_foods_mobile/common/constants/assets_constants.dart';
+import 'package:jaguar_foods_mobile/common/constants/custom_error_dialog.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/button.dart';
+import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 import 'package:jaguar_foods_mobile/core/config/router_config.dart';
 
-class ConfirmRedeemScreen extends StatelessWidget {
-  const ConfirmRedeemScreen({super.key});
+class ConfirmRedeemScreen extends StatefulWidget {
+  final String token;
+  final String index;
+  final String lunchType;
+  final String sender;
+  const ConfirmRedeemScreen({
+    super.key,
+    required this.token,
+    required this.index,
+    required this.lunchType,
+    required this.sender,
+  });
 
+  @override
+  State<ConfirmRedeemScreen> createState() => _ConfirmRedeemScreenState();
+}
+
+class _ConfirmRedeemScreenState extends State<ConfirmRedeemScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,7 +56,7 @@ class ConfirmRedeemScreen extends StatelessWidget {
                 )),
                 Flexible(
                   child: Text(
-                    'You will receive\nRewards in cash value',
+                    'Are you sure you want to redeem ${widget.lunchType} from ${widget.sender}?',
                     textAlign: TextAlign.center,
                     maxLines: 2,
                     overflow: TextOverflow.clip,
@@ -67,9 +85,39 @@ class ConfirmRedeemScreen extends StatelessWidget {
                   height: 100.h,
                 ),
                 ButtonWidget(
-                  onPressed: () {},
-                  buttonText: 'Send',
-                  fontSize: 14,
+                  onPressed: () async {
+                    CustomDialog().showLoadDialog(context);
+                    final response =
+                        await Lunch.redeemLunch(widget.token, widget.index);
+                    routerConfig.pop();
+
+                    if (response.toString().contains('error') ||
+                        response.toString().contains('fail')) {
+                      _showDialog(
+                        'error',
+                        'Error',
+                        response['message'],
+                        'Ok',
+                      );
+                    } else {
+                      _showDialog(
+                        'success',
+                        'Redeemed Successfully',
+                        response['message'],
+                        'Ok',
+                      );
+                      while (routerConfig.canPop()) {
+                        routerConfig.pop();
+                      }
+                      routerConfig
+                          .pushReplacement(RoutesPath.successScreen, extra: {
+                        "token": widget.token,
+                        "id": 0,
+                      });
+                    }
+                  },
+                  buttonText: 'Confirm',
+                  fontSize: 14.sp,
                 ),
                 Expanded(
                     child: SizedBox(
@@ -79,5 +127,22 @@ class ConfirmRedeemScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _showDialog(
+    String type,
+    String title,
+    String body,
+    String buttonText,
+  ) {
+    if (mounted) {
+      CustomDialog().showAlertDialog(
+        context,
+        type,
+        title,
+        body,
+        buttonText,
+      );
+    }
   }
 }

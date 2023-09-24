@@ -8,7 +8,12 @@ import 'package:jaguar_foods_mobile/common/constants/assets_constants.dart';
 import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 
 class WithdrawDetailsScreen extends StatefulWidget {
-  const WithdrawDetailsScreen({super.key});
+  final String token;
+
+  const WithdrawDetailsScreen({
+    super.key,
+    required this.token,
+  });
 
   @override
   State<WithdrawDetailsScreen> createState() => _WithdrawDetailsScreenState();
