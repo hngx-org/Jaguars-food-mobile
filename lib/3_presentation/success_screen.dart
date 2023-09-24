@@ -6,6 +6,10 @@ import 'package:jaguar_foods_mobile/common/constants/assets_constants.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/button.dart';
 import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 import 'package:jaguar_foods_mobile/core/config/router_config.dart';
+import 'package:jaguar_foods_mobile/core/providers/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../1_data/datasources/remote_datasource.dart';
 
 class SuccessScreen extends StatelessWidget {
   final String? giftee;
@@ -32,17 +36,14 @@ class SuccessScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      60.verticalSpace,
                       Expanded(
-                          child: SizedBox(
-                        height: 1.h,
-                      )),
-                      Flexible(
                         child: Text(
                           giftee == '' || giftee == null
                               ? 'You have succesfully\nwithdrawn your Reward!'
                               : "You have successfullly gifted\n$giftee\nfree $lunchType Lunch",
                           textAlign: TextAlign.center,
-                          maxLines: 3,
+                          maxLines: 4,
                           overflow: TextOverflow.clip,
                           style: GoogleFonts.lato(
                             color: AppColor.appBrandColor,
@@ -51,9 +52,7 @@ class SuccessScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
-                        height: 60.h,
-                      ),
+                      70.verticalSpace,
                       Container(
                         alignment: Alignment.bottomCenter,
                         height: 200.h,
@@ -88,13 +87,16 @@ class SuccessScreen extends StatelessWidget {
                         height: 5.h,
                       ),
                       ButtonWidget(
-                        onPressed: () {
-                          while (routerConfig.canPop() == true) {
-                            routerConfig.pop();
-                          }
-                          routerConfig.pushReplacement(
-                            RoutesPath.navScreen,
-                          );
+                        onPressed: () async {
+
+                          SharedPreferences prefs = SharedPreferencesManager.preferences;
+                          final token = prefs.getString('token');
+                          print(token);
+
+                          routerConfig.pushReplacement(RoutesPath.navScreen, extra: {
+                            "token": token ?? '',
+                            "id": 0,
+                          });
                         },
                         buttonText: 'Back to home',
                         fontSize: 14,

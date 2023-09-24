@@ -1,6 +1,12 @@
 class Assets {
   static const pngPath = "assets/png";
   static const svgPath = "assets/svg";
+  static const jaguarPath = "assets/jaguars";
+
+  static List<String> jagPaths = List.generate(10, (index) {
+    final jagNumber = index + 1;
+    return '$jaguarPath/jag$jagNumber.jpg';
+  });
 
   static String cashImagePath = '$pngPath/cash.png';
   static String circleTickImagePath = '$pngPath/circle_tick.png';
@@ -13,6 +19,7 @@ class Assets {
   static String cheeseImagePath = '$pngPath/cheese.png';
   static String splashImagePath = '$pngPath/splash_logo.png';
   static String sendImagePath = '$pngPath/send.png';
+  static String sampleProfile = '$pngPath/sample_profile.png';
 
   static String employeesIconPath = '$svgPath/employees_icon.svg';
   static String giftIconPath = '$svgPath/gift_icon.svg';
