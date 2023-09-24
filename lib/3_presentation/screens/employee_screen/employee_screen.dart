@@ -54,24 +54,39 @@ class _EmployeeScreenState extends State<EmployeeScreen> {
                     filled: true,
                     fillColor: const Color(0xFFF4F4F4),
                     hintText: 'Search for an employee',
-                    suffixIcon: SizedBox(
-                      width: 15.w,
-                      height: 15.h,
+                    hintStyle: GoogleFonts.lato(),
+                    suffixIconConstraints: BoxConstraints(
+                      minHeight: 24.h,
+                      minWidth: 24.w,
+                    ),
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.only(right: 10.0),
                       child: SvgPicture.asset(
                         Assets.searchPath,
                         fit: BoxFit.cover,
                       ),
                     ),
                     border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.r),
+                      borderRadius: BorderRadius.circular(8.r),
+                      borderSide: const BorderSide(
+                        style: BorderStyle.solid,
+                        width: 1,
+                        color: Color(0xFFF4F4F4),
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.r),
                       borderSide: BorderSide(
-                        width: 5,
-                        color: Color(0xFFF4F4F4).withOpacity(.1),
+                        style: BorderStyle.solid,
+                        width: 1.w,
+                        color: const Color(0xFFF4F4F4),
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(height: 36),
+                SizedBox(
+                  height: 36.h,
+                ),
                 Text(
                   "All Employees",
                   style: GoogleFonts.lato(

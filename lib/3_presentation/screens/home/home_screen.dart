@@ -152,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen>
                   ),
                   child: Container(
                     width: mediaQuery.width,
-                    height: 150.h,
+                    height: 120.h,
                     clipBehavior: Clip.antiAlias,
                     decoration: ShapeDecoration(
                       color: const Color(0xFF222222),
@@ -289,7 +289,7 @@ class _HomeScreenState extends State<HomeScreen>
                         child: Material(
                           color: Colors.transparent,
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(7)),
+                              borderRadius: BorderRadius.circular(7.r)),
                           elevation: 2,
                           child: InkWell(
                             onTap: () => context
@@ -419,134 +419,141 @@ class _HomeScreenState extends State<HomeScreen>
                       height: 15,
                     ),
                     //item
-                    Material(
-                      color: Colors.transparent,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: transactions.length,
-                        itemBuilder: (context, index) {
-                          final transaction = transactions[index];
-                          final formattedTransactionDate =
-                              DateFormat('d MMM, HH:mm')
-                                  .format(transaction.createdAt);
+                    SingleChildScrollView(
+                      child: Material(
+                        color: Colors.transparent,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: transactions.length,
+                          itemBuilder: (context, index) {
+                            final transaction = transactions[index];
+                            final formattedTransactionDate =
+                                DateFormat('d MMM, HH:mm')
+                                    .format(transaction.createdAt);
 
-                          return Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Container(
-                                margin: const EdgeInsets.only(bottom: 20),
-                                child: Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    //gift icon
-                                    Material(
-                                      elevation: 2,
-                                      color: Colors.transparent,
-                                      shape: const OvalBorder(),
-                                      child: Container(
-                                        width: 36,
-                                        height: 36,
-                                        padding: const EdgeInsets.all(10),
-                                        decoration: const ShapeDecoration(
-                                          color: Color(0xFFE8DDFF),
-                                          shape: OvalBorder(),
-                                        ),
-                                        child: ColorFiltered(
-                                          colorFilter: const ColorFilter.mode(
-                                            AppColor.appBrandColor,
-                                            BlendMode.srcIn,
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.only(bottom: 20),
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      //gift icon
+                                      Material(
+                                        elevation: 2,
+                                        color: Colors.transparent,
+                                        shape: const OvalBorder(),
+                                        child: Container(
+                                          width: 36,
+                                          height: 36,
+                                          padding: const EdgeInsets.all(10),
+                                          decoration: const ShapeDecoration(
+                                            color: Color(0xFFE8DDFF),
+                                            shape: OvalBorder(),
                                           ),
-                                          child: SvgPicture.asset(
-                                            'assets/svg/gift_icon.svg',
+                                          child: ColorFiltered(
+                                            colorFilter: const ColorFilter.mode(
+                                              AppColor.appBrandColor,
+                                              BlendMode.srcIn,
+                                            ),
+                                            child: SvgPicture.asset(
+                                              'assets/svg/gift_icon.svg',
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    const SizedBox(
-                                      width: 15,
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text.rich(
-                                            TextSpan(
-                                              children: [
-                                                TextSpan(
-                                                  text: transaction.receiverId,
-                                                  style: GoogleFonts.lato(
-                                                    color:
-                                                        const Color(0xFF1A1920),
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w700,
-                                                  ),
-                                                ),
-                                                TextSpan(
-                                                  text:
-                                                      ' just gifted you ${transaction.amount.toInt()} Plts',
-                                                  style: GoogleFonts.lato(
-                                                    color: const Color(
-                                                      0xFF55506D,
+                                      const SizedBox(
+                                        width: 15,
+                                      ),
+                                      Expanded(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text.rich(
+                                              TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text:
+                                                        transaction.receiverId,
+                                                    style: GoogleFonts.lato(
+                                                      color: const Color(
+                                                          0xFF1A1920),
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.w700,
                                                     ),
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w600,
                                                   ),
-                                                ),
-                                              ],
+                                                  TextSpan(
+                                                    text:
+                                                        ' just gifted you ${transaction.amount.toInt()} Plts',
+                                                    style: GoogleFonts.lato(
+                                                      color: const Color(
+                                                        0xFF55506D,
+                                                      ),
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
                                             ),
-                                            overflow: TextOverflow.ellipsis,
-                                            maxLines: 1,
-                                          ),
-                                          // Date
-                                          const SizedBox(height: 8),
-                                          Text(
-                                            formattedTransactionDate,
+                                            // Date
+                                            const SizedBox(height: 8),
+                                            Text(
+                                              formattedTransactionDate,
+                                              style: GoogleFonts.lato(
+                                                color: const Color(0xFFABABAB),
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      // text
+                                      Material(
+                                        color: Colors.transparent,
+                                        child: Container(
+                                          alignment: Alignment.centerRight,
+                                          child: Text(
+                                            'View',
                                             style: GoogleFonts.lato(
-                                              color: const Color(0xFFABABAB),
+                                              color: const Color(0xFF2EAA60),
                                               fontSize: 12,
                                               fontWeight: FontWeight.w600,
                                             ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    // text
-                                    Material(
-                                      color: Colors.transparent,
-                                      child: Container(
-                                        alignment: Alignment.centerRight,
-                                        child: Text(
-                                          'View',
-                                          style: GoogleFonts.lato(
-                                            color: const Color(0xFF2EAA60),
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w600,
                                           ),
                                         ),
-                                      ),
-                                    )
-                                  ],
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              Divider(
-                                color: AppColor.secondaryColor.withOpacity(0.7),
-                              ),
-                              10.verticalSpace
-                            ],
-                          );
-                        },
+                                Divider(
+                                  color:
+                                      AppColor.secondaryColor.withOpacity(0.7),
+                                ),
+                                10.verticalSpace
+                              ],
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ],
