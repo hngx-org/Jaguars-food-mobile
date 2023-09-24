@@ -126,6 +126,9 @@ class CustomDialog {
       ),
     );
 
+    // Create a Completer to control when to close the dialog
+    final completer = Completer<void>();
+
     showGeneralDialog(
       barrierDismissible: false,
       context: context,
@@ -159,7 +162,11 @@ class CustomDialog {
     const timeoutDuration =
         Duration(seconds: 15); // Adjust the timeout duration as needed
     Timer(timeoutDuration, () {
-      Navigator.of(context).pop();
+      if (!completer.isCompleted) {
+        // Check if the Completer is completed to avoid closing twice
+        completer.complete();
+        Navigator.of(context).pop();
+      }
     });
   }
 
