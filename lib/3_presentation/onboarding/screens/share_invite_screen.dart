@@ -57,7 +57,10 @@ class _ShareInviteScreenState extends State<ShareInviteScreen> {
                     while (context.canPop()) {
                       context.pop();
                     }
-                    context.pushReplacement(RoutesPath.navScreen);
+                    context.pushReplacement(RoutesPath.navScreen, extra: {
+                      "token": widget.token,
+                      "id": 0,
+                    });
                   },
                   child: const Text(
                     'Cancel',

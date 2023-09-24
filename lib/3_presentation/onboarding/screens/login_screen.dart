@@ -156,9 +156,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           'Ok',
                         );
                       } else {
-                        routerConfig.push(
-                          RoutesPath.navScreen,
-                        );
+                        routerConfig.push(RoutesPath.navScreen, extra: {
+                          "token": loginResponse['token'],
+                          "id": 0,
+                        });
                       }
                     }
                   },

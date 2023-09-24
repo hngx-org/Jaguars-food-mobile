@@ -109,8 +109,25 @@ class Auth {
       if (response.body == "" || response.statusCode == 200) {
         return true;
       } else {
-        return false;
+        return response.statusCode;
       }
+    } catch (e) {
+      return {"status": "fail", "message": "Something went wrong"};
+    }
+  }
+
+  static Future loadUser(String token) async {
+    // returns user details if success
+    // returns false if it doesnt
+    // returns {"status": "fail", "message": "something went wrong"} for other issues
+    String getUrl = "api/user/profile";
+    Map<String, String> headers = {"Authorization": "Bearer $token"};
+    try {
+      var response = await http.get(
+        Uri.parse(baseUrl + getUrl),
+        headers: headers,
+      );
+      return jsonDecode(response.body);
     } catch (e) {
       return {"status": "fail", "message": "Something went wrong"};
     }

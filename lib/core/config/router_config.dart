@@ -11,7 +11,6 @@ import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/landing_sc
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/redeem_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/set_lunch_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/employee_screen/employee_screen.dart';
-import 'package:jaguar_foods_mobile/3_presentation/screens/home/home_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/screens/nav_screen/nav_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/onboarding/screens/verification_screen.dart';
 import 'package:jaguar_foods_mobile/3_presentation/withdraw_details/withdraw_details.dart';
@@ -75,13 +74,6 @@ final GoRouter routerConfig = GoRouter(
       ),
     ),
     GoRoute(
-      path: RoutesPath.homeScreen,
-      pageBuilder: (context, state) => CupertinoPage<void>(
-        child: const HomeScreen(),
-        key: state.pageKey,
-      ),
-    ),
-    GoRoute(
         path: RoutesPath.navScreen,
         pageBuilder: (context, state) {
           if (state.extra != null) {
@@ -89,6 +81,7 @@ final GoRouter routerConfig = GoRouter(
             return CupertinoPage<void>(
               child: NavigationScreen(
                 initialIndex: args["id"],
+                token: args['token'],
               ),
               key: state.pageKey,
             );
@@ -96,6 +89,7 @@ final GoRouter routerConfig = GoRouter(
             return CupertinoPage<void>(
               child: const NavigationScreen(
                 initialIndex: 0,
+                token: '',
               ),
               key: state.pageKey,
             );

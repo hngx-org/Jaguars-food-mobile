@@ -24,6 +24,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController orgController = TextEditingController();
   bool _orgIsTaken = false;
   bool _isLoading = true;
+  bool _isError = false;
 
   @override
   void dispose() {
@@ -57,6 +58,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     return 'Required field';
                   } else if (_orgIsTaken) {
                     return 'Organisation already exists';
+                  } else if (_isError) {
+                    return 'A server error has occured';
                   } else {
                     return null;
                   }
@@ -65,16 +68,26 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   setState(() {
                     _isLoading = true;
                   });
-                  final response = await Auth.orgExists(value);
-                  if (response.toString() == 'true') {
-                    setState(() {
-                      _orgIsTaken = false;
-                    });
+                  if (value.isEmpty) {
                   } else {
-                    setState(() {
-                      _orgIsTaken = true;
-                    });
+                    final response = await Auth.orgExists(value);
+
+                    if (response.toString() == 'true') {
+                      setState(() {
+                        _orgIsTaken = false;
+                        _isError = false;
+                      });
+                    } else if (response.toString().contains('server error')) {
+                      setState(() {
+                        _isError = true;
+                      });
+                    } else {
+                      setState(() {
+                        _orgIsTaken = true;
+                      });
+                    }
                   }
+
                   setState(() {
                     _isLoading = false;
                   });
