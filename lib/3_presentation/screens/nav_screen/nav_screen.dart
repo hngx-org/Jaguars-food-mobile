@@ -13,6 +13,7 @@ import 'package:jaguar_foods_mobile/common/constants/custom_error_dialog.dart';
 import 'package:jaguar_foods_mobile/common/constants/custom_nav_bar.dart';
 import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 import 'package:jaguar_foods_mobile/core/config/router_config.dart';
+import 'package:jaguar_foods_mobile/common/constants/reusables/button.dart';
 
 class NavigationScreen extends StatefulWidget {
   const NavigationScreen({
@@ -1121,6 +1122,22 @@ class _NavigationScreenState extends State<NavigationScreen> {
                             ),
                           ),
                         ),
+                        
+                ButtonWidget(
+                  onPressed: () async {
+                  
+                      //
+                      routerConfig
+                          .push(RoutesPath.successScreen, extra: {
+                        "token": widget.token,
+    "giftee":"",
+                            "lunch":"",
+                      });
+                    
+                  },
+                  buttonText: 'Invite members',
+                  fontSize: 14.sp,
+                ),
                       ],
                     ),
                     const SettingsScreen(),
