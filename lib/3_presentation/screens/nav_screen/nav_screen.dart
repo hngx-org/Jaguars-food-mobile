@@ -860,6 +860,22 @@ class _NavigationScreenState extends State<NavigationScreen> {
                             );
                           },
                         ),
+//
+                     Visibility (
+                       visible: _user["isAdmin"].toString() == "true",
+                       child:  ButtonWidget(
+                  onPressed: () async {
+                  
+                      //
+                      context.push(RoutesPath.shareInviteScreen, extra: {
+                      'companyName': "",
+                      'token': widget.token,
+                    });
+                    
+                  },
+                  buttonText: 'Invite members',
+                  fontSize: 14.sp,
+                ),),
                       ],
                     ),
                     Column(
@@ -1123,19 +1139,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
                           ),
                         ),
                         
-                ButtonWidget(
-                  onPressed: () async {
-                  
-                      //
-                      context.push(RoutesPath.shareInviteScreen, extra: {
-                      'companyName': orgName,
-                      'token': token,
-                    });
-                    
-                  },
-                  buttonText: 'Invite members',
-                  fontSize: 14.sp,
-                ),
+                
                       ],
                     ),
                     const SettingsScreen(),
