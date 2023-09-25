@@ -167,6 +167,8 @@ final GoRouter routerConfig = GoRouter(
           return CupertinoPage<void>(
             child: const SuccessScreen(
               token: '',
+              giftee: "",
+              lunchType: "",
             ),
             key: state.pageKey,
           );
