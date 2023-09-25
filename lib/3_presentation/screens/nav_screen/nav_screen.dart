@@ -36,7 +36,6 @@ class _NavigationScreenState extends State<NavigationScreen> {
   List<dynamic> _allUsers = [];
   List<Transactions> transactions = [];
   late PageController _pageController;
-  String _quantity = '';
 
   @override
   void initState() {

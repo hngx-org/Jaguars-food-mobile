@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:jaguar_foods_mobile/1_data/datasources/remote_datasource.dart';
 import 'package:jaguar_foods_mobile/common/constants/app_color.dart';
 import 'package:jaguar_foods_mobile/common/constants/assets_constants.dart';
+import 'package:jaguar_foods_mobile/common/constants/custom_error_dialog.dart';
+import 'package:jaguar_foods_mobile/common/constants/reusables/back_icon.dart';
+import 'package:jaguar_foods_mobile/common/constants/reusables/textfield.dart';
 import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
+import 'package:jaguar_foods_mobile/core/config/router_config.dart';
 
 class WithdrawDetailsScreen extends StatefulWidget {
   final String token;
@@ -20,6 +24,8 @@ class WithdrawDetailsScreen extends StatefulWidget {
 }
 
 class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
+  final GlobalKey<FormState> _amountKey = GlobalKey();
+  final TextEditingController _amount = TextEditingController();
   String? accountNumber = '4567890123';
   String? accountName = 'Gege Akutami';
   bool isVerified = false;
@@ -53,26 +59,29 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 27),
-        child: SingleChildScrollView(
-          child: SizedBox(
-            height: MediaQuery.of(context).size.height * 1.5,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [BackIconWidget()],
+                ),
                 // text
-                Padding(
-                  padding: const EdgeInsets.only(top: 100, bottom: 40),
-                  child: Text(
-                    'Redeem your free lunch!',
-                    style: GoogleFonts.lato(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18.sp,
-                    ),
+                Text(
+                  'Redeem your free lunch!',
+                  style: GoogleFonts.lato(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20.sp,
                   ),
                 ),
-
+                SizedBox(
+                  height: 30.h,
+                ),
                 // container with png
                 Container(
                   alignment: Alignment.bottomCenter,
@@ -161,31 +170,26 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
                 ),
 
                 // 3rd textfield
-                Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      border: Border.all(color: Colors.grey),
-                    ),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: "How much do you want to redeem?",
-                        contentPadding: EdgeInsets.symmetric(
-                            horizontal: 16.w, vertical: 16.h),
-                      ),
-                    )),
-
-                const SizedBox(
-                  height: 4,
-                ),
-
-                //  texts
-                Text(
-                  'Triple Lunch = N 500',
-                  style: GoogleFonts.lato(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14.sp,
+                Form(
+                  key: _amountKey,
+                  child: CustomTextField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Required field';
+                      } else {
+                        return null;
+                      }
+                    },
+                    onChanged: (value) {
+                      _amountKey.currentState!.validate();
+                    },
+                    controller: _amount,
+                    hintText: 'How much do you want to redeem',
+                    headerText: '',
+                    keyboardType: TextInputType.number,
                   ),
                 ),
+
                 const SizedBox(
                   height: 30,
                 ),
@@ -194,10 +198,33 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
                   height: 52,
                   width: MediaQuery.of(context).size.width,
                   child: ElevatedButton(
-                    onPressed: () {
-                      context.push(
-                        RoutesPath.successScreen,
-                      );
+                    onPressed: () async {
+                      if (_amountKey.currentState!.validate()) {
+                        CustomDialog().showLoadDialog(context);
+                        final response = await Lunch.withdraw(
+                            widget.token, int.parse(_amount.text));
+
+                        if (response.toString().contains('error') ||
+                            response.toString().contains('fail')) {
+                          routerConfig.pop();
+                          _showDialog(
+                            'error',
+                            'Error',
+                            response['message'],
+                            'Ok',
+                          );
+                        } else {
+                          while (routerConfig.canPop() == true) {
+                            routerConfig.pop();
+                          }
+                          routerConfig.pushReplacement(RoutesPath.successScreen,
+                              extra: {
+                                "token": widget.token,
+                                "giftee": "",
+                                "lunch": "",
+                              });
+                        }
+                      }
                     },
                     child: Text(
                       'Withdraw',
@@ -246,5 +273,22 @@ class _WithdrawDetailsScreenState extends State<WithdrawDetailsScreen> {
         );
       },
     );
+  }
+
+  _showDialog(
+    String type,
+    String title,
+    String body,
+    String buttonText,
+  ) {
+    if (mounted) {
+      CustomDialog().showAlertDialog(
+        context,
+        type,
+        title,
+        body,
+        buttonText,
+      );
+    }
   }
 }

@@ -333,7 +333,7 @@ class Lunch {
           headers: headers, body: body);
       return jsonDecode(response.body);
     } catch (e) {
-      return {"status": "fail", "message": "Something went wrong $e"};
+      return {"status": "fail", "message": "Something went wrong "};
     }
   }
 
@@ -360,7 +360,25 @@ class Lunch {
           headers: headers, body: body);
       return jsonDecode(response.body);
     } catch (e) {
-      return {"status": "fail", "message": "Something went wrong $e"};
+      return {"status": "fail", "message": "Something went wrong"};
+    }
+  }
+
+  static Future withdraw(authToken, int amount) async {
+    String getUrl = "api/withdrawal/request";
+    var body = jsonEncode({
+      "amount": amount,
+    });
+    var headers = {
+      "authorization": "Bearer $authToken",
+      "Content-Type": "application/json"
+    };
+    try {
+      var response = await http.post(Uri.parse(baseUrl + getUrl),
+          headers: headers, body: body);
+      return jsonDecode(response.body);
+    } catch (e) {
+      return {"status": "fail", "message": "Something went wrong"};
     }
   }
 

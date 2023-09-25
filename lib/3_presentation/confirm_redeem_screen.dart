@@ -38,11 +38,13 @@ class _ConfirmRedeemScreenState extends State<ConfirmRedeemScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-                  children:[const BackIconWidget(),],),
-                
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    BackIconWidget(),
+                  ],
+                ),
                 Expanded(
                     child: SizedBox(
                   height: 1.h,
@@ -93,12 +95,14 @@ class _ConfirmRedeemScreenState extends State<ConfirmRedeemScreen> {
                         'Ok',
                       );
                     } else {
-                      while(routerConfig.canPop() == true){routerConfig.pop();}
+                      while (routerConfig.canPop() == true) {
+                        routerConfig.pop();
+                      }
                       routerConfig
                           .pushReplacement(RoutesPath.successScreen, extra: {
                         "token": widget.token,
-    "giftee":"",
-                            "lunch":"",
+                        "giftee": "",
+                        "lunch": "",
                       });
                     }
                   },
