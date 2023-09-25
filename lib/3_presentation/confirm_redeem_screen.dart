@@ -8,6 +8,7 @@ import 'package:jaguar_foods_mobile/common/constants/custom_error_dialog.dart';
 import 'package:jaguar_foods_mobile/common/constants/reusables/button.dart';
 import 'package:jaguar_foods_mobile/common/constants/route_constant.dart';
 import 'package:jaguar_foods_mobile/core/config/router_config.dart';
+import 'package:jaguar_foods_mobile/common/constants/reusables/back_icon.dart';
 
 class ConfirmRedeemScreen extends StatefulWidget {
   final String token;
@@ -37,19 +38,7 @@ class _ConfirmRedeemScreenState extends State<ConfirmRedeemScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    InkWell(
-                      onTap: () => routerConfig.pop(),
-                      child: Icon(
-                        Icons.close,
-                        size: 20.w,
-                      ),
-                    )
-                  ],
-                ),
+                const BackIconWidget(),
                 Expanded(
                     child: SizedBox(
                   height: 1.h,
@@ -100,7 +89,7 @@ class _ConfirmRedeemScreenState extends State<ConfirmRedeemScreen> {
                         'Ok',
                       );
                     } else {
-                      while(routerConfig.canPop()){routerConfig.pop()}
+                      while(routerConfig.canPop() == true){routerConfig.pop()}
                       routerConfig
                           .pushReplacement(RoutesPath.successScreen, extra: {
                         "token": widget.token,
