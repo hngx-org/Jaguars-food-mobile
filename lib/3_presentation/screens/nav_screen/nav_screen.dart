@@ -1127,12 +1127,10 @@ class _NavigationScreenState extends State<NavigationScreen> {
                   onPressed: () async {
                   
                       //
-                      routerConfig
-                          .push(RoutesPath.successScreen, extra: {
-                        "token": widget.token,
-    "giftee":"",
-                            "lunch":"",
-                      });
+                      context.push(RoutesPath.shareInviteScreen, extra: {
+                      'companyName': orgName,
+                      'token': token,
+                    });
                     
                   },
                   buttonText: 'Invite members',
