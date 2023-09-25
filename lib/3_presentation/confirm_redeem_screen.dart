@@ -38,7 +38,11 @@ class _ConfirmRedeemScreenState extends State<ConfirmRedeemScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const BackIconWidget(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+                  children:[const BackIconWidget(),],),
+                
                 Expanded(
                     child: SizedBox(
                   height: 1.h,
