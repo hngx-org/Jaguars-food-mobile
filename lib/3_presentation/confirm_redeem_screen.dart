@@ -103,7 +103,8 @@ class _ConfirmRedeemScreenState extends State<ConfirmRedeemScreen> {
                       routerConfig
                           .pushReplacement(RoutesPath.successScreen, extra: {
                         "token": widget.token,
-    
+    "giftee":"",
+                            "lunch":"",
                       });
                     }
                   },
