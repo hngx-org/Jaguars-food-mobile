@@ -100,15 +100,6 @@ class _ConfirmRedeemScreenState extends State<ConfirmRedeemScreen> {
                         'Ok',
                       );
                     } else {
-                      _showDialog(
-                        'success',
-                        'Redeemed Successfully',
-                        response['message'],
-                        'Ok',
-                      );
-                      while (routerConfig.canPop()) {
-                        routerConfig.pop();
-                      }
                       routerConfig
                           .pushReplacement(RoutesPath.successScreen, extra: {
                         "token": widget.token,
